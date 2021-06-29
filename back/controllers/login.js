@@ -35,13 +35,14 @@ const login = async(req, res = response) =>{
 
         res.json({
             ok:true,
-            token
+            token,
+            usuarioDB
         })
     } catch (error) {
         console.log(error);
         res.status(500).json({
             ok:false,
-            msg: 'error console sus logs'
+            msg: 'error cconsulte con el administrador'
         })
     }
 }

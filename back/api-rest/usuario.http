@@ -27,11 +27,12 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:3000/api/usuarios/60db39417d3fe005009fa3ae
+PUT http://localhost:3000/api/usuarios/60db782d5d9a283b48a108bd
 Content-Type: application/json
-Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiMzk0MTdkM2ZlMDA1MDA5ZmEzYWUiLCJpYXQiOjE2MjQ5ODk4OTUsImV4cCI6MTYyNTA3NjI5NX0.3bfyEaQMv7dYWkgOKL6UVMX7j9YWDW7iEKK5lSFEDWc
+Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiNzgyZDVkOWEyODNiNDhhMTA4YmQiLCJpYXQiOjE2MjQ5OTY1NjgsImV4cCI6MTYyNTA4Mjk2OH0.Q4rs8VQKUpSkORSRNMsvfe7Jtfj3twRevzg03C1iG3k
+
 {
 	"nombres": "Samantha del Cisne",
     "apellidos":"gonzalez Herrera",
-    "numeroDeCelular": "09134234",
+    "email":"samantha@gmail.com",
 }

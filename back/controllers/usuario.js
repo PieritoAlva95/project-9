@@ -82,7 +82,7 @@ const actualizarUsuario = async(req, res) =>{
     
          //actualizacion
          //digo que estos campos no son necesarios para actualizar
-         const {passwrord, documentoDeIdentidad, email, ...campos} = req.body;
+         const {passwrord, email, ...campos} = req.body;
         if (usuarioDB.email !== email) {
             const existeEmail = await Usuario.findOne({email});
             if (existeEmail) {
