@@ -15,5 +15,13 @@ const UsuarioSchema = Schema({
   });
 
 
+//para modificar el _id de la tabla cambia de _id a uid
+UsuarioSchema.method('toJSON', function(){
+  //esto extraigo y cuando haga un get no lo devuelvo
+  const {__v, _id, password, ...object} = this.toObject();
+
+  object.uid = _id;
+  return object;
+})
 
 module.exports =model('Usuario', UsuarioSchema);

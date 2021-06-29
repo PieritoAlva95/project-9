@@ -1,5 +1,4 @@
 ####
-
 GET http://localhost:3000/api/usuarios
 
 
@@ -9,10 +8,30 @@ POST http://localhost:3000/api/usuarios
 Content-Type: application/json
 
 {
-	"nombres": "aaa",
-    "apellidos":"perez",
-    "documentoDeIdentidad":"2232243353451",
-    "numeroDeCelular": "875433222243243214621",
-    "email":"aaaa@gmail.com",
+	"nombres": "Samantha",
+    "apellidos":"gonzales",
+    "documentoDeIdentidad":"01155854",
+    "numeroDeCelular": "09134234",
+    "email":"samantha@gmail.com",
     "password":"12345"
+}
+
+###
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "email":"samantha@gmail.com",
+    "password":"12345"
+}
+
+
+###
+PUT http://localhost:3000/api/usuarios/60db39417d3fe005009fa3ae
+Content-Type: application/json
+Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiMzk0MTdkM2ZlMDA1MDA5ZmEzYWUiLCJpYXQiOjE2MjQ5ODk4OTUsImV4cCI6MTYyNTA3NjI5NX0.3bfyEaQMv7dYWkgOKL6UVMX7j9YWDW7iEKK5lSFEDWc
+{
+	"nombres": "Samantha del Cisne",
+    "apellidos":"gonzalez Herrera",
+    "numeroDeCelular": "09134234",
 }
