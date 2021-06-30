@@ -7,16 +7,15 @@ const app = express();
 require('./db/config');
 
 
-
 app.use(express.json());
-
+app.use(cors());
 
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/login', require('./routes/login'));
 app.use( '/api/upload', require('./routes/uploads') );
+app.use('/api/oferta', require('./routes/ofertas'));
 
 
-app.use(cors());
 
 
 
