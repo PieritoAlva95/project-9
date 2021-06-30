@@ -8,11 +8,11 @@ POST http://localhost:3000/api/usuarios
 Content-Type: application/json
 
 {
-	"nombres": "Samantha",
-    "apellidos":"gonzales",
-    "documentoDeIdentidad":"01155854",
-    "numeroDeCelular": "09134234",
-    "email":"samantha@gmail.com",
+	"nombres": "Pierzo",
+    "apellidos":"gonzalez",
+    "documentoDeIdentidad":"4542454",
+    "numeroDeCelular": "545645",
+    "email":"piero@gmail.com",
     "password":"12345"
 }
 
@@ -21,7 +21,7 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "email":"samantha@gmail.com",
+    "email":"piero@gmail.com",
     "password":"12345"
 }
 
@@ -36,3 +36,4 @@ Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiNzgy
     "apellidos":"gonzalez Herrera",
     "email":"samantha@gmail.com",
 }
+7

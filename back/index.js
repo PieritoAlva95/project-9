@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/login', require('./routes/login'));
+app.use( '/api/upload', require('./routes/uploads') );
 
 
 app.use(cors());
