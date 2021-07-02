@@ -1,12 +1,12 @@
 ####
 //http://localhost:3000/api/usuarios/
 //http://localhost:3000/api/usuarios?desde=10
-GET http://localhost:3000/api/usuarios
+GET http://localhost:4000/api/usuarios
 
 
 
 ###
-POST http://localhost:3000/api/usuarios
+POST http://localhost:4000/api/usuarios
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/api/login
+POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:3000/api/usuarios/60db782d5d9a283b48a108bd
+PUT http://localhost:4000/api/usuarios/60db782d5d9a283b48a108bd
 Content-Type: application/json
 Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiNzgyZDVkOWEyODNiNDhhMTA4YmQiLCJpYXQiOjE2MjQ5OTY1NjgsImV4cCI6MTYyNTA4Mjk2OH0.Q4rs8VQKUpSkORSRNMsvfe7Jtfj3twRevzg03C1iG3k
 
@@ -41,10 +41,10 @@ Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiNzgy
 
 ###
 //lista todas las ofertas
-GET http://localhost:3000/api/oferta
+GET http://localhost:4000/api/oferta
 
 
 ###
-GET http://localhost:3000/api/oferta/60dcb8a0df26ce2b7477d26b
+GET http://localhost:4000/api/oferta/60dcb8a0df26ce2b7477d26b
 
 ###

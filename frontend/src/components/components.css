@@ -1,0 +1,69 @@
+:root{
+    --backgorundColor: #f7fff7;
+    --primary: #1a535c;
+    --secondary: #4ecdc4;
+    --alert: #ffe66d;
+    --danger: #ff6b6b;
+    --txtClaro: #fafafa;
+}
+h1, h2, h3, h4, h5, h6{
+    color: var(--primary);
+}
+
+/* NAVBAR */
+.menu-bar{
+    background-color: var(--primary);
+    padding-left: 8px;
+    padding-right: 8px;
+    position: fixed;
+    width: 100%;
+}
+.navbar-brand, .nav-link{
+    color: var(--txtClaro);
+}
+.navbar-brand:hover{
+    color: var(--secondary);
+}
+.nav-link:hover{
+    color: var(--secondary);
+}
+.navbar-toggler-icon{
+    color: var(--txtClaro);
+}
+.navbar-toggler-icon i{
+    font-size: 30px;
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+/* LISTA DE OFERTAS */
+.oferta p{
+    text-align: justify;
+}
+.oferta button{
+    border-style: none;
+    background-color: var(--primary);
+    padding: 1% 2% ;
+    margin: 2%;
+    border-radius: 5px;
+    color: var(--txtClaro);
+}
+.etiqueta{
+    /* background-color: var(--secondary); */
+    border: 3px solid var(--secondary);
+    padding: 3%;
+    border-radius: 10px;
+}
+.etiqueta .avatar{
+    width: 100px;
+    float: left;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .oferta{
+        padding: 5%;
+    }
+}

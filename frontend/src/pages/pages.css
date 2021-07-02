@@ -1,0 +1,52 @@
+:root{
+    --backgorundColor: #f7fff7;
+    --primary: #1a535c;
+    --secondary: #4ecdc4;
+    --alert: #ffe66d;
+    --danger: #ff6b6b;
+    --txtClaro: #fafafa;
+}
+/* MAIN SECTION */
+.main-section{
+    padding-top: 7%;
+}
+
+
+/* LOGIN PAGE */
+.mainlogin{
+    padding-top: 10%;
+}
+.login-form{
+    width: 50%;
+    background-color: var(--primary);
+    padding: 3%;
+    border-radius: 25px;
+}
+.login-form h3{
+    text-align: center;
+    color: var(--txtClaro);
+}
+.login-form label{
+    color: var(--txtClaro);
+}
+.login-form p{
+    color: var(--txtClaro);
+}
+.login-form button{
+    border-style: none;
+    background-color: var(--secondary);
+    padding: 1% 2% ;
+    margin: 2%;
+    border-radius: 5px;
+    color: var(--txtClaro);
+}
+
+/* PERFIL PAGE */
+.main-perfil{
+    padding-top: 10%;
+}
+
+/* MAIN DASHBOARD */
+.main-dashboard{
+    padding-top: 10%;
+}
