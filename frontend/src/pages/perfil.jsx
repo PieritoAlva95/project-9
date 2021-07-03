@@ -1,16 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 const Perfil = () =>{
-    const [user, setuser] = useState({});
+    const user = JSON.parse(window.localStorage.getItem('user'));
     
-    useEffect(() => {
-        const usuariosLoggin = window.localStorage.getItem('user');
-        if(usuariosLoggin){
-            const user = JSON.parse(usuariosLoggin);
-            setuser(user);
-            console.log(user);
-        }        
-    }, [])
     return(
         <div className="container main-perfil">
             <h1>Perfil de {user.usuarioDB.nombres} </h1>

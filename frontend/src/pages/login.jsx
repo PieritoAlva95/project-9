@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const LoginPage = (props) => {
     const history = useHistory();
@@ -53,6 +53,7 @@ return (
             <p className="forgot-password text-right">
                 Forgot password?
             </p>
+            <Link className="link" to="/registro">Registrate!</Link>
         </form>
     </div>
 );

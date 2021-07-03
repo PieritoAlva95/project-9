@@ -1,17 +1,18 @@
 import React from 'react';
 import './components.css';
+import {Link} from 'react-router-dom';
 
 const ListaOfertas = ({ oferta }) => {
     return (
         <div className="oferta col-lg-5">
             <div className="etiqueta">
-                <img className="avatar" src="https://images.unsplash.com/photo-1555170629-9240c8e7df1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=751&q=80" alt="" />
-                <h4>{oferta.titulo}</h4>
-                <h6>{oferta.usuario}</h6>
+                <i class='bx bx-briefcase'></i>
+                <Link className="link" to={{pathname:"/oferta", state:{oferta:oferta}}}><h4>{oferta.titulo}</h4></Link>
+                <Link className="link" to="/perfil"><h6>{oferta.nombreUsuario}</h6></Link>
                 <br />
                 <p>{oferta.cuerpo}</p>
-                <p>{oferta.categoria}</p>
-                <p>{oferta.precio}</p>
+                <span><strong>Categoria:</strong> {oferta.categoria}</span> <br />
+                <small><strong>Salario:</strong> {oferta.precio}</small> <br />
                 <button><i class='bx bxs-send'></i> Ofertar</button>
                 <span>Ofertas: 4</span>
             </div>

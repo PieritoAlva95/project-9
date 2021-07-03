@@ -5,8 +5,8 @@ const OfertaSchema = Schema({
     cuerpo:{ type: String, require:true},
     precio:{ type: Number, require:true},
     categoria:{ type: String, require:true},
-
     usuario:{require:true,  type: Schema.Types.ObjectId, ref: 'Usuario' },
+    nombreUsuario:{require:true, type:String},
     fechaCreacion: {type: Date, default: Date.now()}
     }, {
         timestamps: false,

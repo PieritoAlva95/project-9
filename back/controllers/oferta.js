@@ -65,7 +65,7 @@ const verOfertas= async(req, res) =>{
     const desde = Number(req.query.desde) || 0;
     const [ ofertas, total ] = await Promise.all([
         Oferta
-            .find({}, 'titulo cuerpo precio categoria')
+            .find()
             .skip( desde )
             .limit( 5 ),
 

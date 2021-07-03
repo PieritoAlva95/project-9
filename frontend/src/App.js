@@ -4,6 +4,8 @@ import Login from './pages/login'
 import Main from './pages/main'
 import Perfil from './pages/perfil'
 import Dashboard from './pages/dashboard';
+import Oferta from './pages/oferta';
+import Registro from './pages/registro';
 
 const App =() => {
   return (
@@ -17,6 +19,8 @@ const App =() => {
         <Route path="/login" component={Login}/>
         <Route path="/perfil" component={Perfil}></Route>
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/oferta" component={Oferta} />
+        <Route path="/registro" component={Registro} />
       </Switch>
     </Router>
     

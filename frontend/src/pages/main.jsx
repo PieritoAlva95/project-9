@@ -13,6 +13,7 @@ const Main = () => {
         const response = await fetch('http://localhost:4000/api/oferta', requestOptions);
         const data = await response.json();
         setOfertas(data.ofertas)
+        console.log(data.ofertas);
     }
     useEffect(() => {
         cargarOfertas();

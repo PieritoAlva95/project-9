@@ -1,12 +1,14 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import {Link} from 'react-router-dom';
 const Navbar = () =>{
   const user = JSON.parse(window.localStorage.getItem('user'));
-  
+
   const verficarLoggeo = () =>{
     if(user){
       return(
-        <Link className="nav-link" to="/dashboard">{user.usuarioDB.nombres}</Link>
+        <Fragment>
+          <Link className="nav-link" to="/dashboard">{user.usuarioDB.nombres}</Link>
+        </Fragment>
         
       );
     }else{

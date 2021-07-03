@@ -6,7 +6,7 @@
     --danger: #ff6b6b;
     --txtClaro: #fafafa;
 }
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, span, small{
     color: var(--primary);
 }
 
@@ -48,19 +48,27 @@ h1, h2, h3, h4, h5, h6{
     border-radius: 5px;
     color: var(--txtClaro);
 }
+.oferta button i{
+    font-size: 1.5em;
+    color: var(--txtClaro);
+}
 .etiqueta{
     /* background-color: var(--secondary); */
     border: 3px solid var(--secondary);
     padding: 3%;
     border-radius: 10px;
 }
-.etiqueta .avatar{
-    width: 100px;
+.etiqueta i{
+    font-size: 3em;
     float: left;
     margin-right: 10px;
     border-radius: 10px;
+    color: var(--primary);
 }
-
+.etiqueta .link{
+    text-decoration: none;
+    text-transform: uppercase;
+}
 
 @media (max-width: 768px) {
     .oferta{

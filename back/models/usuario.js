@@ -7,7 +7,7 @@ const UsuarioSchema = Schema({
     numeroDeCelular:{type: String, require:true, unique:true},
     email:{type: String, require:true, unique:true},
     password:{type: String, require:true},
-    img:{type: String},
+    img:{type: String, default:'no-img.png'},
     esAdmin: { type: Boolean,  default: false},
     fechaCreacion: {type: Date, default: Date.now()}
     }, {
