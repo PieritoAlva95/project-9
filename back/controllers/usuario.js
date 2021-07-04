@@ -26,7 +26,10 @@ const getUsuario = async(req, res) =>{
 
 }
 
-
+const getUsuarioById = async(req, res) =>{
+    const user = await Usuario.findById(req.params.id);
+    res.json(user);
+}
 
 
 const crearUsuario = async(req, res = response) =>{
@@ -145,6 +148,6 @@ module.exports = {
     getUsuario,
     crearUsuario,
     actualizarUsuario,
-    borrarUsuario
-    
+    borrarUsuario,
+    getUsuarioById
 }

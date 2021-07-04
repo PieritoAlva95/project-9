@@ -1,11 +1,4 @@
-:root{
-    --backgorundColor: #f7fff7;
-    --primary: #1a535c;
-    --secondary: #4ecdc4;
-    --alert: #ffe66d;
-    --danger: #ff6b6b;
-    --txtClaro: #fafafa;
-}
+/*  */
 /* MAIN SECTION *******************************************************************************/
 .main-section{
     padding-top: 7%;
@@ -15,13 +8,27 @@
 
 /* LOGIN PAGE *******************************************************************************/
 .mainlogin{
-    padding-top: 10%;
+    padding-top: 7%;
+    /* background-color: var(--secondary);
+    height: 100vh; */
+}
+.mainlogin .row{
+    margin: 0px;
+}
+.mainlogin .imagen{
+    padding: 0%;
+    height: 370px;
+}
+.mainlogin .imagen img{
+    width: 100%;
+}
+.mainlogin .formulario{
+    padding: 0%;
+    background-color: var(--primary);
+    height: 370px;
 }
 .login-form{
-    width: 50%;
-    background-color: var(--primary);
     padding: 3%;
-    border-radius: 25px;
 }
 .login-form h3{
     text-align: center;
@@ -44,15 +51,33 @@
 .login-form .link{
     text-decoration: none;
     color:var(--txtClaro);
+    font-size: 1.3em;
 }
 .login-form .link:hover{
-    color: var(--txtClaro);
+    color: var(--alert);
+    font-size: 1.4em;
+    border: 1px solid var(--alert);
+    padding: 1.4%;
+    border-radius: 10px;
 }
 /* FIN LOGIN PAGE *******************************************************************************/
 
 /* PERFIL PAGE */
 .main-perfil{
-    padding-top: 10%;
+    padding-top: 7%;
+    display: flex;
+    justify-content: center;
+}
+.perfil{
+    text-align: center;
+}
+.perfil img{
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+}
+.perfil p{
+    margin-bottom: 1%;
 }
 /* FIN PERFIL PAGE *******************************************************************************/
 
@@ -66,10 +91,28 @@
 .main-oferta{
     padding-top: 10%;
 }
+.main-oferta .usuario{
+    color: var(--primary);
+}
+.main-oferta p{
+    color: var(--primary);
+}
 /* FIN OFERTA PAGE *******************************************************************************/
 
 /* REGISTRO PAGE *******************************************************************************/
 .main-registro{
-    padding-top: 10%;
+    padding-top: 7%;
+}
+.main-registro .imagen{
+    padding: 0%;
+    height: 450px;
+}
+.main-registro .imagen img{
+    width: 100%;
+    height: 100%;
+}
+.main-registro .formulario{
+    background-color: var(--primary);
+    padding: 0%;
 }
 /* FIN REGISTRO PAGE *******************************************************************************/

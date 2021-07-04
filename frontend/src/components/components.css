@@ -1,11 +1,4 @@
-:root{
-    --backgorundColor: #f7fff7;
-    --primary: #1a535c;
-    --secondary: #4ecdc4;
-    --alert: #ffe66d;
-    --danger: #ff6b6b;
-    --txtClaro: #fafafa;
-}
+
 h1, h2, h3, h4, h5, h6, span, small{
     color: var(--primary);
 }
@@ -36,13 +29,19 @@ h1, h2, h3, h4, h5, h6, span, small{
 .navbar-toggler:focus{
     box-shadow: none;
 }
-/* LISTA DE OFERTAS */
+/* LISTA DE OFERTAS ***************************************************************************************/
+.oferta{
+    margin-bottom: 2%;
+}
+.oferta h5, h6{
+    color: var(--txtClaro);
+}
 .oferta p{
     text-align: justify;
 }
 .oferta button{
     border-style: none;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     padding: 1% 2% ;
     margin: 2%;
     border-radius: 5px;
@@ -54,21 +53,50 @@ h1, h2, h3, h4, h5, h6, span, small{
 }
 .etiqueta{
     /* background-color: var(--secondary); */
-    border: 3px solid var(--secondary);
-    padding: 3%;
+    /* border: 3px solid var(--secondary); */
     border-radius: 10px;
+}
+.etiqueta .header{
+    background-color: var(--secondary);
+    border-radius: 10px 10px 0px 0px;
+    padding: 3%;
+    height: 70px;
+}
+.etiqueta .cuerpo{
+    padding: 2%;
+    border: 3px solid var(--secondary);
+    border-radius: 0px 0px 10px 10px;
+    height: 180px;
 }
 .etiqueta i{
     font-size: 3em;
     float: left;
     margin-right: 10px;
     border-radius: 10px;
-    color: var(--primary);
+    color: var(--txtClaro);
 }
 .etiqueta .link{
     text-decoration: none;
     text-transform: uppercase;
 }
+/* FIN LISTA OFERTAS  ***********************************************************************************/
+
+/* INICIO LISTA PERSONAS  ***********************************************************************************/
+.lista-personas {
+    margin-top: 4%;
+    padding: 0%;
+}
+.lista-personas img{
+    padding: 0%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+.lista-personas .nombres-apellidos{
+    padding: 0%;
+}
+
+/* FIN LISTA PERSONAS  ***********************************************************************************/
 
 @media (max-width: 768px) {
     .oferta{

@@ -1,9 +1,10 @@
 :root{
   --backgorundColor: #f7fff7;
-  --primary: #1a535c;
-  --secondary: #4ecdc4;
+  --primary: #1d3557;
+  --secondary: #355070;
   --alert: #ffe66d;
   --danger: #ff6b6b;
+  --txtClaro:#fafafa;
 }
 body {
   margin: 0;
