@@ -16,6 +16,7 @@ app.use('/api/login', require('./routes/login'));
 app.use( '/api/upload', require('./routes/uploads') );
 app.use('/api/oferta', require('./routes/ofertas'));
 app.use('/uploads', express.static(path.resolve('./uploads/usuarios')));
+app.use('/api/postulante', require('./routes/interesado'));
 
 
 
