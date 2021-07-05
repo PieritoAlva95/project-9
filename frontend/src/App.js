@@ -6,6 +6,7 @@ import Perfil from './pages/perfil'
 import Dashboard from './pages/dashboard';
 import Oferta from './pages/oferta';
 import Registro from './pages/registro';
+import AñadirOferta from './components/añadirOferta';
 
 const App =() => {
   return (
@@ -21,6 +22,7 @@ const App =() => {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/oferta" component={Oferta} />
         <Route path="/registro" component={Registro} />
+        <Route path="add-oferta" component={AñadirOferta}/>
       </Switch>
     </Router>
     

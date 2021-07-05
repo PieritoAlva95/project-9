@@ -1,74 +1,63 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import AñadirOferta from '../components/añadirOferta';
+import TablaOfertas from '../components/tablaOfertas';
+import Sidebar from '../components/sidebar'
 
 const Dashboard = () => {
     const user = JSON.parse(window.localStorage.getItem('user'));
+    
+    let lista = [];
+    const [listaOfertas, setListaOfertas] = useState([]);
 
-    const [oferta, setOferta] = useState({
-        titulo: '',
-        cuerpo: '',
-        precio: '',
-        categoria: '',
-        nombreUsuario: user.usuarioDB.nombres,
-        uid: user.usuarioDB.uid
-    })
-    const handleInputChange = e => {
-        const { name, value } = e.target
-        setOferta({ ...oferta, [name]: value })
-    }
+    
 
-    const crearOferta = async () => {
+    const cargarOfertasByUser = async () => {
+        console.log(user);
         const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-token': user.token
-            },
-            body: JSON.stringify(oferta)
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
         };
-        const response = await fetch('http://localhost:4000/api/oferta', requestOptions);
+        const response = await fetch('http://localhost:4000/api/oferta/usuario/' + user.usuarioDB.uid, requestOptions);
         const data = await response.json();
-        console.log(data);
+        setListaOfertas(data)
+        lista.push(data);
     }
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(oferta);
-        crearOferta();
-    }
+    useEffect(cargarOfertasByUser, [])
+    console.log(lista);
 
-    const cerrarSesion = () =>{
-        localStorage.removeItem('user');
-    }
 
     return (
         <Fragment>
-            <div className="container main-dashboard">
-                <h1>Perfil de {user.usuarioDB.nombres} </h1>
-                <button onClick={cerrarSesion}>Cerrar Sesiónn</button>
-                <form className="login-form" onSubmit={handleSubmit}>
-                    <h3>Añade una oferta de trabajo</h3>
-
-                    <div className="form-group">
-                        <label>Titulo</label>
-                        <input type="text" className="form-control" placeholder="Enter title" name="titulo" onChange={handleInputChange} />
+            <Sidebar></Sidebar>
+            <div className="container-fluid main-dashboard">
+                <div className="row">
+                    <div className="col-lg-2">
                     </div>
-
-                    <div className="form-group">
-                        <label>Descripción</label>
-                        <input type="text" className="form-control" placeholder="Enter description" name="cuerpo" onChange={handleInputChange} />
+                    <div className="col-lg-10">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Añadir
+                        </button>
+                        <div className="main-tabla">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        listaOfertas.map(oferta => (
+                                            <TablaOfertas key={oferta._id} oferta={oferta}></TablaOfertas>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <AñadirOferta></AñadirOferta>
                     </div>
-
-                    <div className="form-group">
-                        <label>Precio</label>
-                        <input type="number" className="form-control" name="precio" onChange={handleInputChange} />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Categoria</label>
-                        <input type="text" className="form-control" placeholder="Enter Category" name="categoria" onChange={handleInputChange} />
-                    </div>
-
-                    <button type="submit">Submit</button>
-                </form>
+                </div>
             </div>
 
         </Fragment>

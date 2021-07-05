@@ -43,6 +43,9 @@ Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiNzgy
 //lista todas las ofertas
 GET http://localhost:4000/api/oferta
 
+# listar todas las ofertas creadas por un usuario
+###
+GET http://localhost:4000/api/oferta/usuario/60dcc5c2958f7d1a98b357ad
 
 ###
 GET http://localhost:4000/api/oferta/60dcb8a0df26ce2b7477d26b

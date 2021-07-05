@@ -10,6 +10,7 @@ h1, h2, h3, h4, h5, h6, span, small{
     padding-right: 8px;
     position: fixed;
     width: 100%;
+    z-index: 2;
 }
 .navbar-brand, .nav-link{
     color: var(--txtClaro);
@@ -98,8 +99,57 @@ h1, h2, h3, h4, h5, h6, span, small{
 
 /* FIN LISTA PERSONAS  ***********************************************************************************/
 
+/* AÑADIR OFERTA *********************************************************************************************************************/
+.main-añadir-oferta .añadir-oferta-form{
+    padding: 2%;
+    color: var(--primary);
+}
+
+.main-añadir-oferta .añadir-oferta-form .btnAddOferta{
+    margin-top: 2%;
+    border-style: none;
+    color: var(--txtClaro);
+    background-color: var(--primary);
+    padding: 2%;
+}
+
+/* FIN AÑADIR OFERTA *********************************************************************************************************************/
+
+/* SIDEBAR *****************************************************************************************************************************/
+.sidebar{
+    background-color: var(--primary);
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    padding-top: 7%;
+}
+.sidebar hr{
+    background-color: var(--txtClaro);
+}
+.sidebar ul li{
+    padding: 3% 3% 3% 7%;
+}
+.sidebar ul li a{
+    color: var(--txtClaro);
+    cursor: pointer;
+    text-decoration: none;
+}
+.sidebar ul li:hover{
+    background-color: var(--secondary);
+}
+.sidebar .cerrar-sesion{
+    border-style: none;
+    background-color: transparent;
+    color: var(--txtClaro);
+    padding: 0%;
+}
+/* FIN DEL SIDEBAR *****************************************************************************************************************************/
+
 @media (max-width: 768px) {
     .oferta{
         padding: 5%;
+    }
+    .sidebar{
+        margin-left: -200px;
     }
 }

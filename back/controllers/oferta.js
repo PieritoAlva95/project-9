@@ -82,6 +82,11 @@ const verOfertas= async(req, res) =>{
  
 }
 
+const verOfertasByUser = async(req, res) => {
+    const listaOfertas = await Oferta.find({usuario:req.params.id});
+    res.json(listaOfertas);
+}
+
 
 const actualizarOferta = async(req, res = response) => {
 
@@ -151,5 +156,6 @@ module.exports = {
     actualizarOferta,
     verOfertaUnica,
     verOfertas,
-    borrarOferta
+    borrarOferta,
+    verOfertasByUser
 }

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import image from '../assets/worker.jpg';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 
 const Registro = () => {
     const history = useHistory();
@@ -17,8 +17,21 @@ const Registro = () => {
         // props.login(ususario)
     }
 
-    const registrar = (usuario) =>{
-        console.log(usuario);
+    const registrar = async(usuario) =>{
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(usuario)
+        };
+        const response = await fetch('http://localhost:4000/api/usuarios', requestOptions);
+        const data = await response.json();
+        if(data.msg === "correo existente"){
+            alert("El correo ya esta vinculado a una cuenta");
+        }else if(data.ok === false){
+            alert("Ha ocurrido un error al registrar el usuario");
+        }else if(data.ok === true){
+            history.push("/login");
+        }
     }
 
     return(
@@ -43,8 +56,13 @@ const Registro = () => {
                         </div>
 
                         <div className="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" className="form-control" placeholder="Ingresa tus apellidos" name="password" onChange={handleInputChange} />
+                        </div>
+
+                        <div className="form-group">
                             <label>Correo</label>
-                            <input type="email" className="form-control" placeholder="Ingresa tu correo" name="correo" onChange={handleInputChange} />
+                            <input type="email" className="form-control" placeholder="Ingresa tu correo" name="email" onChange={handleInputChange} />
                         </div>
 
                         <div className="form-group">
