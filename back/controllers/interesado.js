@@ -41,6 +41,5 @@ const actualizarOferta = async(req, res = response) => {
 
 
 module.exports = {
-    actualizarOferta,
-    ofertaPorPostulante
+    actualizarOferta
 }

@@ -5,11 +5,24 @@ import Sidebar from '../components/sidebar'
 
 const Dashboard = () => {
     const user = JSON.parse(window.localStorage.getItem('user'));
-    
+
     let lista = [];
     const [listaOfertas, setListaOfertas] = useState([]);
 
-    
+    const crearOferta = async (data) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': user.token
+            },
+            body: JSON.stringify(data)
+        };
+        const response = await fetch('http://localhost:4000/api/oferta', requestOptions);
+        const dataREs = await response.json();
+        console.log(dataREs);
+        cargarOfertasByUser()
+    }
 
     const cargarOfertasByUser = async () => {
         console.log(user);
@@ -21,9 +34,11 @@ const Dashboard = () => {
         const data = await response.json();
         setListaOfertas(data)
         lista.push(data);
+        console.log(data);
     }
-    useEffect(cargarOfertasByUser, [])
-    console.log(lista);
+    useEffect(()=>{
+        cargarOfertasByUser()
+    }, [])
 
 
     return (
@@ -49,13 +64,13 @@ const Dashboard = () => {
                                 <tbody>
                                     {
                                         listaOfertas.map(oferta => (
-                                            <TablaOfertas key={oferta._id} oferta={oferta}></TablaOfertas>
+                                            <TablaOfertas key={oferta._id} oferta={oferta} metodoCargarDatos = {cargarOfertasByUser}></TablaOfertas>
                                         ))
                                     }
                                 </tbody>
                             </table>
                         </div>
-                        <AñadirOferta></AñadirOferta>
+                        <AñadirOferta metodoCrearOferta={crearOferta}></AñadirOferta>
                     </div>
                 </div>
             </div>

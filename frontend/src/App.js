@@ -6,9 +6,12 @@ import Perfil from './pages/perfil'
 import Dashboard from './pages/dashboard';
 import Oferta from './pages/oferta';
 import Registro from './pages/registro';
-import AñadirOferta from './components/añadirOferta';
+import EditarOferta from './components/editOferta';
+import PageNotFound from './pages/notFound';
+import { useState } from 'react';
 
 const App =() => {
+  
   return (
     <Router>
       <div className="container-fluid">
@@ -19,10 +22,11 @@ const App =() => {
         </Route>
         <Route path="/login" component={Login}/>
         <Route path="/perfil" component={Perfil}></Route>
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} exact/>
         <Route path="/oferta" component={Oferta} />
         <Route path="/registro" component={Registro} />
-        <Route path="add-oferta" component={AñadirOferta}/>
+        <Route path="/dashboard/editar-oferta" component={EditarOferta} exact />
+        <Route component={PageNotFound} />
       </Switch>
     </Router>
     

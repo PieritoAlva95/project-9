@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-const AñadirOferta = () => {
+const AñadirOferta = ({metodoCrearOferta}) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
 
     const [oferta, setOferta] = useState({
@@ -16,23 +16,9 @@ const AñadirOferta = () => {
         setOferta({ ...oferta, [name]: value })
     }
 
-    const crearOferta = async () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-token': user.token
-            },
-            body: JSON.stringify(oferta)
-        };
-        const response = await fetch('http://localhost:4000/api/oferta', requestOptions);
-        const data = await response.json();
-        console.log(data);
-    }
-    const handleSubmit = e => {
+        const handleSubmit = e => {
         e.preventDefault();
-        console.log(oferta);
-        crearOferta();
+        metodoCrearOferta(oferta)
     }
     return (
         <Fragment>
