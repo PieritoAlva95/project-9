@@ -31,8 +31,8 @@ const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
                     {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
                         <i class='bx bx-edit'></i>
                     </button> */}
-                    <Link to={{pathname:"/dashboard/editar-oferta", state:{oft:oferta} }}><i class='bx bx-edit'></i></Link>
-                    <button type="button" class="btn btn-primary" onClick={eliminarOferta}>
+                    <Link className="btnLink" to={{pathname:"/dashboard/editar-oferta", state:{oft:oferta} }}><i class='bx bx-edit'></i></Link>
+                    <button type="button" class="btnDelete" onClick={eliminarOferta}>
                         <i class='bx bx-trash'></i>
                     </button>
                 </td>

@@ -5,6 +5,8 @@
   --alert: #ffe66d;
   --danger: #ff6b6b;
   --txtClaro:#fafafa;
+  --oferta:#FDFEFE;
+  --ofertaHover:#F2F3F4;
 }
 body {
   margin: 0;

@@ -32,10 +32,14 @@ h1, h2, h3, h4, h5, h6, span, small{
 }
 /* LISTA DE OFERTAS ***************************************************************************************/
 .oferta{
-    margin-bottom: 2%;
+    background-color: var(--oferta);
+    width: 100%;
+    padding: 2%;
+    border: 2px solid var(--ofertaHover);
+    box-shadow: 2px 2px 5px #999;
 }
-.oferta h5, h6{
-    color: var(--txtClaro);
+.oferta:hover{
+    background-color: var(--ofertaHover);
 }
 .oferta p{
     text-align: justify;
@@ -44,39 +48,30 @@ h1, h2, h3, h4, h5, h6, span, small{
     border-style: none;
     background-color: var(--secondary);
     padding: 1% 2% ;
-    margin: 2%;
+    margin: 10px 10px 10px 1px;
     border-radius: 5px;
     color: var(--txtClaro);
+    box-shadow: 0 7px #999;
+}
+.oferta button:active{
+    box-shadow: 0 4px #666;
+    transform: translateY(4px)
 }
 .oferta button i{
     font-size: 1.5em;
     color: var(--txtClaro);
 }
-.etiqueta{
-    /* background-color: var(--secondary); */
-    /* border: 3px solid var(--secondary); */
-    border-radius: 10px;
-}
-.etiqueta .header{
-    background-color: var(--secondary);
-    border-radius: 10px 10px 0px 0px;
-    padding: 3%;
-    height: 70px;
-}
-.etiqueta .cuerpo{
-    padding: 2%;
-    border: 3px solid var(--secondary);
-    border-radius: 0px 0px 10px 10px;
-    height: 180px;
-}
-.etiqueta i{
+
+
+.oferta i{
     font-size: 3em;
     float: left;
     margin-right: 10px;
     border-radius: 10px;
-    color: var(--txtClaro);
+    color: var(--primary);
 }
-.etiqueta .link{
+.oferta .link{
+    color: var(--primary);
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -98,6 +93,24 @@ h1, h2, h3, h4, h5, h6, span, small{
 }
 
 /* FIN LISTA PERSONAS  ***********************************************************************************/
+
+/* TABLA OFERTA ***********************************************************************************************************************/
+.btnLink{
+    padding: 6%;
+}
+.btnLink i{
+    font-size: 30px;
+}
+.btnDelete{
+    padding: 5%;
+    border-style: none;
+    background-color: transparent;
+}
+.btnDelete i{
+    font-size: 30px;
+    color: var(--danger);
+}
+/* TABLA OFERTA ***********************************************************************************************************************/
 
 /* AÑADIR OFERTA *********************************************************************************************************************/
 .main-añadir-oferta{

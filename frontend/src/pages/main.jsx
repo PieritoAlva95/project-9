@@ -4,7 +4,7 @@ import './pages.css';
 
 const Main = () => {
     const [ofertas, setOfertas] = useState([]);
-    
+
     const cargarOfertas = async () => {
         const requestOptions = {
             method: 'GET',
@@ -21,17 +21,28 @@ const Main = () => {
 
     // console.log(ofertas);
 
-    const presentarOfertas = () =>{
-        return(
-            ofertas.map(oferta => (
-                <ListaOfertas key={oferta._id} oferta={oferta}></ListaOfertas>
-            ))
+    const presentarOfertas = () => {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-3">
+
+                    </div>
+                    <div className="col-9">
+                        {
+                            ofertas.map(oferta => (
+                                <ListaOfertas key={oferta._id} oferta={oferta}></ListaOfertas>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
         );
     }
     return (
         <div className="container main-section">
             <div className="row">
-            {presentarOfertas()}
+                {presentarOfertas()}
             </div>
         </div>
     );

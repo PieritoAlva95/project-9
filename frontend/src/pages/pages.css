@@ -98,6 +98,19 @@
 .main-oferta p{
     color: var(--primary);
 }
+.body-oferta button{
+    border-style: none;
+    background-color: var(--secondary);
+    padding: 1% 2% ;
+    margin: 10px 10px 10px 1px;
+    border-radius: 5px;
+    color: var(--txtClaro);
+    box-shadow: 0 7px #999;
+}
+.body-oferta button:active{
+    box-shadow: 0 4px #666;
+    transform: translateY(4px)
+}
 /* FIN OFERTA PAGE *******************************************************************************/
 
 /* REGISTRO PAGE *******************************************************************************/

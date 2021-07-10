@@ -12,6 +12,7 @@ const OfertaSchema = Schema({
       {
         postulante:{type: String, require:true },
         nombres: {type: String, require:true },
+        foto:{type:String},
         aceptado: {type: Boolean, require:true, default:false },
        fechaPostulacion: {type: Date, default: Date.now()}
       }
