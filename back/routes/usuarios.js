@@ -21,11 +21,7 @@ router.post('/',[
 
 router.put('/:id' ,[
     validarJWT,
-    check('nombres', 'Los nombres es obligatorio').not().isEmpty(),
-    
     validarCampos,
-    
-
 ] , actualizarUsuario);
 
 router.delete('/:id', validarJWT ,borrarUsuario);

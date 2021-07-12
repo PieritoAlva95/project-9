@@ -48,7 +48,7 @@ const Oferta = ({ location }) => {
                         <p>{oferta.cuerpo}</p>
                         <p><strong>Categoria:</strong> {oferta.categoria}</p>
                         <p><strong>Salario:</strong> {oferta.precio}</p>
-                        <button onClick={postularseOferta}><i class='bx bxs-send'></i> Ofertar</button>
+                        <button onClick={postularseOferta}><i className='bx bxs-send'></i> Ofertar</button>
                     </div>
                     <div className="col-lg-6 personas">
                         <h2>Personas que estan ofertando</h2>

@@ -34,7 +34,7 @@ const getUsuarioById = async(req, res) =>{
 
 const crearUsuario = async(req, res = response) =>{
 
-    const {nombres, apellidos, documentoDeIdentidad, numeroDeCelular, email,
+    const {email,
         password} = req.body;
     
     try {
@@ -83,24 +83,16 @@ const actualizarUsuario = async(req, res) =>{
             });
         }
     
-         //actualizacion
-         //digo que estos campos no son necesarios para actualizar
-         const {passwrord, email, ...campos} = req.body;
-        if (usuarioDB.email !== email) {
-            const existeEmail = await Usuario.findOne({email});
-            if (existeEmail) {
-                return res.status(400).json({
-                    ok:false,
-                    msg:'El correo ya existe'
-                })
-            }
+        const cambio = {
+            ...req.body,
+            usuario: uid
         }
-        campos.email = email;
-        const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new:true});
+
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(uid,cambio,{new:true});
 
         res.json({
             ok:true,
-            usuarioActualizado
+            usuarioActualizado,
         })
     } catch (error) {
         console.log(error);

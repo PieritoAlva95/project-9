@@ -96,19 +96,32 @@ h1, h2, h3, h4, h5, h6, span, small{
 
 /* TABLA OFERTA ***********************************************************************************************************************/
 .btnLink{
-    padding: 6%;
+    padding: 3%;
 }
 .btnLink i{
-    font-size: 30px;
+    font-size: 25px;
+}
+.btnLink i:hover{
+    padding: 3%;
+    color: var(--txtClaro);
+    background-color: var(--primary);
+    border-radius: 25px;
 }
 .btnDelete{
-    padding: 5%;
+    padding: 3%;
     border-style: none;
     background-color: transparent;
 }
 .btnDelete i{
-    font-size: 30px;
+    font-size: 25px;
     color: var(--danger);
+}
+.btnDelete i:hover{
+    padding: 15%;
+    font-size: 25px;
+    color: var(--txtClaro);
+    background-color: var(--danger);
+    border-radius: 25px;
 }
 /* TABLA OFERTA ***********************************************************************************************************************/
 

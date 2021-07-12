@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-const AñadirOferta = ({metodoCrearOferta}) => {
+const AñadirOferta = ({ metodoCrearOferta }) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
 
     const [oferta, setOferta] = useState({
@@ -16,9 +16,13 @@ const AñadirOferta = ({metodoCrearOferta}) => {
         setOferta({ ...oferta, [name]: value })
     }
 
-        const handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
-        metodoCrearOferta(oferta)
+        if((oferta.titulo == "") || (oferta.cuerpo == "") || (oferta.precio == "") || (oferta.categoria == "")){
+            alert("Los campos son obligatorios");
+        }else{
+            metodoCrearOferta(oferta)
+        }
     }
     return (
         <Fragment>
@@ -34,29 +38,56 @@ const AñadirOferta = ({metodoCrearOferta}) => {
                                 <form className="añadir-oferta-form" onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label>Titulo</label>
-                                        <input type="text" className="form-control" placeholder="Enter title" name="titulo" onChange={handleInputChange} />
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Enter title"
+                                            name="titulo"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
 
                                     <div className="form-group">
                                         <label>Descripción</label>
-                                        <input type="text" className="form-control" placeholder="Enter description" name="cuerpo" onChange={handleInputChange} />
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Enter description"
+                                            name="cuerpo"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
 
                                     <div className="form-group">
                                         <label>Precio</label>
-                                        <input type="number" className="form-control" name="precio" onChange={handleInputChange} />
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            name="precio"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
 
                                     <div className="form-group">
                                         <label>Categoria</label>
-                                        <input type="text" className="form-control" placeholder="Enter Category" name="categoria" onChange={handleInputChange} />
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Enter Category"
+                                            name="categoria"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
 
                                 </form>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button data-bs-dismiss="modal" className="btnAddOferta" onClick={handleSubmit} type="submit">Añadir Oferta</button>
+                        <div className="card-footer">
+                            <button className="btnAddOferta" onClick={handleSubmit} type="submit">Añadir Oferta</button>
                         </div>
                     </div>
                 </div>

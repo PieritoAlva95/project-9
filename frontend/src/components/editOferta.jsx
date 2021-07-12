@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const EditarOferta = ({ location }) => {
     const history = useHistory();
@@ -30,7 +30,7 @@ const EditarOferta = ({ location }) => {
             },
             body: JSON.stringify(oferta)
         };
-        const response = await fetch('http://localhost:4000/api/oferta/'+oft._id, requestOptions);
+        const response = await fetch('http://localhost:4000/api/oferta/' + oft._id, requestOptions);
         const data = await response.json();
         console.log(data);
         // console.log(oft.titulo);
@@ -45,26 +45,57 @@ const EditarOferta = ({ location }) => {
         <Fragment>
             <div className="container main-añadir-oferta">
                 <form className="añadir-oferta-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
+                    <div className="form-group needs-validation">
                         <label>Titulo</label>
-                        <input type="text" className="form-control" placeholder="Enter title" name="titulo" onChange={handleInputChange} />
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter title"
+                            defaultValue={oft.titulo}
+                            name="titulo"
+                            onChange={handleInputChange}
+                            required
+                        />
                     </div>
 
                     <div className="form-group">
                         <label>Descripción</label>
-                        <textarea type="text" className="form-control" placeholder="Enter description" name="cuerpo" onChange={handleInputChange}></textarea>
+                        <textarea
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter description"
+                            name="cuerpo"
+                            defaultValue={oft.cuerpo}
+                            onChange={handleInputChange}
+                            required
+                        ></textarea>
                     </div>
 
                     <div className="form-group">
                         <label>Precio</label>
-                        <input type="number" className="form-control" name="precio" onChange={handleInputChange} />
+                        <input
+                            type="number"
+                            className="form-control"
+                            name="precio"
+                            defaultValue={oft.precio}
+                            onChange={handleInputChange}
+                            required
+                        />
                     </div>
 
                     <div className="form-group">
                         <label>Categoria</label>
-                        <input type="text" className="form-control" placeholder="Enter Category" name="categoria" onChange={handleInputChange} />
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter Category"
+                            defaultValue={oft.categoria}
+                            name="categoria"
+                            onChange={handleInputChange}
+                            required
+                        />
                     </div>
-                    <button>Guardar Cambios</button>
+                    <button className="btn-submit">Guardar Cambios</button>
                 </form>
             </div>
 

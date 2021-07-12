@@ -25,3 +25,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.btn-submit{
+  border-style: none;
+  background-color: var(--secondary);
+  padding: 1% 2% ;
+  margin: 10px 10px 10px 1px;
+  border-radius: 5px;
+  color: var(--txtClaro);
+  box-shadow: 0 7px #999;
+}
+.btn-submit:active{
+  box-shadow: 0 4px #666;
+  transform: translateY(4px)
+}
+
+textarea{
+  resize: none;
+}

@@ -3,7 +3,7 @@ import AñadirOferta from '../components/añadirOferta';
 import TablaOfertas from '../components/tablaOfertas';
 import Sidebar from '../components/sidebar'
 
-const Dashboard = () => {
+const Dashboard = ({setLogeado}) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
 
     let lista = [];
@@ -43,13 +43,13 @@ const Dashboard = () => {
 
     return (
         <Fragment>
-            <Sidebar></Sidebar>
+            <Sidebar setLogeado={setLogeado}></Sidebar>
             <div className="container-fluid main-dashboard">
                 <div className="row">
                     <div className="col-lg-2">
                     </div>
                     <div className="col-lg-10">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Añadir
                         </button>
                         <div className="main-tabla">

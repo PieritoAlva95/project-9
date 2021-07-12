@@ -8,6 +8,28 @@ const UsuarioSchema = Schema({
     email:{type: String, require:true, unique:true},
     password:{type: String, require:true},
     img:{type: String, default:'no-img.png'},
+    skills:[{type:String, require:false, default:''}],
+    bio:{type:String},
+    redesSociales:[{
+      twitter:{type:String},
+      facebook:{type:String},
+      linkedin:{type:String},
+      instagram:{type:String},
+    }],
+    experiencia:[{
+      titulo:{type:String},
+      empresa:{type:String},
+      fechaInicio:{type:String},
+      fechaFin:{type:String},
+      descripcion:{type:String}
+    }],
+    estudios:[{
+      nombreInstitucion:{type:String},
+      titulo:{type:String},
+      fechaInicio:{type:String},
+      fechaFin:{type:String},
+      descripcion:{type:String}
+    }],
     esAdmin: { type: Boolean,  default: false},
     fechaCreacion: {type: Date, default: Date.now()}
     }, {

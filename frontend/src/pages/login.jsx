@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import image from '../assets/worker.jpg';
 
-const LoginPage = (props) => {
+const LoginPage = ({setLogeado}) => {
     const history = useHistory();
     const [usuario, setusuario] = useState({})
 
@@ -15,8 +15,8 @@ const LoginPage = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         login(usuario)
-        // props.login(usuario)
     }
+
     const login = async (user) => {
         const requestOptions = {
             method: 'POST',
@@ -25,9 +25,15 @@ const LoginPage = (props) => {
         };
         const response = await fetch('http://localhost:4000/api/login', requestOptions);
         const data = await response.json();
-        window.localStorage.setItem('user', JSON.stringify(data));
-        history.push("/dashboard");
+        if (data.ok == true) {
+            window.localStorage.setItem('user', JSON.stringify(data));
+            setLogeado(true)
+            history.push("/dashboard");
+        } else {
+            alert("Usuario no encontrado");
+        }
     }
+
     return (
         <div className="container mainlogin">
             <div className="row">
@@ -35,19 +41,21 @@ const LoginPage = (props) => {
                     <img src={image} alt="" />
                 </div>
                 <div className="col-lg-6 formulario">
-                    <form className="login-form" onSubmit={handleSubmit}>
+                    <form className="login-form needs-validation" onSubmit={handleSubmit}>
                         <h3>Login</h3>
 
                         <div className="form-group">
                             <label>Email address</label>
-                            <input type="email" className="form-control" placeholder="Ingresa un correo" name="email" onChange={handleInputChange} />
+                            <input type="email" className="form-control" placeholder="Ingresa un correo" name="email" onChange={handleInputChange} required />
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password" className="form-control" placeholder="Ingresa tu contraseña" name="password" onChange={handleInputChange} />
+                            <input type="password" className="form-control" placeholder="Ingresa tu contraseña" name="password" onChange={handleInputChange} required />
                         </div>
-
+                        <div id="msj-error" className="mensaje-error disable">
+                            <p>LO SIENTO EL USUARIO NO HA SIDO ENCONTRADO EN NUESTROS REGISTROS</p>
+                        </div>
                         <div className="form-group">
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input" id="customCheck1" />
