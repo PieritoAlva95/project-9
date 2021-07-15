@@ -139,6 +139,43 @@
 .main-editar-perfil{
     padding-top: 7%;
 }
+.img-perfil img{
+    width: 100px;
+}
+.redes-sociales i{
+    font-size: 30px;
+    color: var(--primary);
+    margin-left: 5px;
+}
+.redes-sociales i:hover{
+    color: var(--secondary);
+}
+.skills{
+    margin-top: 20px;
+}
+.skills span{
+    margin-right: 15px;
+    padding: 0%;
+}
+.skills span i{
+    font-size: 20px;
+    padding: 0%;
+    margin: 0%;
+}
+.perfil .informacion{
+    margin-top: 50px;
+}
+
+.perfil .informacion .experiencia .data{
+    padding: 10px;
+    background-color: #E5E7E9;
+    text-align: justify;
+}
+.perfil .informacion .estudios .data{
+    background-color: #E5E7E9;
+    text-align: justify;
+    padding: 10px;
+}
 /* EDITAR PERFIL ***********************************************************************************/
 .notfound{
     padding-top: 7%;

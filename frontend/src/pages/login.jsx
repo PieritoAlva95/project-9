@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import image from '../assets/worker.jpg';
 
-const LoginPage = ({setLogeado}) => {
+const LoginPage = ({setUser, setLogeado}) => {
     const history = useHistory();
     const [usuario, setusuario] = useState({})
 

@@ -20,6 +20,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
         e.preventDefault();
         if((oferta.titulo == "") || (oferta.cuerpo == "") || (oferta.precio == "") || (oferta.categoria == "")){
             alert("Los campos son obligatorios");
+            
         }else{
             metodoCrearOferta(oferta)
         }
@@ -35,7 +36,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                         </div>
                         <div className="modal-body">
                             <div className="container main-añadir-oferta">
-                                <form className="añadir-oferta-form" onSubmit={handleSubmit}>
+                                <form className="añadir-oferta-form"  onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label>Titulo</label>
                                         <input
@@ -87,7 +88,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button className="btnAddOferta" onClick={handleSubmit} type="submit">Añadir Oferta</button>
+                            <button data-bs-dismiss="modal" className="btnAddOferta" onClick={handleSubmit} type="submit">Añadir Oferta</button>
                         </div>
                     </div>
                 </div>

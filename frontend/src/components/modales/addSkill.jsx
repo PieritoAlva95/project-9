@@ -1,26 +1,11 @@
 import React, { useState } from 'react'
 
-const AddSkill = ({user}) => {
+const AddSkill = ({editarUser ,user}) => {
     const [habilidad, setHabilidad] = useState("")
 
     const handleInputChange = e => {
         const { value } = e.target
         setHabilidad(value)
-    }
-
-    const editarUser = async (useredit) => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-token': useredit.token
-            },
-            body: JSON.stringify(useredit.usuarioDB)
-        };
-        const response = await fetch('http://localhost:4000/api/usuarios/' + useredit.usuarioDB.uid, requestOptions);
-        const data = await response.json();
-        console.log(data);
-        // console.log(oft.titulo);
     }
 
     const handleSubmit = e => {
@@ -54,7 +39,7 @@ const AddSkill = ({user}) => {
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button className="btnAddOferta" onClick={handleSubmit} type="submit">Añadir Habilidad</button>
+                        <button className="btnAddOferta" data-bs-dismiss="modal" onClick={handleSubmit} type="submit">Añadir Habilidad</button>
                     </div>
                 </div>
             </div>

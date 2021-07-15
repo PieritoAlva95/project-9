@@ -74,9 +74,9 @@ const actualizarUsuario = async(req, res) =>{
     
     const uid = req.params.id;
     try {
-        const usuarioDB = await Usuario.findById(uid);
+        const usuario = await Usuario.findById(uid);
 
-        if (!usuarioDB) {
+        if (!usuario) {
             return res.status(404).json({
                 ok:false,
                 msg: 'El usuario no existe'
@@ -87,12 +87,13 @@ const actualizarUsuario = async(req, res) =>{
             ...req.body,
             usuario: uid
         }
-
-        const usuarioActualizado = await Usuario.findByIdAndUpdate(uid,cambio,{new:true});
+        const token = await generarJWT(usuario.id);
+        const usuarioDB = await Usuario.findByIdAndUpdate(uid,cambio,{new:true});
 
         res.json({
             ok:true,
-            usuarioActualizado,
+            token,
+            usuarioDB,
         })
     } catch (error) {
         console.log(error);

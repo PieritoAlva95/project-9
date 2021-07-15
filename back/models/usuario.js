@@ -11,10 +11,10 @@ const UsuarioSchema = Schema({
     skills:[{type:String, require:false, default:''}],
     bio:{type:String},
     redesSociales:[{
-      twitter:{type:String},
-      facebook:{type:String},
-      linkedin:{type:String},
-      instagram:{type:String},
+      twitter:{type:String, default:'no-data'},
+      facebook:{type:String, default:'no-data'},
+      linkedin:{type:String, default:'no-data'},
+      instagram:{type:String, default:'no-data'},
     }],
     experiencia:[{
       titulo:{type:String},

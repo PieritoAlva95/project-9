@@ -66,8 +66,8 @@ const verOfertas= async(req, res) =>{
     const [ ofertas, total ] = await Promise.all([
         Oferta
             .find()
-            .skip( desde )
-            .limit( 5 ),
+            .skip( desde ),
+            // .limit( 5 ),
 
             Oferta.countDocuments()
     ]);

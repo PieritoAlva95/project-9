@@ -52,6 +52,7 @@ const Dashboard = ({setLogeado}) => {
                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Añadir
                         </button>
+                        
                         <div className="main-tabla">
                             <table className="table">
                                 <thead>
