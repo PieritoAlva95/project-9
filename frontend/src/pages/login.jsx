@@ -28,12 +28,12 @@ const LoginPage = ({ setLogeado }) => {
       requestOptions
     );
     const data = await response.json();
-    if (data.ok == true) {
+    if (data.ok === true) {
       window.localStorage.setItem('user', JSON.stringify(data));
       setLogeado(true);
       history.push('/dashboard');
     } else {
-      alert('Usuario no encontrado');
+      alert('Credenciales incorrectas.');
     }
   };
 
@@ -45,10 +45,10 @@ const LoginPage = ({ setLogeado }) => {
         </div>
         <div className='col-lg-6 formulario'>
           <form className='login-form needs-validation' onSubmit={handleSubmit}>
-            <h3>Login</h3>
+            <h3>Iniciar sesión</h3>
 
             <div className='form-group'>
-              <label>Email address</label>
+              <label>Correo Electrónico</label>
               <input
                 type='email'
                 className='form-control'
@@ -89,9 +89,11 @@ const LoginPage = ({ setLogeado }) => {
             </div>
 
             <button type='submit'>Ingresar</button>
-            <p className='forgot-password text-right'>
-              Has olvidado tu contraseña?
-            </p>
+            <Link to='/reseteo-password'>
+              <p className='forgot-password text-right'>
+                Has olvidado tu contraseña?
+              </p>
+            </Link>
             <Link className='link' to='/registro'>
               Regístrate!
             </Link>

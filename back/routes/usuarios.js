@@ -1,29 +1,35 @@
-const {Router} = require('express');
-const {check} = require('express-validator');
-const {validarCampos} = require('../middlewares/validar-campos');
+const { Router } = require('express');
+const { check } = require('express-validator');
+const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
-
 
 const router = Router();
 
-const {getUsuario, crearUsuario, actualizarUsuario, borrarUsuario, getUsuarioById} = require('../controllers/usuario');
+const {
+  getUsuario,
+  crearUsuario,
+  actualizarUsuario,
+  borrarUsuario,
+  getUsuarioById,
+} = require('../controllers/usuario');
 
-router.get('/' ,getUsuario);
+router.get('/', getUsuario);
+
 router.get('/:id', getUsuarioById);
 
-router.post('/',[
+router.post(
+  '/',
+  [
     check('nombres', 'Los nombres es obligatorio').not().isEmpty(),
     // check('password', 'El pass es obligatorio').not().isEmpty(),
     // check('email', 'El email es obligatorio').isEmail(),
     validarCampos,
-] ,crearUsuario);
+  ],
+  crearUsuario
+);
 
+router.put('/:id', [validarJWT, validarCampos], actualizarUsuario);
 
-router.put('/:id' ,[
-    validarJWT,
-    validarCampos,
-] , actualizarUsuario);
-
-router.delete('/:id', validarJWT ,borrarUsuario);
+router.delete('/:id', validarJWT, borrarUsuario);
 
 module.exports = router;
