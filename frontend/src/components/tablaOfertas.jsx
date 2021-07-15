@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
-import EditarOferta from './editOferta'
+import EditarOferta from './editOferta';
 import { Link } from 'react-router-dom';
 
-
 const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
-    const user = JSON.parse(window.localStorage.getItem('user'));
-
+  const user = JSON.parse(window.localStorage.getItem('user'));
 
     const eliminarOferta = async () => {
         const requestOptions = {
@@ -55,6 +53,6 @@ const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
             </div>
         </Fragment>
     );
-}
+  };
 
-export default TablaOfertas
+export default TablaOfertas;

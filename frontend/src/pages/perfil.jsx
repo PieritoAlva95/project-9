@@ -117,6 +117,6 @@ const Perfil = ({ location }) => {
             </div>
         </div>
     );
-}
+  };
 
 export default Perfil;
