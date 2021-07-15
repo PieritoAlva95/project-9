@@ -14,11 +14,16 @@ const Registro = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (usuario.password !== usuario.confirmPassword) {
-      alert('Las contraseñas no son iguales');
+      alert('Las contraseñas no son iguales.');
+    }
+    if (usuario.password.length < 6) {
+      alert('La contraseña debe tener como minimo 6 caracteres.');
+    }
+    if (usuario.numeroDeCelular.length !== 10) {
+      alert('Por favor ingrese un numero de teléfono valido.');
     } else {
       registrar(usuario);
     }
-    // props.login(ususario)
   };
 
   const registrar = async (usuario) => {
@@ -37,6 +42,7 @@ const Registro = () => {
     } else if (data.ok === false) {
       alert('Ha ocurrido un error al registrar el usuario');
     } else if (data.ok === true) {
+      alert('El usuario ha sido regitrado con exito.');
       history.push('/login');
     }
   };
@@ -101,7 +107,7 @@ const Registro = () => {
               </div>
 
               <div className='form-group'>
-                <label>Correo</label>
+                <label>correo Electrónico</label>
                 <input
                   type='email'
                   className='form-control'
