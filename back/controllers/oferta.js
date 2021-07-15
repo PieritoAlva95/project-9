@@ -87,6 +87,11 @@ const verOfertasByUser = async(req, res) => {
     res.json(listaOfertas);
 }
 
+const getOfertasDiferentesUser = async(req, res) => {
+    const listaOfertas = await Oferta.find({usuario:{$ne:req.params.id}});
+    res.json(listaOfertas);
+}
+
 
 const actualizarOferta = async(req, res = response) => {
 
@@ -157,5 +162,6 @@ module.exports = {
     verOfertaUnica,
     verOfertas,
     borrarOferta,
-    verOfertasByUser
+    verOfertasByUser,
+    getOfertasDiferentesUser
 }

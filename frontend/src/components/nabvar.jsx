@@ -33,19 +33,25 @@ const Navbar = ({ logeado, setLogeado }) => {
           </button>
           <div className='collapse navbar-collapse' id='navbarSupportedContent'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-              <li className='nav-item'>
                 {logeado ? (
-                  <Link className='nav-link' to='/dashboard'>
-                    "{user.usuarioDB.nombres}"
-                  </Link>
+                  <li className='nav-item'>
+                    <Link className='nav-link' to='/dashboard'>
+                      {user.usuarioDB.nombres}
+                    </Link>
+                  </li>
                 ) : (
                   <>
-                    <Link className='nav-link' to='/login'>
-                      Iniciar Sesión
-                    </Link>
+                    <li className='nav-item'>
+                      <Link className='nav-link' to='/login'>
+                        Iniciar Sesión
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/registro">Registrarse</Link>
+                    </li>
                   </>
                 )}
-              </li>
+
               {/* <li><button onClick={props.test()}>Ola</button></li> */}
             </ul>
           </div>

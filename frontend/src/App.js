@@ -22,7 +22,9 @@ const App = () => {
         <Navbar logeado={logeado} setLogeado={setLogeado}></Navbar>
       </div>
       <Switch>
-        <Route path='/' component={Main} exact></Route>
+        <Route path='/' component={(routeProps) => (
+            <Main {...routeProps} logeado={logeado} />
+          )} exact></Route>
         <Route
           path='/login'
           component={(routeProps) => (
@@ -44,7 +46,9 @@ const App = () => {
         <Route path='/dashboard/editar-oferta' component={EditarOferta} exact />
         <Route
           path='/dashboard/visualizar-oferta'
-          component={VisualizarOferta}
+          component={(routeProps) => (
+            <VisualizarOferta {...routeProps} setLogeado={setLogeado} />
+          )}
           exact
         />
         <Route

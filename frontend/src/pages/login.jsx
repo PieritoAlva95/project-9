@@ -94,9 +94,9 @@ const LoginPage = ({ setLogeado }) => {
                 Has olvidado tu contraseña?
               </p>
             </Link>
-            <Link className='link' to='/registro'>
+            {/* <Link className='link' to='/registro'>
               Regístrate!
-            </Link>
+            </Link> */}
           </form>
         </div>
       </div>

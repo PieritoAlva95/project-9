@@ -4,7 +4,7 @@ const {validarCampos} = require('../middlewares/validar-campos');
 
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-const {crearOferta, verOfertaUnica, verOfertas ,actualizarOferta, borrarOferta, verOfertasByUser } = require('../controllers/oferta');
+const {crearOferta, verOfertaUnica, verOfertas ,actualizarOferta, borrarOferta, verOfertasByUser, getOfertasDiferentesUser } = require('../controllers/oferta');
 
 const router = Router();
 
@@ -39,5 +39,7 @@ router.put('/:id',
 
 
 router.delete('/:id',validarJWT ,borrarOferta);
+
+router.get('/usuario/get-ofertas/:id', getOfertasDiferentesUser)
 
 module.exports = router;

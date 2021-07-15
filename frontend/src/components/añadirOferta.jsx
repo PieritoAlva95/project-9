@@ -18,7 +18,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if((oferta.titulo == "") || (oferta.cuerpo == "") || (oferta.precio == "") || (oferta.categoria == "")){
+        if((oferta.titulo === "") || (oferta.cuerpo === "") || (oferta.precio === "") || (oferta.categoria === "")){
             alert("Los campos son obligatorios");
             
         }else{

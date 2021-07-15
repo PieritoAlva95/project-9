@@ -49,7 +49,7 @@ const Oferta = ({ location }) => {
     <Fragment>
       <div className='container main-oferta'>
         <div className='row'>
-          <div className='col-lg-6 body-oferta'>
+          <div className='col-lg-12 body-oferta'>
             <h1>{oferta.titulo}</h1>
             <h4 className='usuario'>{oferta.nombreUsuario}</h4>
             <p>{oferta.cuerpo}</p>
@@ -63,12 +63,12 @@ const Oferta = ({ location }) => {
               <i className='bx bxs-send'></i> Postular
             </button>
           </div>
-          <div className='col-lg-6 personas'>
+          {/* <div className='col-lg-6 personas'>
             <h2>Personas que estan postulando</h2>
             {oferta.interesados.map((persona) => (
               <ListaPersonas persona={persona}></ListaPersonas>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </Fragment>
