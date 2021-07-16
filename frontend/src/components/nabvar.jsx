@@ -35,7 +35,7 @@ const Navbar = ({ logeado, setLogeado }) => {
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
                 {logeado ? (
                   <li className='nav-item'>
-                    <Link className='nav-link' to='/dashboard'>
+                    <Link className='nav-link usuario-nombre' to='/dashboard'>
                       {user.usuarioDB.nombres}
                     </Link>
                   </li>

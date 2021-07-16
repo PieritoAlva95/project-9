@@ -4,6 +4,15 @@ import Sidebar from '../components/sidebar'
 
 const VisualizarOferta = ({ setLogeado, location }) => {
   const oferta = location.state.oft;
+  
+  const realizarContrato = (personaID) => {
+    console.log(personaID);
+    const interesadoContratado = oferta.interesados.findIndex(post => post.postulante === personaID);
+    oferta.interesados[interesadoContratado].aceptado=true;
+    console.log(oferta);
+    // LLAMAR A LA API PARA GUARDAR LA OFERTA....PREGUNTAR COMO HACER PARA YA NO  MOSTRAR ESA OFERTA CUANDO YA TIENEN UN CONTRATO
+    // LA IDEA ES TENER UN CAMPO MAS EN OFERTA DISPONIBLE=FALSE
+  }
 
   return (
     <Fragment>
@@ -29,7 +38,7 @@ const VisualizarOferta = ({ setLogeado, location }) => {
                   <h2>Personas que estan ofertando</h2>
                   <div className='container lista-personas'>
                     {oferta.interesados.map((persona) => (
-                      <ListaPersonas key={persona._id} persona={persona} />
+                      <ListaPersonas key={persona._id} persona={persona} metodoContratar ={realizarContrato} />
                     ))}
                   </div>
                 </div>

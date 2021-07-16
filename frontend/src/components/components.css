@@ -23,13 +23,17 @@ small {
   color: var(--txtClaro);
 }
 .navbar-brand:hover {
-  color: var(--secondary);
+  color: #cfd4d4;
 }
 .nav-link:hover {
-  color: var(--secondary);
+  color: #cfd4d4;
+  /* background-color: var(--secondary); */
 }
 .navbar-toggler-icon {
   color: var(--txtClaro);
+}
+.nav-item .usuario-nombre{
+  text-transform: uppercase;
 }
 .navbar-toggler-icon i {
   font-size: 30px;
@@ -97,7 +101,18 @@ small {
 .lista-personas .nombres-apellidos {
   padding: 0%;
 }
-
+.lista-personas button{
+  padding: 5px;
+}
+.lista-personas .link{
+  text-decoration: none;
+  color: var(--primary);
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+.lista-personas .link:hover{
+  color: var(--secondary);
+}
 /* FIN LISTA PERSONAS  ***********************************************************************************/
 
 /* TABLA OFERTA ***********************************************************************************************************************/

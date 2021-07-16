@@ -142,6 +142,9 @@
 .img-perfil img{
     width: 100px;
 }
+.perfil h1{
+    text-transform: uppercase;
+}
 .redes-sociales i{
     font-size: 30px;
     color: var(--primary);
@@ -162,16 +165,20 @@
     padding: 0%;
     margin: 0%;
 }
-.perfil .informacion{
+.informacion{
     margin-top: 50px;
+    margin-bottom: 50px;
+}
+.informacion h1{
+    text-align: center;
 }
 
-.perfil .informacion .experiencia .data{
+.informacion .experiencia .data{
     padding: 10px;
     background-color: #E5E7E9;
     text-align: justify;
 }
-.perfil .informacion .estudios .data{
+.informacion .estudios .data{
     background-color: #E5E7E9;
     text-align: justify;
     padding: 10px;
