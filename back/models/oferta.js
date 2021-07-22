@@ -16,7 +16,8 @@ const OfertaSchema = Schema({
         aceptado: {type: Boolean, require:true, default:false },
        fechaPostulacion: {type: Date, default: Date.now()}
       }
-    ]
+    ],
+    disponible:{type:Boolean, default:true}
     }, {
         timestamps: false,
         versionKey: false,

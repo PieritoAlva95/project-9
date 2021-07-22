@@ -4,14 +4,25 @@ import Sidebar from '../components/sidebar'
 
 const VisualizarOferta = ({ setLogeado, location }) => {
   const oferta = location.state.oft;
-  
-  const realizarContrato = (personaID) => {
+  const user = JSON.parse(window.localStorage.getItem('user'));
+
+  const realizarContrato = async (personaID) => {
     console.log(personaID);
     const interesadoContratado = oferta.interesados.findIndex(post => post.postulante === personaID);
-    oferta.interesados[interesadoContratado].aceptado=true;
-    console.log(oferta);
-    // LLAMAR A LA API PARA GUARDAR LA OFERTA....PREGUNTAR COMO HACER PARA YA NO  MOSTRAR ESA OFERTA CUANDO YA TIENEN UN CONTRATO
-    // LA IDEA ES TENER UN CAMPO MAS EN OFERTA DISPONIBLE=FALSE
+    oferta.interesados[interesadoContratado].aceptado = true;
+    oferta.disponible = false;
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': user.token
+      },
+      body: JSON.stringify(oferta)
+    };
+    const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
+    const data = await response.json();
+    console.log(data);
+
   }
 
   return (
@@ -38,7 +49,7 @@ const VisualizarOferta = ({ setLogeado, location }) => {
                   <h2>Personas que estan ofertando</h2>
                   <div className='container lista-personas'>
                     {oferta.interesados.map((persona) => (
-                      <ListaPersonas key={persona._id} persona={persona} metodoContratar ={realizarContrato} />
+                      <ListaPersonas key={persona._id} persona={persona} metodoContratar={realizarContrato} />
                     ))}
                   </div>
                 </div>

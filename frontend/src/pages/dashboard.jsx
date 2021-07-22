@@ -8,6 +8,7 @@ const Dashboard = ({ setLogeado }) => {
 
   let lista = [];
   const [listaOfertas, setListaOfertas] = useState([]);
+  const [ofertasContratos, setOfertasContratos] = useState([])
 
   const crearOferta = async (data) => {
     const requestOptions = {
@@ -28,7 +29,6 @@ const Dashboard = ({ setLogeado }) => {
   };
 
   const cargarOfertasByUser = async () => {
-    console.log(user);
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -39,11 +39,26 @@ const Dashboard = ({ setLogeado }) => {
     );
     const data = await response.json();
     setListaOfertas(data);
+
     lista.push(data);
-    console.log(data);
   };
+
+  const cargarOfertasContratos = async() =>{
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    const resp = await fetch(
+      'http://localhost:4000/api/oferta/usuario/contratos/' + user.usuarioDB.uid,
+      requestOptions
+    );
+    const res = await resp.json();
+    setOfertasContratos(res);
+    console.log(res);
+  }
   useEffect(() => {
     cargarOfertasByUser();
+    cargarOfertasContratos();
   }, []);
 
   return (
@@ -77,6 +92,25 @@ const Dashboard = ({ setLogeado }) => {
                       oferta={oferta}
                       metodoCargarDatos={cargarOfertasByUser}
                     ></TablaOfertas>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <h1>Contratos</h1>
+            <div className='main-tabla'>
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th scope='col'>Titulo</th>
+                    <th scope='col'>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ofertasContratos.map((oferta) => (
+                    <tr key={oferta._id}>
+                      <td>{oferta.titulo}</td>
+                      <td>{oferta.cuerpo}</td>
+                    </tr>
                   ))}
                 </tbody>
               </table>

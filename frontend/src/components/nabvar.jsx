@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Toggable from './toggable';
 
@@ -9,7 +9,7 @@ const Navbar = ({ logeado, setLogeado }) => {
     if (user) {
       setLogeado(true);
     }
-  }, logeado);
+  }, [logeado]);
 
   return (
     <Toggable>

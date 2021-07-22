@@ -4,7 +4,7 @@ import './pages.css';
 
 const Main = ({ logeado }) => {
   const [ofertas, setOfertas] = useState([]);
-
+  console.log(logeado);
   const cargarOfertas = async () => {
     const requestOptions = {
       method: 'GET',
@@ -17,22 +17,36 @@ const Main = ({ logeado }) => {
       );
       const data = await response.json();
       setOfertas(data.ofertas);
+      console.log(data.ofertas);
     }
 
     if (logeado) {
       const user = JSON.parse(window.localStorage.getItem('user'));
       const response = await fetch(
-        'http://localhost:4000/api/oferta/usuario/get-ofertas/'+ user.usuarioDB.uid,
+        'http://localhost:4000/api/oferta/usuario/get-ofertas/' + user.usuarioDB.uid,
         requestOptions
       );
       const data = await response.json();
       setOfertas(data);
+      console.log(data);
     }
 
   };
+
+  const presentarListaOfertas = () => {
+    if (ofertas.length > 0) {
+      return(
+        ofertas.map((oferta) => (
+          <ListaOfertas key={oferta._id} oferta={oferta}></ListaOfertas>
+        ))
+      )
+    } else {
+      return(<h1>NO HAY DATA</h1>)
+    }
+  }
   useEffect(() => {
     cargarOfertas();
-  }, [logeado]);
+  }, logeado);
 
   // console.log(ofertas);
 
@@ -42,9 +56,9 @@ const Main = ({ logeado }) => {
         <div className='row'>
           <div className='col-3'></div>
           <div className='col-9'>
-            {ofertas.map((oferta) => (
-              <ListaOfertas key={oferta._id} oferta={oferta}></ListaOfertas>
-            ))}
+            {
+              presentarListaOfertas()
+            }
           </div>
         </div>
       </div>
@@ -53,7 +67,7 @@ const Main = ({ logeado }) => {
 
   return (
     <div className='container main-section'>
-      <div className='row'>{ presentarOfertas() }</div>
+      <div className='row'>{presentarOfertas()}</div>
     </div>
   );
 };

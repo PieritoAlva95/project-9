@@ -65,7 +65,7 @@ const verOfertas= async(req, res) =>{
     const desde = Number(req.query.desde) || 0;
     const [ ofertas, total ] = await Promise.all([
         Oferta
-            .find()
+            .find({disponible:true})
             .skip( desde ),
             // .limit( 5 ),
 
@@ -83,12 +83,17 @@ const verOfertas= async(req, res) =>{
 }
 
 const verOfertasByUser = async(req, res) => {
-    const listaOfertas = await Oferta.find({usuario:req.params.id});
+    const listaOfertas = await Oferta.find({usuario:req.params.id, disponible:true});
+    res.json(listaOfertas);
+}
+
+const verOfertasContratadasByUser = async(req, res) => {
+    const listaOfertas = await Oferta.find({usuario:req.params.id, disponible:false});
     res.json(listaOfertas);
 }
 
 const getOfertasDiferentesUser = async(req, res) => {
-    const listaOfertas = await Oferta.find({usuario:{$ne:req.params.id}});
+    const listaOfertas = await Oferta.find({usuario:{$ne:req.params.id}, disponible:true});
     res.json(listaOfertas);
 }
 
@@ -163,5 +168,6 @@ module.exports = {
     verOfertas,
     borrarOferta,
     verOfertasByUser,
-    getOfertasDiferentesUser
+    getOfertasDiferentesUser,
+    verOfertasContratadasByUser
 }

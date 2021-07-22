@@ -5,7 +5,7 @@ const Oferta = require('../models/oferta');
 const actualizarOferta = async(req, res = response) => {
 
     const id  = req.params.id;
-    const uid = req.uid;
+    const uid = req.body.usuario;
     try {
         const ofertaDB = await Oferta.findById(id);
         
