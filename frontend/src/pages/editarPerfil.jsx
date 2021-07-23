@@ -39,6 +39,7 @@ const EditarPerfil = ({ setLogeado }) => {
         const data = await response.json();
         console.log(data);
         window.localStorage.setItem('user', JSON.stringify(data));
+        console.log(user);
         cargarSkills();
         // console.log(oft.titulo);
     }
@@ -58,6 +59,12 @@ const EditarPerfil = ({ setLogeado }) => {
                     <td>{exp.descripcion}</td>
                     <td>{exp.fechaInicio}</td>
                     <td>{exp.fechaFin}</td>
+                    <td><button type="button" data-bs-toggle="modal" data-bs-target="#editar">
+                        <i className='bx bx-edit'></i>
+                    </button>
+                    <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                        <i className='bx bx-trash'></i>
+                    </button></td>
                 </tr>
             ))
         );
@@ -70,6 +77,12 @@ const EditarPerfil = ({ setLogeado }) => {
                     <td>{estudio.descripcion}</td>
                     <td>{estudio.fechaInicio}</td>
                     <td>{estudio.fechaFin}</td>
+                    <td><button type="button" data-bs-toggle="modal" data-bs-target="#editar">
+                        <i className='bx bx-edit'></i>
+                    </button>
+                    <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                        <i className='bx bx-trash'></i>
+                    </button></td>
                 </tr>
             ))
         );
@@ -77,7 +90,7 @@ const EditarPerfil = ({ setLogeado }) => {
 
     useEffect(() => {
         cargarSkills()
-    }, [])
+    }, [user])
 
 
     return (
@@ -114,6 +127,7 @@ const EditarPerfil = ({ setLogeado }) => {
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Fecha inicio</th>
                                         <th scope="col">Fecha fin</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,6 +145,7 @@ const EditarPerfil = ({ setLogeado }) => {
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Fecha inicio</th>
                                         <th scope="col">Fecha fin</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,7 +162,7 @@ const EditarPerfil = ({ setLogeado }) => {
                                     <input
                                         type="text"
                                         name="facebook"
-                                        defaultValue={user.usuarioDB.redesSociales.facebook}
+                                        defaultValue={user.usuarioDB.redesSociales[0].facebook}
                                         id="facebook"
                                         onChange={handleInputChange}
                                     />
@@ -157,7 +172,7 @@ const EditarPerfil = ({ setLogeado }) => {
                                     <input
                                         type="text"
                                         name="twitter"
-                                        defaultValue={user.usuarioDB.redesSociales.twitter}
+                                        defaultValue={user.usuarioDB.redesSociales[0].twitter}
                                         id="twitter"
                                         onChange={handleInputChange}
                                     />
@@ -167,7 +182,7 @@ const EditarPerfil = ({ setLogeado }) => {
                                     <input
                                         type="text"
                                         name="instagram"
-                                        defaultValue={user.usuarioDB.redesSociales.instagram}
+                                        defaultValue={user.usuarioDB.redesSociales[0].instagram}
                                         id="instagram"
                                         onChange={handleInputChange}
                                     />
@@ -177,7 +192,7 @@ const EditarPerfil = ({ setLogeado }) => {
                                     <input
                                         type="text"
                                         name="linkedin"
-                                        defaultValue={user.usuarioDB.redesSociales.linkedin}
+                                        defaultValue={user.usuarioDB.redesSociales[0].linkedin}
                                         id="linkedin"
                                         onChange={handleInputChange}
                                     />
@@ -194,6 +209,42 @@ const EditarPerfil = ({ setLogeado }) => {
             <AddSkill editarUser={editarUser} user={user} />
             <AddExperiencia editarUser={editarUser} user={user} />
             <AddEstudios editarUser={editarUser} user={user} />
+
+            <div className="modal fade" id="confirmDelete" tabIndex={-1}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">ELIMINAR</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                        </div>
+                        <div className="modal-body">
+                            <p>Esta seguro de eliminar?</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="editar" tabIndex={-1}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">ELIMINAR</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                        </div>
+                        <div className="modal-body">
+                            <p>Esta seguro de elasdasdasdiminar?</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Fragment>
     );
 }
