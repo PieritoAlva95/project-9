@@ -3,6 +3,9 @@ import AddEstudios from '../components/modales/addEstudios';
 import AddExperiencia from '../components/modales/addExperiencia';
 import AddSkill from '../components/modales/addSkill';
 import Sidebar from '../components/sidebar'
+import { Link } from 'react-router-dom';
+import TablaEstudios from '../components/tablaEstudios';
+import TabalaExperiencia from '../components/tablaExperiencia';
 
 const EditarPerfil = ({ setLogeado }) => {
     const imgURL = "http://localhost:4000/uploads/";
@@ -59,12 +62,13 @@ const EditarPerfil = ({ setLogeado }) => {
                     <td>{exp.descripcion}</td>
                     <td>{exp.fechaInicio}</td>
                     <td>{exp.fechaFin}</td>
-                    <td><button type="button" data-bs-toggle="modal" data-bs-target="#editar">
-                        <i className='bx bx-edit'></i>
-                    </button>
-                    <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
-                        <i className='bx bx-trash'></i>
-                    </button></td>
+                    <td><Link className="btnLink" to={{
+                        pathname: "/dashboard/perfil/experiencia",
+                        state: { experiencia: exp }
+                    }}><i className='bx bx-edit'></i></Link>
+                        <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                            <i className='bx bx-trash'></i>
+                        </button></td>
                 </tr>
             ))
         );
@@ -77,15 +81,20 @@ const EditarPerfil = ({ setLogeado }) => {
                     <td>{estudio.descripcion}</td>
                     <td>{estudio.fechaInicio}</td>
                     <td>{estudio.fechaFin}</td>
-                    <td><button type="button" data-bs-toggle="modal" data-bs-target="#editar">
-                        <i className='bx bx-edit'></i>
-                    </button>
-                    <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
-                        <i className='bx bx-trash'></i>
-                    </button></td>
+                    <td><Link className="btnLink" to={{
+                        pathname: "/dashboard/perfil/estudios",
+                        state: { estudio: estudio }
+                    }}><i className='bx bx-edit'></i></Link>
+                        <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                            <i className='bx bx-trash'></i>
+                        </button></td>
                 </tr>
             ))
         );
+    }
+
+    const eliminar = () => {
+        alert("eliminar")
     }
 
     useEffect(() => {
@@ -119,7 +128,7 @@ const EditarPerfil = ({ setLogeado }) => {
                         </div>
                         <div className="col-lg-12">
                             <h1>Experiencia</h1>
-                            <button className="btn-submit" data-bs-toggle="modal" data-bs-target="#addExperiencia"><i className='bx bx-plus-medical'></i></button>
+                            <Link className="btnLink" to={{ pathname: "/dashboard/perfil/experiencia", state: { experiencia: {} } }}><i className='bx bx-plus-medical'></i></Link>
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -131,13 +140,17 @@ const EditarPerfil = ({ setLogeado }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {cargarExperiencia()}
+                                    {
+                                        user.usuarioDB.experiencia.map(exp => (
+                                            <TabalaExperiencia experiencia={exp} user={user} />
+                                        ))
+                                    }
                                 </tbody>
                             </table>
                         </div>
                         <div className="col-lg-12">
                             <h1>Estudios</h1>
-                            <button className="btn-submit" data-bs-toggle="modal" data-bs-target="#addEstudios"><i className='bx bx-plus-medical'></i></button>
+                            <Link className="btnLink" to={{ pathname: "/dashboard/perfil/estudios", state: { estudio: {} } }}><i className='bx bx-plus-medical'></i></Link>
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -149,12 +162,16 @@ const EditarPerfil = ({ setLogeado }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {cargarEstudios()}
+                                    {
+                                        user.usuarioDB.estudios.map(estudio => (
+                                            <TablaEstudios estudio={estudio} user={user} />
+                                        ))
+                                    }
                                 </tbody>
                             </table>
                         </div>
                         <div className="col-lg-12">
-                            <h1>AÑADIR REDES SOCIALES</h1>
+                            <h1>REDES SOCIALES</h1>
                             <form className="añadir-oferta-form" onSubmit={handleSubmit}>
 
                                 <div className="form-group">
@@ -207,44 +224,6 @@ const EditarPerfil = ({ setLogeado }) => {
                 </div>
             </div>
             <AddSkill editarUser={editarUser} user={user} />
-            <AddExperiencia editarUser={editarUser} user={user} />
-            <AddEstudios editarUser={editarUser} user={user} />
-
-            <div className="modal fade" id="confirmDelete" tabIndex={-1}>
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">ELIMINAR</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-                        </div>
-                        <div className="modal-body">
-                            <p>Esta seguro de eliminar?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="modal fade" id="editar" tabIndex={-1}>
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">ELIMINAR</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-                        </div>
-                        <div className="modal-body">
-                            <p>Esta seguro de elasdasdasdiminar?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </Fragment>
     );
 }

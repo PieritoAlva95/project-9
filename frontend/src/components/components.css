@@ -110,9 +110,7 @@ small {
   text-transform: uppercase;
   font-size: 1.4em;
 }
-.lista-personas .link:hover{
-  color: var(--secondary);
-}
+
 /* FIN LISTA PERSONAS  ***********************************************************************************/
 
 /* TABLA OFERTA ***********************************************************************************************************************/
@@ -122,12 +120,7 @@ small {
 .btnLink i {
   font-size: 25px;
 }
-.btnLink i:hover {
-  padding: 3%;
-  color: var(--txtClaro);
-  background-color: var(--primary);
-  border-radius: 25px;
-}
+
 .btnDelete {
   padding: 3%;
   border-style: none;
@@ -137,13 +130,7 @@ small {
   font-size: 25px;
   color: var(--danger);
 }
-.btnDelete i:hover {
-  padding: 15%;
-  font-size: 25px;
-  color: var(--txtClaro);
-  background-color: var(--danger);
-  border-radius: 25px;
-}
+
 /* TABLA OFERTA ***********************************************************************************************************************/
 
 /* AÑADIR OFERTA *********************************************************************************************************************/

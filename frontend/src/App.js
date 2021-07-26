@@ -12,9 +12,27 @@ import { useState } from 'react';
 import VisualizarOferta from './pages/visualizarOferta';
 import EditarPerfil from './pages/editarPerfil';
 import ReseteoPassword from './pages/reseteoPassword';
+import AddExperiencia from './components/modales/addExperiencia';
+import AddEstudios from './components/modales/addEstudios';
 
 const App = () => {
   const [logeado, setLogeado] = useState(false);
+
+  const editarUser = async (useredit) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': useredit.token
+      },
+      body: JSON.stringify(useredit.usuarioDB)
+    };
+    const response = await fetch('http://localhost:4000/api/usuarios/' + useredit.usuarioDB.uid, requestOptions);
+    const data = await response.json();
+    console.log(data);
+    var user = window.localStorage.setItem('user', JSON.stringify(data));
+    console.log(user);
+  }
 
   return (
     <Router>
@@ -23,8 +41,8 @@ const App = () => {
       </div>
       <Switch>
         <Route path='/' component={(routeProps) => (
-            <Main {...routeProps} logeado={logeado} />
-          )} exact></Route>
+          <Main {...routeProps} logeado={logeado} />
+        )} exact></Route>
         <Route
           path='/login'
           component={(routeProps) => (
@@ -58,6 +76,12 @@ const App = () => {
           )}
           exact
         />
+        <Route path="/dashboard/perfil/experiencia" component={(routeProps) => (
+            <AddExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
+          )} />
+        <Route path="/dashboard/perfil/estudios" component={(routeProps) => (
+            <AddEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
+          )} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>
