@@ -11,14 +11,12 @@ const UsuarioSchema = Schema(
     img: { type: String, default: 'no-img.png' },
     skills: [{ type: String, require: false, default: '' }],
     bio: { type: String },
-    redesSociales: [
-      {
-        twitter: { type: String, default:'' },
-        facebook: { type: String, default:'' },
-        linkedin: { type: String, default:'' },
-        instagram: { type: String, default:'' },
-      },
-    ],
+    redesSociales: {
+      twitter: { type: String, default: '' },
+      facebook: { type: String, default: '' },
+      linkedin: { type: String, default: '' },
+      instagram: { type: String, default: '' },
+    },
     experiencia: [
       {
         titulo: { type: String },
