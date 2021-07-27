@@ -10,6 +10,7 @@ import TabalaExperiencia from '../components/tablaExperiencia';
 const EditarPerfil = ({ setLogeado }) => {
     const imgURL = "http://localhost:4000/uploads/";
     const user = JSON.parse(window.localStorage.getItem('user'));
+    const [usuario, setUsuario] = useState({});
     const [redesSociales, setRedesSociales] = useState({
         facebook: "",
         twitter: "",
@@ -40,9 +41,9 @@ const EditarPerfil = ({ setLogeado }) => {
         };
         const response = await fetch('http://localhost:4000/api/usuarios/' + useredit.usuarioDB.uid, requestOptions);
         const data = await response.json();
-        console.log(data);
         window.localStorage.setItem('user', JSON.stringify(data));
-        console.log(user);
+        const user = JSON.parse(window.localStorage.getItem('user'));
+        setUsuario(user);
         cargarSkills();
         // console.log(oft.titulo);
     }
@@ -54,52 +55,11 @@ const EditarPerfil = ({ setLogeado }) => {
             ))
         );
     }
-    const cargarExperiencia = () => {
-        return (
-            user.usuarioDB.experiencia.map(exp => (
-                <tr key={exp._id}>
-                    <th scope="row">{exp.titulo}</th>
-                    <td>{exp.descripcion}</td>
-                    <td>{exp.fechaInicio}</td>
-                    <td>{exp.fechaFin}</td>
-                    <td><Link className="btnLink" to={{
-                        pathname: "/dashboard/perfil/experiencia",
-                        state: { experiencia: exp }
-                    }}><i className='bx bx-edit'></i></Link>
-                        <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
-                            <i className='bx bx-trash'></i>
-                        </button></td>
-                </tr>
-            ))
-        );
-    }
-    const cargarEstudios = () => {
-        return (
-            user.usuarioDB.estudios.map(estudio => (
-                <tr key={estudio._id}>
-                    <th scope="row">{estudio.titulo}</th>
-                    <td>{estudio.descripcion}</td>
-                    <td>{estudio.fechaInicio}</td>
-                    <td>{estudio.fechaFin}</td>
-                    <td><Link className="btnLink" to={{
-                        pathname: "/dashboard/perfil/estudios",
-                        state: { estudio: estudio }
-                    }}><i className='bx bx-edit'></i></Link>
-                        <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
-                            <i className='bx bx-trash'></i>
-                        </button></td>
-                </tr>
-            ))
-        );
-    }
 
-    const eliminar = () => {
-        alert("eliminar")
-    }
 
     useEffect(() => {
-        cargarSkills()
-    }, [user])
+        cargarSkills();
+    }, [usuario])
 
 
     return (

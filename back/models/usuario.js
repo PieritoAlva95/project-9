@@ -13,10 +13,10 @@ const UsuarioSchema = Schema(
     bio: { type: String },
     redesSociales: [
       {
-        twitter: { type: String },
-        facebook: { type: String },
-        linkedin: { type: String },
-        instagram: { type: String },
+        twitter: { type: String, default:'' },
+        facebook: { type: String, default:'' },
+        linkedin: { type: String, default:'' },
+        instagram: { type: String, default:'' },
       },
     ],
     experiencia: [

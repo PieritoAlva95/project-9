@@ -4,8 +4,13 @@ import { useHistory, Link } from 'react-router-dom';
 import image from '../assets/worker.jpg';
 
 const LoginPage = ({ setLogeado }) => {
+  const user = JSON.parse(window.localStorage.getItem('user'));
   const history = useHistory();
   const [usuario, setusuario] = useState({});
+
+  if (user != null) {
+    history.push('/dashboard');
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

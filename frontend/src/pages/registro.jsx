@@ -3,8 +3,13 @@ import image from '../assets/worker.jpg';
 import { useHistory } from 'react-router-dom';
 
 const Registro = () => {
+  const user = JSON.parse(window.localStorage.getItem('user'));
   const history = useHistory();
   const [usuario, setUsuario] = useState({});
+
+  if (user != null) {
+    history.push('/dashboard');
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +27,7 @@ const Registro = () => {
       if (digito_region >= 1 && digito_region <= 24) {
 
         // Extraigo el ultimo digito
-        var ultimo_digito = cedula.substring(9, 10);
+        var ultimo_digito = parseInt(cedula.substring(9, 10));
 
         //Agrupo todos los pares y los sumo
         var pares = parseInt(cedula.substring(1, 2)) + parseInt(cedula.substring(3, 4)) + parseInt(cedula.substring(5, 6)) + parseInt(cedula.substring(7, 8));
@@ -65,7 +70,6 @@ const Registro = () => {
         //Si el digito validador es = a 10 toma el valor de 0
         if (digito_validador == 10)
           var digito_validador = 0;
-
         //Validamos que el digito validador sea igual al de la cedula
         if (digito_validador === ultimo_digito) {
           return true

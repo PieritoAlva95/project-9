@@ -17,7 +17,7 @@ const OfertaSchema = Schema({
        fechaPostulacion: {type: Date, default: Date.now()}
       }
     ],
-    disponible:{type:Boolean, default:true}
+    disponible:{type:String, default:'sin contrato'}
     }, {
         timestamps: false,
         versionKey: false,

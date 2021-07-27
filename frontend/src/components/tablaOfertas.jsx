@@ -25,6 +25,7 @@ const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
             <tr>
                 <td>{oferta.titulo}</td>
                 <td>{oferta.cuerpo}</td>
+                <td>${oferta.precio}</td>
                 <td>
                     <Link className="btnLink" to={{ pathname: "/dashboard/visualizar-oferta", state: { oft: oferta } }}><i className='bx bxs-show'></i></Link>
                     <Link className="btnLink" to={{ pathname: "/dashboard/editar-oferta", state: { oft: oferta } }}><i className='bx bx-edit'></i></Link>

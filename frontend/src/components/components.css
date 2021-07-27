@@ -120,7 +120,12 @@ small {
 .btnLink i {
   font-size: 25px;
 }
-
+.buttonDelete {
+  padding: 3%;
+  border-style: none;
+  background-color: var(--danger);
+  color: var(--txtClaro);
+}
 .btnDelete {
   padding: 3%;
   border-style: none;

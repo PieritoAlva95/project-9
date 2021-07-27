@@ -51,14 +51,14 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
 
                                     <div className="form-group">
                                         <label>Descripción</label>
-                                        <input
+                                        <textarea
                                             type="text"
                                             className="form-control"
                                             placeholder="Enter description"
                                             name="cuerpo"
                                             onChange={handleInputChange}
                                             required
-                                        />
+                                        ></textarea>
                                     </div>
 
                                     <div className="form-group">

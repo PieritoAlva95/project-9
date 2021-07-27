@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import Sidebar from '../sidebar';
+import { useHistory } from 'react-router-dom';
 
 
 const AddEstudios = ({ location, editarUser, setLogeado }) => {
+  const history = useHistory();
     const estudio = location.state.estudio;
     const user = JSON.parse(window.localStorage.getItem('user'));
 
@@ -30,6 +32,7 @@ const AddEstudios = ({ location, editarUser, setLogeado }) => {
             user.usuarioDB.estudios.push(estudios);
         }
         editarUser(user);
+        history.goBack();
     }
     return (
         <Fragment>
