@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import Sidebar from '../sidebar';
+import { useHistory } from 'react-router-dom';
+
 
 const AddExperiencia = ({ location, editarUser, setLogeado }) => {
+    const history = useHistory();
     const user = JSON.parse(window.localStorage.getItem('user'));
     const exp = location.state.experiencia;
     const [experiencia, setExperiencia] = useState({
@@ -28,6 +31,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado }) => {
             user.usuarioDB.experiencia.push(experiencia);
         }
         editarUser(user);
+        history.goBack();
     }
 
     return (
@@ -40,7 +44,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado }) => {
                     <div className="col-lg-10">
                         <div className="container">
                             <div className="row">
-                                <form className="añadir-oferta-form" onSubmit={handleSubmit}>
+                                <form className="añadir-oferta-form needs-validation" onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label>Titulo</label>
                                         <input
@@ -104,8 +108,9 @@ const AddExperiencia = ({ location, editarUser, setLogeado }) => {
                                             required
                                         ></textarea>
                                     </div>
+                                <button className="btnAddOferta" type="submit">Guardar</button>
+
                                 </form>
-                                <button className="btnAddOferta" data-bs-dismiss="modal" onClick={handleSubmit} type="submit">Guardar</button>
                             </div>
                         </div>
                     </div>

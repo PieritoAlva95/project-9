@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import './components.css';
 import { Link } from 'react-router-dom';
 
-const ListaOfertas = ({ oferta }) => {
+const ListaOfertas = ({ oferta, logeado }) => {
 
     const postularseOferta = async () => {
         const user = JSON.parse(window.localStorage.getItem('user'));
@@ -42,7 +42,10 @@ const ListaOfertas = ({ oferta }) => {
                 <p>{oferta.cuerpo}</p>
                 <span><strong>Categoria:</strong> {oferta.categoria}</span> <br />
                 <small><strong>Salario:</strong> {oferta.precio}</small> <br />
-                <button data-bs-toggle="modal" data-bs-target="#postularse">Postularse</button>
+                {
+                    logeado ? <button data-bs-toggle="modal" data-bs-target="#postularse">Postularse</button>
+                    : ""
+                }
                 <span>Ofertas: {oferta.interesados.length}</span>
             </div>
 

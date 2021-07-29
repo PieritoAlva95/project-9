@@ -37,7 +37,7 @@ const Main = ({ logeado }) => {
     if (ofertas.length > 0) {
       return(
         ofertas.map((oferta) => (
-          <ListaOfertas key={oferta._id} oferta={oferta}></ListaOfertas>
+          <ListaOfertas key={oferta._id} oferta={oferta} logeado={logeado}></ListaOfertas>
         ))
       )
     } else {
@@ -56,6 +56,9 @@ const Main = ({ logeado }) => {
         <div className='row'>
           <div className='col-3'></div>
           <div className='col-9'>
+            {
+              logeado ? "" : <p>Recuerde que para poder postularse a un trabajo debe tener una cuenta e iniciar sesión</p>
+            }
             {
               presentarListaOfertas()
             }

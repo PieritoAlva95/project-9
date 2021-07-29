@@ -10,13 +10,15 @@ import TabalaExperiencia from '../components/tablaExperiencia';
 const EditarPerfil = ({ setLogeado }) => {
   const imgURL = 'http://localhost:4000/uploads/';
   const user = JSON.parse(window.localStorage.getItem('user'));
+  console.log(user);
   const [usuario, setUsuario] = useState({});
   const [redesSociales, setRedesSociales] = useState({
-    facebook: '',
-    twitter: '',
-    instagram: '',
-    linkedin: '',
+    facebook: user.usuarioDB.redesSociales.facebook,
+    twitter: user.usuarioDB.redesSociales.twitter,
+    instagram: user.usuarioDB.redesSociales.instagram,
+    linkedin: user.usuarioDB.redesSociales.linkedin,
   });
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +28,7 @@ const EditarPerfil = ({ setLogeado }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     user.usuarioDB.redesSociales = redesSociales;
-    console.log(user);
+    console.log(user.usuarioDB.redesSociales);
     editarUser(user);
   };
 
@@ -48,11 +50,27 @@ const EditarPerfil = ({ setLogeado }) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
     setUsuario(user);
     cargarSkills();
+    alert("Sus cambios se han guardado satisfactoriamente");
     // console.log(oft.titulo);
   };
+  
+  const eliminarSkill = (skill) => {
+    var response = window.confirm("Esta seguro de eliminar la habilidad");
+        if (response == true) {
+          const habilidad = user.usuarioDB.skills.indexOf(skill);
+          user.usuarioDB.skills.splice(habilidad, 1);
+          editarUser(user);
+        }else{
+            alert("La información no ha sido eliminada");
+        }
+    
+  }
 
   const cargarSkills = () => {
-    return user.usuarioDB.skills.map((skill) => <span>| {skill} </span>);
+    return user.usuarioDB.skills.map((skill) => 
+    <div className="habilidades">
+      {skill} <button type="button" onClick={() => eliminarSkill(skill)} className="btnDelete"><i className='bx bx-trash'></i></button>
+      </div>);
   };
 
   useEffect(() => {

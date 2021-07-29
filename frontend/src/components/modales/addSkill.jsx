@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AddSkill = ({editarUser ,user}) => {
+const AddSkill = ({ editarUser, user }) => {
     const [habilidad, setHabilidad] = useState("")
 
     const handleInputChange = e => {
@@ -23,7 +23,7 @@ const AddSkill = ({editarUser ,user}) => {
                     </div>
                     <div className="modal-body">
                         <div className="container main-añadir-oferta">
-                            <form className="añadir-oferta-form" onSubmit={handleSubmit}>
+                            <form className="añadir-oferta-form needs-validation" onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label>habilidad</label>
                                     <input
@@ -35,11 +35,12 @@ const AddSkill = ({editarUser ,user}) => {
                                         required
                                     />
                                 </div>
+                                <button className="btnAddOferta" data-bs-dismiss="modal" type="submit">Añadir Habilidad</button>
+
                             </form>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button className="btnAddOferta" data-bs-dismiss="modal" onClick={handleSubmit} type="submit">Añadir Habilidad</button>
                     </div>
                 </div>
             </div>

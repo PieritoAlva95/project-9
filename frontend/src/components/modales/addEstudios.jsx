@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 
 const AddEstudios = ({ location, editarUser, setLogeado }) => {
-  const history = useHistory();
+    const history = useHistory();
     const estudio = location.state.estudio;
     const user = JSON.parse(window.localStorage.getItem('user'));
 
@@ -44,7 +44,7 @@ const AddEstudios = ({ location, editarUser, setLogeado }) => {
                     <div className="col-lg-10">
                         <div className="container">
                             <div className="row">
-                                <form className="añadir-oferta-form" onSubmit={handleSubmit}>
+                                <form className="añadir-oferta-form needs-validation" onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label>Institución</label>
                                         <input
@@ -108,8 +108,9 @@ const AddEstudios = ({ location, editarUser, setLogeado }) => {
                                             required
                                         ></textarea>
                                     </div>
+                                    <button className="btnAddOferta" type="submit">Guardar</button>
+
                                 </form>
-                                <button className="btnAddOferta" onClick={handleSubmit} type="submit">Añadir Estudio</button>
                             </div>
                         </div>
                     </div>
