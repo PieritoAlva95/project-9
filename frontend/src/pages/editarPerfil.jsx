@@ -19,6 +19,32 @@ const EditarPerfil = ({ setLogeado }) => {
     linkedin: user.usuarioDB.redesSociales.linkedin,
   });
 
+  const [datos, setDatos] = useState({
+    nombres: user.usuarioDB.nombres,
+    apellidos: user.usuarioDB.apellidos,
+    numeroDeCelular: user.usuarioDB.numeroDeCelular,
+    email: user.usuarioDB.email,
+    bio:user.usuarioDB.bio
+  });
+
+  const handleInputChangeData = (e) => {
+    const { name, value } = e.target;
+    setDatos({ ...datos, [name]: value });
+  }
+
+  const handleSubmitData = (e) => {
+    e.preventDefault();
+    if (user.usuarioDB.email != datos.email) {
+      alert("Si modifica su correo electrónico, se cerrara su sesión automáticamente y deberá ingresar nuevamente con su nuevo correo")
+    }
+    user.usuarioDB.nombres = datos.nombres;
+    user.usuarioDB.apellidos = datos.apellidos;
+    user.usuarioDB.numeroDeCelular = datos.numeroDeCelular;
+    user.usuarioDB.email = datos.email;
+    user.usuarioDB.bio = datos.bio;
+
+    editarUser(user);
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,7 +94,7 @@ const EditarPerfil = ({ setLogeado }) => {
 
   const cargarSkills = () => {
     return user.usuarioDB.skills.map((skill) => 
-    <div className="habilidades">
+    <div className="habilidad">
       {skill} <button type="button" onClick={() => eliminarSkill(skill)} className="btnDelete"><i className='bx bx-trash'></i></button>
       </div>);
   };
@@ -93,7 +119,72 @@ const EditarPerfil = ({ setLogeado }) => {
                 </div>
               </div>
             </div>
-            <div className='col-lg-12'>
+            <hr />
+            <div className="col-12 datosGenerales">
+              <h1>Datos Generales</h1>
+              <form className='datos-generales' onSubmit={handleSubmitData}>
+                <div className='form-group'>
+                  <label>Nombres</label>
+                  <input
+                    type='text'
+                    className='txtSocial'
+                    name='nombres'
+                    defaultValue={datos.nombres}
+                    id='nombres'
+                    onChange={handleInputChangeData}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label>Apellidos</label>
+                  <input
+                    type='text'
+                    className='txtSocial'
+                    name='apellidos'
+                    defaultValue={datos.apellidos}
+                    id='apellidos'
+                    onChange={handleInputChangeData}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label>Telefono</label>
+                  <input
+                    type='text'
+                    className='txtSocial'
+                    name='numeroDeCelular'
+                    defaultValue={datos.numeroDeCelular}
+                    id='numeroDeCelular'
+                    onChange={handleInputChangeData}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label>Correo</label>
+                  <input
+                    type='text'
+                    className='txtSocial'
+                    name='email'
+                    defaultValue={datos.email}
+                    id='email'
+                    onChange={handleInputChangeData}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label>Biografia</label>
+                  <textarea
+                    type='text'
+                    className='txtSocial'
+                    name='bio'
+                    defaultValue={datos.bio}
+                    id='bio'
+                    onChange={handleInputChangeData}
+                  ></textarea>
+                </div>
+                <button className='btn-submit'>
+                    <i class='bx bxs-save'></i> Guardar Cambios
+                  </button>
+                </form>
+            </div>
+            <hr />
+            <div className='col-lg-12 habilidades'>
               <h1>Habilidades</h1>
               <button
                 className='btn-submit'
@@ -104,7 +195,8 @@ const EditarPerfil = ({ setLogeado }) => {
               </button>
               <div>{cargarSkills()}</div>
             </div>
-            <div className='col-lg-12'>
+            <hr />
+            <div className='col-lg-12 experiencia'>
               <h1>Experiencia</h1>
               <Link
                 className='btnLink'
@@ -132,7 +224,8 @@ const EditarPerfil = ({ setLogeado }) => {
                 </tbody>
               </table>
             </div>
-            <div className='col-lg-12'>
+            <hr />
+            <div className='col-lg-12 estudios'>
               <h1>Estudios</h1>
               <Link
                 className='btnLink'
@@ -160,13 +253,16 @@ const EditarPerfil = ({ setLogeado }) => {
                 </tbody>
               </table>
             </div>
-            <div className='col-lg-12'>
+            <hr />
+            <div className='col-lg-12 redesSociales'>
               <h1>REDES SOCIALES</h1>
-              <form className='añadir-oferta-form' onSubmit={handleSubmit}>
+              <small>Recuerde ingresar el link de su perfil!</small>
+              <form className='redes-sociales' onSubmit={handleSubmit}>
                 <div className='form-group'>
                   <i class='bx bxl-facebook-square'></i>
                   <input
                     type='text'
+                    className='txtSocial'
                     name='facebook'
                     defaultValue={user.usuarioDB.redesSociales.facebook}
                     id='facebook'
@@ -177,6 +273,7 @@ const EditarPerfil = ({ setLogeado }) => {
                   <i class='bx bxl-twitter'></i>
                   <input
                     type='text'
+                    className='txtSocial'
                     name='twitter'
                     defaultValue={user.usuarioDB.redesSociales.twitter}
                     id='twitter'
@@ -187,6 +284,7 @@ const EditarPerfil = ({ setLogeado }) => {
                   <i class='bx bxl-instagram'></i>
                   <input
                     type='text'
+                    className='txtSocial'
                     name='instagram'
                     defaultValue={user.usuarioDB.redesSociales.instagram}
                     id='instagram'
@@ -197,6 +295,7 @@ const EditarPerfil = ({ setLogeado }) => {
                   <i class='bx bxl-linkedin-square'></i>
                   <input
                     type='text'
+                    className='txtSocial'
                     name='linkedin'
                     defaultValue={user.usuarioDB.redesSociales.linkedin}
                     id='linkedin'

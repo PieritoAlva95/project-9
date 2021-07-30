@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Toggable from './toggable';
 
 const Navbar = ({ logeado, setLogeado }) => {
   const user = JSON.parse(window.localStorage.getItem('user'));
@@ -12,7 +11,6 @@ const Navbar = ({ logeado, setLogeado }) => {
   }, [logeado]);
 
   return (
-    <Toggable>
       <nav className='navbar navbar-expand-lg menu-bar'>
         <div className='container-fluid'>
           <Link className='navbar-brand' to='/'>
@@ -57,7 +55,6 @@ const Navbar = ({ logeado, setLogeado }) => {
           </div>
         </div>
       </nav>
-    </Toggable>
   );
 };
 export default Navbar;

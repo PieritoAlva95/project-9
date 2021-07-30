@@ -11,11 +11,14 @@ const {
   actualizarUsuario,
   borrarUsuario,
   getUsuarioById,
+  getUsuarios
 } = require('../controllers/usuario');
 
 router.get('/', getUsuario);
 
 router.get('/:id', getUsuarioById);
+
+router.get('/obtener/usuarios', getUsuarios);
 
 router.post(
   '/',

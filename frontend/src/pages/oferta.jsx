@@ -49,26 +49,28 @@ const Oferta = ({ location }) => {
     <Fragment>
       <div className='container main-oferta'>
         <div className='row'>
-          <div className='col-lg-12 body-oferta'>
-            <h1>{oferta.titulo}</h1>
-            <h4 className='usuario'>{oferta.nombreUsuario}</h4>
-            <p>{oferta.cuerpo}</p>
-            <p>
-              <strong>Categoria:</strong> {oferta.categoria}
-            </p>
-            <p>
-              <strong>Salario:</strong> {oferta.precio}
-            </p>
-            <button onClick={postularseOferta}>
-              <i className='bx bxs-send'></i> Postular
-            </button>
+          <div className='col-lg-12 body-oferta card'>
+            <div className="card-header">
+              <h1>{oferta.titulo}</h1>
+            </div>
+            <div className="card-body">
+              <h4 className='usuario'>{oferta.nombreUsuario}</h4>
+              <p>{oferta.cuerpo}</p>
+              <p>
+                <strong>Categoria:</strong> {oferta.categoria}
+              </p>
+              <p>
+                <strong>Salario:</strong> {oferta.precio}
+              </p>
+            </div>
+
+            <div className="card-footer">
+              <button onClick={postularseOferta}>
+                <i className='bx bxs-send'></i> Postular
+              </button>
+            </div>
+
           </div>
-          {/* <div className='col-lg-6 personas'>
-            <h2>Personas que estan postulando</h2>
-            {oferta.interesados.map((persona) => (
-              <ListaPersonas persona={persona}></ListaPersonas>
-            ))}
-          </div> */}
         </div>
       </div>
     </Fragment>

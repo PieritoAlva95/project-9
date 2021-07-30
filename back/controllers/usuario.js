@@ -24,9 +24,27 @@ const getUsuario = async (req, res) => {
   });
 };
 
+const getUsuarios = async (req, res) => {
+  try {
+    const users = await Usuario.find({esAdmin:false});
+    res.json(users);
+  } catch (error) {
+    res.json({
+      mensaje:"Error del server"
+    });
+  }
+}
+
 const getUsuarioById = async (req, res) => {
-  const user = await Usuario.findById(req.params.id);
-  res.json(user);
+  try {
+    const user = await Usuario.findById(req.params.id);
+    res.json(user);  
+  } catch (error) {
+    res.json({
+      mensaje:"Error"
+    });
+  }
+  
 }
 
 
@@ -135,4 +153,5 @@ module.exports = {
   actualizarUsuario,
   borrarUsuario,
   getUsuarioById,
+  getUsuarios
 };

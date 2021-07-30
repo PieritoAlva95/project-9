@@ -119,11 +119,12 @@ small {
 }
 .btnLink i {
   font-size: 25px;
+  color: var(--secondary) !important;
 }
 .buttonDelete {
   padding: 3%;
   border-style: none;
-  background-color: var(--danger);
+  background-color: var(--danger) !important;
   color: var(--txtClaro);
 }
 .btnDelete {
@@ -133,7 +134,7 @@ small {
 }
 .btnDelete i {
   font-size: 25px;
-  color: var(--danger);
+  color: var(--danger) !important;
 }
 
 /* TABLA OFERTA ***********************************************************************************************************************/

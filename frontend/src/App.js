@@ -14,6 +14,8 @@ import EditarPerfil from './pages/editarPerfil';
 import ReseteoPassword from './pages/reseteoPassword';
 import AddExperiencia from './components/modales/addExperiencia';
 import AddEstudios from './components/modales/addEstudios';
+import VerPerfil from './components/verPerfil';
+import DashboardAdmin from './pages/dashboardAdmin';
 
 const App = () => {
   const [logeado, setLogeado] = useState(false);
@@ -61,7 +63,9 @@ const App = () => {
         <Route path='/oferta' component={Oferta} exact />
         <Route path='/registro' component={Registro} exact />
         <Route path='/reseteo-password' component={ReseteoPassword} exact />
-        <Route path='/dashboard/editar-oferta' component={EditarOferta} exact />
+        <Route path='/dashboard/editar-oferta' component={(routeProps) => (
+          <EditarOferta {...routeProps} setLogeado={setLogeado} />
+        )} exact />
         <Route
           path='/dashboard/visualizar-oferta'
           component={(routeProps) => (
@@ -77,11 +81,27 @@ const App = () => {
           exact
         />
         <Route path="/dashboard/perfil/experiencia" component={(routeProps) => (
-            <AddExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
-          )} />
+          <AddExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
+        )} />
         <Route path="/dashboard/perfil/estudios" component={(routeProps) => (
-            <AddEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
-          )} />
+          <AddEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
+        )} />
+        <Route
+          path='/dashboard/ver-perfil'
+          component={(routeProps) => (
+            <VerPerfil {...routeProps} logeado={logeado} setLogeado={setLogeado} />
+          )}
+          exact
+        />
+
+        <Route
+          path='/dashboard-admin'
+          component={(routeProps) => (
+            <DashboardAdmin {...routeProps} setLogeado={setLogeado} />
+          )}
+          exact
+        />
+
         <Route component={PageNotFound} />
       </Switch>
     </Router>

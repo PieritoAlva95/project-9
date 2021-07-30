@@ -36,7 +36,12 @@ const LoginPage = ({ setLogeado }) => {
     if (data.ok === true) {
       window.localStorage.setItem('user', JSON.stringify(data));
       setLogeado(true);
-      history.push('/dashboard');
+  
+      if (data.usuarioDB.esAdmin == true) {
+        history.push('/dashboard-admin');
+      } else {
+        history.push('/dashboard');
+      }
     } else {
       alert('Credenciales incorrectas.');
     }

@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Sidebar from './sidebar';
 
-const EditarOferta = ({ location }) => {
+const EditarOferta = ({ location, setLogeado }) => {
     const history = useHistory();
 
     const oft = location.state.oft;
@@ -43,62 +44,69 @@ const EditarOferta = ({ location }) => {
 
     return (
         <Fragment>
-            <div className="container main-añadir-oferta">
-                <form className="añadir-oferta-form" onSubmit={handleSubmit}>
-                    <div className="form-group needs-validation">
-                        <label>Titulo</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter title"
-                            defaultValue={oft.titulo}
-                            name="titulo"
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
+            <Sidebar setLogeado={setLogeado} />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-2"></div>
+                    <div className="col-10">
+                        <div className="container main-añadir-oferta">
+                            <form className="añadir-oferta-form" onSubmit={handleSubmit}>
+                                <div className="form-group needs-validation">
+                                    <label>Titulo</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter title"
+                                        defaultValue={oft.titulo}
+                                        name="titulo"
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
 
-                    <div className="form-group">
-                        <label>Descripción</label>
-                        <textarea
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter description"
-                            name="cuerpo"
-                            defaultValue={oft.cuerpo}
-                            onChange={handleInputChange}
-                            required
-                        ></textarea>
-                    </div>
+                                <div className="form-group">
+                                    <label>Descripción</label>
+                                    <textarea
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter description"
+                                        name="cuerpo"
+                                        defaultValue={oft.cuerpo}
+                                        onChange={handleInputChange}
+                                        required
+                                    ></textarea>
+                                </div>
 
-                    <div className="form-group">
-                        <label>Precio</label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="precio"
-                            defaultValue={oft.precio}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
+                                <div className="form-group">
+                                    <label>Precio</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        name="precio"
+                                        defaultValue={oft.precio}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
 
-                    <div className="form-group">
-                        <label>Categoria</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter Category"
-                            defaultValue={oft.categoria}
-                            name="categoria"
-                            onChange={handleInputChange}
-                            required
-                        />
+                                <div className="form-group">
+                                    <label>Categoria</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter Category"
+                                        defaultValue={oft.categoria}
+                                        name="categoria"
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <button className="btn-submit">Guardar Cambios</button>
+                            </form>
+                        </div>
                     </div>
-                    <button className="btn-submit">Guardar Cambios</button>
-                </form>
+                </div>
             </div>
-
         </Fragment >
     );
 }

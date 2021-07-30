@@ -30,7 +30,7 @@ const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
                     <Link className="btnLink" to={{ pathname: "/dashboard/visualizar-oferta", state: { oft: oferta } }}><i className='bx bxs-show'></i></Link>
                     <Link className="btnLink" to={{ pathname: "/dashboard/editar-oferta", state: { oft: oferta } }}><i className='bx bx-edit'></i></Link>
                     <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#confirmDelete">
-                        <i className='bx bx-trash'></i>
+                        <i className='bx bx-trash delete'></i>
                     </button>
                 </td>
             </tr>
