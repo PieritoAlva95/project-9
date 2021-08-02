@@ -15,10 +15,13 @@ import ReseteoPassword from './pages/reseteoPassword';
 import AddExperiencia from './components/modales/addExperiencia';
 import AddEstudios from './components/modales/addEstudios';
 import VerPerfil from './components/verPerfil';
-import DashboardAdmin from './pages/dashboardAdmin';
+import AdminUsers from './pages/adminUsers';
+import Contratos from './components/contratos';
+import AdminOfertas from './pages/adminOfertas';
 
 const App = () => {
   const [logeado, setLogeado] = useState(false);
+  const [busqueda, setBusqueda] = useState({});
 
   const editarUser = async (useredit) => {
     const requestOptions = {
@@ -36,14 +39,29 @@ const App = () => {
     console.log(user);
   }
 
+  const buscarOfertas = async (texto) => {
+    if (texto.length > 0) {
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      const response = await fetch(
+        'http://localhost:4000/api/oferta/busqueda/' + texto,
+        requestOptions
+      );
+      const data = await response.json();
+      setBusqueda(data.ofertas);
+    }
+  }
+
   return (
     <Router>
       <div className='container-fluid'>
-        <Navbar logeado={logeado} setLogeado={setLogeado}></Navbar>
+        <Navbar logeado={logeado} metodoBusqueda={buscarOfertas} setLogeado={setLogeado}></Navbar>
       </div>
       <Switch>
         <Route path='/' component={(routeProps) => (
-          <Main {...routeProps} logeado={logeado} />
+          <Main {...routeProps} logeado={logeado} busqueda={busqueda} />
         )} exact></Route>
         <Route
           path='/login'
@@ -60,7 +78,9 @@ const App = () => {
           )}
           exact
         />
-        <Route path='/oferta' component={Oferta} exact />
+        <Route path='/oferta' component={(routeProps) => (
+          <Oferta {...routeProps} logeado={logeado} />
+        )} exact />
         <Route path='/registro' component={Registro} exact />
         <Route path='/reseteo-password' component={ReseteoPassword} exact />
         <Route path='/dashboard/editar-oferta' component={(routeProps) => (
@@ -95,9 +115,23 @@ const App = () => {
         />
 
         <Route
-          path='/dashboard-admin'
+          path='/dashboard/admin/usuarios'
           component={(routeProps) => (
-            <DashboardAdmin {...routeProps} setLogeado={setLogeado} />
+            <AdminUsers {...routeProps} setLogeado={setLogeado} />
+          )}
+          exact
+        />
+        <Route
+          path='/dashboard/admin/ofertas'
+          component={(routeProps) => (
+            <AdminOfertas {...routeProps} setLogeado={setLogeado} />
+          )}
+          exact
+        />
+        <Route
+          path='/dashboard/contratos'
+          component={(routeProps) => (
+            <Contratos {...routeProps} setLogeado={setLogeado} />
           )}
           exact
         />

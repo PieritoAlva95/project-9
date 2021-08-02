@@ -35,6 +35,17 @@ const getUsuarios = async (req, res) => {
   }
 }
 
+const getUsuariosAdmin = async (req, res) => {
+  try {
+    const users = await Usuario.find({_id:{$ne:req.params.id}});
+    res.json(users);
+  } catch (error) {
+    res.json({
+      mensaje:"Error del server"
+    });
+  }
+}
+
 const getUsuarioById = async (req, res) => {
   try {
     const user = await Usuario.findById(req.params.id);
@@ -147,11 +158,44 @@ const borrarUsuario = async (req, res) => {
   }
 };
 
+const cambiarPassword = async(req, res) => {
+  const uid = req.params.id;
+  try {
+    const usuario = await Usuario.findById(uid);
+
+    if (!usuario) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'El usuario no existe'
+      });
+    }
+
+    const salt = bcryptjs.genSaltSync();
+    const pass = bcryptjs.hashSync(req.body.password, salt);
+    usuario.password = pass;
+    const usuarioDB = await Usuario.findByIdAndUpdate(uid, usuario);
+
+    res.json({
+      ok: true,
+      usuarioDB,
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'error inesperado, consulta con el administrador',
+    });
+  }
+  
+}
+
 module.exports = {
   getUsuario,
   crearUsuario,
   actualizarUsuario,
   borrarUsuario,
   getUsuarioById,
-  getUsuarios
+  getUsuarios,
+  getUsuariosAdmin,
+  cambiarPassword
 };

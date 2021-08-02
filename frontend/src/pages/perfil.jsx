@@ -56,7 +56,8 @@ const Perfil = ({ location }) => {
                     <img src={imgURL + user.img} alt="" />
                     <h1>{user.nombres} {user.apellidos}</h1>
                     <p>{user.email}</p>
-                    <a href={linkwhatsapp + user.numeroDeCelular} target="_blank">{user.numeroDeCelular}</a>
+                    <span className="telefono">{user.numeroDeCelular} </span>
+                    <a className="contactame" href={linkwhatsapp + user.numeroDeCelular} target="_blank">Contactame!</a>
                     <div className="redes-sociales">
                         {
                             user.redesSociales.facebook ?

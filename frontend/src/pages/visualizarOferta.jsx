@@ -1,16 +1,19 @@
 import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import ListaPersonas from '../components/listaPersonas'
 import Sidebar from '../components/sidebar'
 
 const VisualizarOferta = ({ setLogeado, location }) => {
   const oferta = location.state.oft;
   const user = JSON.parse(window.localStorage.getItem('user'));
+  const history = useHistory();
 
   const realizarContrato = async (personaID) => {
     console.log(personaID);
-    const interesadoContratado = oferta.interesados.findIndex(post => post.postulante === personaID);
-    oferta.interesados[interesadoContratado].aceptado = true;
-    oferta.disponible = false;
+    const interesadoContratado = oferta.interesados.find(post => post.postulante === personaID);
+    interesadoContratado.aceptado = true;
+    oferta.interesados= interesadoContratado;
+    oferta.disponible = 'con contrato';
     const requestOptions = {
       method: 'PUT',
       headers: {
@@ -21,8 +24,8 @@ const VisualizarOferta = ({ setLogeado, location }) => {
     };
     const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
     const data = await response.json();
-    console.log(data);
-
+    alert("Se ha contratado a la persona exitorsamente");
+    history.push('/dashboard/contratos')
   }
 
   return (

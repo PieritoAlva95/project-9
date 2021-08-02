@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import ListaPersonas from '../components/listaPersonas';
 
-const Oferta = ({ location }) => {
+const Oferta = ({ location, logeado }) => {
   const oferta = location.state.oferta;
 
   const postularseOferta = async () => {
@@ -65,9 +65,13 @@ const Oferta = ({ location }) => {
             </div>
 
             <div className="card-footer">
-              <button onClick={postularseOferta}>
+              {
+                logeado ? <button onClick={postularseOferta}>
                 <i className='bx bxs-send'></i> Postular
-              </button>
+                </button>
+                : <p>RECUERDE! Para postularse debe iniciar sesión</p>
+              }
+
             </div>
 
           </div>

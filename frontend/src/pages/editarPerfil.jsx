@@ -10,8 +10,13 @@ import TabalaExperiencia from '../components/tablaExperiencia';
 const EditarPerfil = ({ setLogeado }) => {
   const imgURL = 'http://localhost:4000/uploads/';
   const user = JSON.parse(window.localStorage.getItem('user'));
-  console.log(user);
+
   const [usuario, setUsuario] = useState({});
+  const [password, setPassword] = useState({
+    password: "",
+    password2: ""
+  });
+
   const [redesSociales, setRedesSociales] = useState({
     facebook: user.usuarioDB.redesSociales.facebook,
     twitter: user.usuarioDB.redesSociales.twitter,
@@ -24,7 +29,7 @@ const EditarPerfil = ({ setLogeado }) => {
     apellidos: user.usuarioDB.apellidos,
     numeroDeCelular: user.usuarioDB.numeroDeCelular,
     email: user.usuarioDB.email,
-    bio:user.usuarioDB.bio
+    bio: user.usuarioDB.bio
   });
 
   const handleInputChangeData = (e) => {
@@ -51,12 +56,30 @@ const EditarPerfil = ({ setLogeado }) => {
     setRedesSociales({ ...redesSociales, [name]: value });
   };
 
+  const handleInputChangePassword = (e) => {
+    const { name, value } = e.target;
+    setPassword({ ...password, [name]: value });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     user.usuarioDB.redesSociales = redesSociales;
     console.log(user.usuarioDB.redesSociales);
     editarUser(user);
   };
+
+  const cambiarPassword = () => {
+    if (password.password === "" || password.password2 === "") {
+      alert("Se deben llenar los campos");
+    } else {
+      if (password.password === password.password2) {
+        user.usuarioDB.password = password.password;
+        passwordChange(user)
+      } else {
+        alert("Las contraseñas no son iguales");
+      }
+    }
+  }
 
   const editarUser = async (useredit) => {
     const requestOptions = {
@@ -79,23 +102,44 @@ const EditarPerfil = ({ setLogeado }) => {
     alert("Sus cambios se han guardado satisfactoriamente");
     // console.log(oft.titulo);
   };
-  
+
+  const passwordChange = async (useredit) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': useredit.token,
+      },
+      body: JSON.stringify(useredit.usuarioDB),
+    };
+    const response = await fetch(
+      'http://localhost:4000/api/usuarios/cambio/' + useredit.usuarioDB.uid,
+      requestOptions
+    );
+    const data = await response.json();
+    user.usuarioDB = data.usuarioDB;
+    setUsuario(user);
+    cargarSkills();
+    alert("Sus cambios se han guardado satisfactoriamente");
+    // console.log(oft.titulo);
+  };
+
   const eliminarSkill = (skill) => {
     var response = window.confirm("Esta seguro de eliminar la habilidad");
-        if (response == true) {
-          const habilidad = user.usuarioDB.skills.indexOf(skill);
-          user.usuarioDB.skills.splice(habilidad, 1);
-          editarUser(user);
-        }else{
-            alert("La información no ha sido eliminada");
-        }
-    
+    if (response == true) {
+      const habilidad = user.usuarioDB.skills.indexOf(skill);
+      user.usuarioDB.skills.splice(habilidad, 1);
+      editarUser(user);
+    } else {
+      alert("La información no ha sido eliminada");
+    }
+
   }
 
   const cargarSkills = () => {
-    return user.usuarioDB.skills.map((skill) => 
-    <div className="habilidad">
-      {skill} <button type="button" onClick={() => eliminarSkill(skill)} className="btnDelete"><i className='bx bx-trash'></i></button>
+    return user.usuarioDB.skills.map((skill) =>
+      <div className="habilidad">
+        {skill} <button type="button" onClick={() => eliminarSkill(skill)} className="btnDelete"><i className='bx bx-trash'></i></button>
       </div>);
   };
 
@@ -179,9 +223,34 @@ const EditarPerfil = ({ setLogeado }) => {
                   ></textarea>
                 </div>
                 <button className='btn-submit'>
-                    <i class='bx bxs-save'></i> Guardar Cambios
-                  </button>
-                </form>
+                  <i class='bx bxs-save'></i> Guardar Cambios
+                </button>
+              </form>
+              <button className="btn-submit" data-bs-toggle="modal" data-bs-target="#cambiarPassword">Cambiar Contraseña</button>
+              <div class="modal fade" id="cambiarPassword" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div>
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name="password" id="password" onChange={handleInputChangePassword} />
+                      </div>
+                      <div>
+                        <label htmlFor="password2">Repita la Contraseña</label>
+                        <input type="password" name="password2" id="password2" onChange={handleInputChangePassword} />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={cambiarPassword}>Guardar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <hr />
             <div className='col-lg-12 habilidades'>

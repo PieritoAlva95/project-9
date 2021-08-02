@@ -25,7 +25,7 @@ const VerPerfil = ({ logeado, setLogeado }) => {
                                 <img src={imgURL + user.usuarioDB.img} alt="" />
                                 <h1>{user.usuarioDB.nombres} {user.usuarioDB.apellidos}</h1>
                                 <p>{user.usuarioDB.email}</p>
-                                <span>{user.usuarioDB.numeroDeCelular}  </span>
+                                <span className="telefono">{user.usuarioDB.numeroDeCelular}  </span>
                                 <a className="contactame" href={linkwhatsapp + user.usuarioDB.numeroDeCelular} target="_blank">Contactame!</a>
                                 <div className="redes-sociales">
                                     {

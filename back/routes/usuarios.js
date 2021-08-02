@@ -11,7 +11,9 @@ const {
   actualizarUsuario,
   borrarUsuario,
   getUsuarioById,
-  getUsuarios
+  getUsuarios,
+  getUsuariosAdmin,
+  cambiarPassword
 } = require('../controllers/usuario');
 
 router.get('/', getUsuario);
@@ -19,6 +21,7 @@ router.get('/', getUsuario);
 router.get('/:id', getUsuarioById);
 
 router.get('/obtener/usuarios', getUsuarios);
+router.get('/obtener/usuarios/:id', getUsuariosAdmin);
 
 router.post(
   '/',
@@ -32,6 +35,8 @@ router.post(
 );
 
 router.put('/:id', [validarJWT, validarCampos], actualizarUsuario);
+
+router.put('/cambio/:id',[validarJWT], cambiarPassword);
 
 router.delete('/:id', validarJWT, borrarUsuario);
 

@@ -7,6 +7,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
         titulo: '',
         cuerpo: '',
         precio: '',
+        tipoPago: '',
         categoria: '',
         nombreUsuario: user.usuarioDB.nombres,
         uid: user.usuarioDB.uid
@@ -18,10 +19,10 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if((oferta.titulo === "") || (oferta.cuerpo === "") || (oferta.precio === "") || (oferta.categoria === "")){
+        if ((oferta.titulo === "") || (oferta.cuerpo === "") || (oferta.precio === "") || (oferta.tipoPago === "Seleccione una opción de pago") || (oferta.categoria === "")) {
             alert("Los campos son obligatorios");
-            
-        }else{
+
+        } else {
             metodoCrearOferta(oferta)
         }
     }
@@ -36,7 +37,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                         </div>
                         <div className="modal-body">
                             <div className="container main-añadir-oferta">
-                                <form className="añadir-oferta-form"  onSubmit={handleSubmit}>
+                                <form className="añadir-oferta-form" onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label>Titulo</label>
                                         <input
@@ -70,6 +71,18 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                                             onChange={handleInputChange}
                                             required
                                         />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label>Tipo Pago</label>
+                                        <select class="form-select" aria-label="Default select example" name="tipoPago" onChange={handleInputChange}>
+                                            <option selected>Seleccione una opción de pago</option>
+                                            <option value="mensual">Mensual</option>
+                                            <option value="quincenal">Quincenal</option>
+                                            <option value="semanal">Semanal</option>
+                                            <option value="hora">Por Hora</option>
+                                            <option value="contrato">Contrato</option>
+                                        </select>
                                     </div>
 
                                     <div className="form-group">

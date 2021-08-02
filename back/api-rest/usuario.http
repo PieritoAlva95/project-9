@@ -12,10 +12,11 @@ Content-Type: application/json
 {
 	"nombres": "Piero",
     "apellidos":"Alvarado",
-    "documentoDeIdentidad":"0706735583",
-    "numeroDeCelular": "0982703096",
-    "email":"piero.alvaradoo@gmail.com",
-    "password":"12345"
+    "documentoDeIdentidad":"0706735445",
+    "numeroDeCelular": "0982703085",
+    "email":"piero@gmail.com",
+    "password":"12345",
+    "esAdmin":true
 }
 # http://localhost:4000/api/upload/usuarios/60dcc5c2958f7d1a98b357ad
 ###
@@ -48,7 +49,13 @@ GET http://localhost:4000/api/oferta
 GET http://localhost:4000/api/oferta/usuario/60dcc5c2958f7d1a98b357ad
 
 ###
+GET http://localhost:4000/api/oferta/busqueda/""
+
+
+###
 GET http://localhost:4000/api/oferta/60dcb8a0df26ce2b7477d26b
 
 ###
 GET http://localhost:4000/api/oferta/usuario/get-ofertas/60ec6703907adc272c743092
+
+

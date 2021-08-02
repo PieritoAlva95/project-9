@@ -2,21 +2,92 @@ import React, { Fragment, useState, useEffect } from 'react';
 import AñadirOferta from '../components/añadirOferta';
 import TablaOfertas from '../components/tablaOfertas';
 import Sidebar from '../components/sidebar';
-import { useHistory } from 'react-router-dom';
-import TablaContratos from '../components/tablaContratos';
+import { useHistory, Link } from 'react-router-dom';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import ToolkitProvider, { Search, CSVExport } from 'react-bootstrap-table2-toolkit';
+const { SearchBar, ClearSearchButton } = Search;
+
 
 const Dashboard = ({ setLogeado }) => {
   const history = useHistory();
   const user = JSON.parse(window.localStorage.getItem('user'));
   console.log(user);
   if (user == null) {
-    console.log("olaa oal aola");
     history.push('/');
   }
 
+  const estiloBtnDelete = {
+    backgroundColor: "#ff6b6b",
+    color: "#fafafa",
+    borderStyle: "none"
+  };
+
+  const columns = [
+    {
+      dataField: 'titulo',
+      text: 'Titulo'
+    },
+    {
+      dataField: 'cuerpo',
+      text: 'Descripción'
+    },
+    {
+      dataField: 'precio',
+      text: 'Precio'
+    },
+    {
+      dataField: 'tipoPago',
+      text: 'Tipo Pago'
+    },
+    {
+      dataField: "",
+      text: 'Acción',
+      formatter: (cellContent, row) => {
+        return (
+          // <p>{row.precio}</p>
+          <Fragment>
+            <Link className="btnLink" to={{ pathname: "/dashboard/visualizar-oferta", state: { oft: row } }}><i className='bx bxs-show'></i></Link>
+            <Link className="btnLink" to={{ pathname: "/dashboard/editar-oferta", state: { oft: row } }}><i className='bx bx-edit'></i></Link>
+            <button type="button" className="btnDelete" onClick={() => eliminar(row)}>
+              <i className='bx bx-trash delete'></i>
+            </button>
+          </Fragment>
+        );
+      }
+    }
+  ];
+
+  const eliminar = async(oferta) => {
+    var response = window.confirm("Esta seguro de eliminar la oferta de trabajo");
+    if (response) {
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-token': user.token
+        }
+      };
+      const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
+      const data = await response.json();
+      cargarOfertasByUser()
+    }
+  }
+
+  const selectedRow = (row, isSelect, rowIndex) => {
+    this.setState(curr => ({ ...curr, selectedRow: row }));
+    console.log(row);
+  };
+
+  const selectRow = {
+    mode: 'radio',
+    clickToSelect: true,
+    hideSelectColumn: true,
+    onselect: selectedRow
+  };
+
   let lista = [];
   const [listaOfertas, setListaOfertas] = useState([]);
-  const [ofertasContratos, setOfertasContratos] = useState([])
 
   const crearOferta = async (data) => {
     const requestOptions = {
@@ -32,7 +103,7 @@ const Dashboard = ({ setLogeado }) => {
       requestOptions
     );
     const dataREs = await response.json();
-    console.log(dataREs);
+    alert("Su Oferta ha sido creada exitosamente");
     cargarOfertasByUser();
   };
 
@@ -47,60 +118,16 @@ const Dashboard = ({ setLogeado }) => {
         requestOptions
       );
       const data = await response.json();
+      console.log(data);
       setListaOfertas(data);
 
       lista.push(data);
     }
   };
 
-  const cargarOfertasContratos = async () => {
-    if (user != null) {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      const resp = await fetch(
-        'http://localhost:4000/api/oferta/usuario/contratos/' + user.usuarioDB.uid,
-        requestOptions
-      );
-      const res = await resp.json();
-      setOfertasContratos(res);
-      console.log(res);
-    }
-  }
-
-  const finalizarContrato = async (oferta) => {
-    const requestOptions = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-token': user.token
-      },
-      body: JSON.stringify(oferta)
-    };
-    const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
-    const data = await response.json();
-    setOfertasContratos(data);
-  }
-
-  const presentarContratos = () => {
-    return (
-      ofertasContratos.map((oferta) => (
-        <TablaContratos
-          key={oferta._id}
-          oferta={oferta}
-          finalizarContrato={finalizarContrato}
-        />
-      ))
-    );
-  }
 
   useEffect(() => {
     cargarOfertasByUser()
-  }, []);
-
-  useEffect(() => {
-    cargarOfertasContratos()
   }, []);
 
   return (
@@ -110,6 +137,7 @@ const Dashboard = ({ setLogeado }) => {
         <div className='row'>
           <div className='col-lg-2'></div>
           <div className='col-lg-10'>
+            <h2>Tus Ofertas</h2>
             <button
               type='button'
               className='btn btn-primary'
@@ -119,43 +147,30 @@ const Dashboard = ({ setLogeado }) => {
               Añadir
             </button>
             <div className='main-tabla'>
-              <table className='table'>
-                <thead>
-                  <tr>
-                    <th scope='col'>Titulo</th>
-                    <th scope='col'>Descripción</th>
-                    <th scope='col'>Precio</th>
-                    <th scope='col'>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {listaOfertas.map((oferta) => (
-                    <TablaOfertas
-                      key={oferta._id}
-                      oferta={oferta}
-                      metodoCargarDatos={cargarOfertasByUser}
-                    ></TablaOfertas>
-                  ))}
-                </tbody>
-              </table>
+              <ToolkitProvider keyField='id'
+                data={listaOfertas}
+                columns={columns}
+                search
+              >
+                {
+                  props => (
+                    <div>
+                      <SearchBar {...props.searchProps} />
+                      <ClearSearchButton {...props.searchProps} />
+                      <hr />
+                      <BootstrapTable
+                        {...props.baseProps}
+                        // ref={ n => this.node = n }
+                        selectRow={selectRow}
+                        pagination={ paginationFactory() }
+                      />
+
+                    </div>
+                  )
+                }
+              </ToolkitProvider>
             </div>
-            <h1>Contratos</h1>
-            <div className='main-tabla'>
-              <table className='table'>
-                <thead>
-                  <tr>
-                    <th scope='col'>Titulo</th>
-                    <th scope='col'>Nombres</th>
-                    <th scope='col'>Descripción</th>
-                    <th scope='col'>Precio</th>
-                    <th scope='col'>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  { presentarContratos() }
-                </tbody>
-              </table>
-            </div>{
+            {
               user ?
                 <AñadirOferta metodoCrearOferta={crearOferta}></AñadirOferta>
                 :

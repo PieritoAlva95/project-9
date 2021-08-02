@@ -38,12 +38,12 @@ const LoginPage = ({ setLogeado }) => {
       setLogeado(true);
   
       if (data.usuarioDB.esAdmin == true) {
-        history.push('/dashboard-admin');
+        history.push('/dashboard');
       } else {
         history.push('/dashboard');
       }
     } else {
-      alert('Credenciales incorrectas.');
+      alert('Usuario o Contraseña incorrectas.');
     }
   };
 

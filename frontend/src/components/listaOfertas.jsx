@@ -9,26 +9,30 @@ const ListaOfertas = ({ oferta, logeado }) => {
 
         if (user === null) {
             alert("No ha iniciado sesión");
-            console.log("ola no hay sesion");
         }
         if (user != null) {
-            const interesado = {
-                postulante: user.usuarioDB.uid,
-                nombres: user.usuarioDB.nombres + " " + user.usuarioDB.apellidos,
-                foto: user.usuarioDB.img
-            }
-            oferta.interesados.push(interesado);
-            const requestOptions = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'x-token': user.token },
-                body: JSON.stringify(oferta)
-            };
-            const response = await fetch('http://localhost:4000/api/postulante/' + oferta._id, requestOptions);
-            const data = await response.json();
-            if (data.ok === true) {
-                alert("Su postulación se ha realizado correctamente");
-            } else {
-                alert("Su postulación no pudo procesarse");
+            const interesado =oferta.interesados.find((post) => post.postulante === user.usuarioDB.uid);
+            if(interesado != undefined){
+                alert("Sr. usuario ya se ha postulado a esta oferta");
+            }else{
+                const interesado = {
+                    postulante: user.usuarioDB.uid,
+                    nombres: user.usuarioDB.nombres + " " + user.usuarioDB.apellidos,
+                    foto: user.usuarioDB.img
+                }
+                oferta.interesados.push(interesado);
+                const requestOptions = {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'x-token': user.token },
+                    body: JSON.stringify(oferta)
+                };
+                const response = await fetch('http://localhost:4000/api/postulante/' + oferta._id, requestOptions);
+                const data = await response.json();
+                if (data.ok === true) {
+                    alert("Su postulación se ha realizado correctamente");
+                } else {
+                    alert("Su postulación no pudo procesarse");
+                }
             }
 
         }
@@ -62,7 +66,7 @@ const ListaOfertas = ({ oferta, logeado }) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn-submit" onClick={postularseOferta}>Enviar Postulación</button>
+                            <button type="button" class="btn-submit" data-bs-dismiss="modal" onClick={postularseOferta}>Enviar Postulación</button>
                         </div>
                     </div>
                 </div>

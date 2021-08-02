@@ -55,6 +55,9 @@ small {
 .oferta p {
   text-align: justify;
 }
+.oferta small, span{
+  color: var(--primary) !important;
+}
 .oferta button {
   border-style: none;
   background-color: var(--secondary);
@@ -192,4 +195,8 @@ small {
   .sidebar {
     margin-left: -200px;
   }
+}
+
+.modal-body p{
+  color: var(--primary);
 }
