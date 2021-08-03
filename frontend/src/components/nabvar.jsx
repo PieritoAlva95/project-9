@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
   const user = JSON.parse(window.localStorage.getItem('user'));
   const [text, setText] = useState({
-    text:""
+    text: ""
   });
-  
+
   const handleBusqueda = (e) => {
     const { name, value } = e.target;
     setText({ ...text, [name]: value });
   }
 
   const buscar = () => {
-    if(text.text.length > 0){
+    if (text.text.length > 0) {
       metodoBusqueda(text.text);
-    }else{
+    } else {
       window.location.reload();
     }
   }
@@ -68,8 +68,10 @@ const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
 
             {/* <li><button onClick={props.test()}>Ola</button></li> */}
           </ul>
-            <input class="form-control me-2" type="search" name="text" placeholder="Search" aria-label="Search" onChange={handleBusqueda} />
+          <div class="d-flex">
+            <input class="form-control me-2 txtBusqueda" type="search" name="text" placeholder="Search" aria-label="Search" onChange={handleBusqueda} />
             <button class="btn btn-outline-success" onClick={buscar}>Search</button>
+          </div>
         </div>
       </div>
     </nav>

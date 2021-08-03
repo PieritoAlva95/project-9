@@ -200,3 +200,8 @@ small {
 .modal-body p{
   color: var(--primary);
 }
+@media (min-width: 1300px) {
+  .txtBusqueda{
+    width: 500px;
+  }
+}

@@ -351,3 +351,9 @@
 .main-tabla h2{
     color: var(--primary);
 }
+
+@media (max-width: 768px) { 
+    .container{
+        padding-top: 10%;
+    }
+}

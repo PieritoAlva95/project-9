@@ -143,6 +143,33 @@ const EditarPerfil = ({ setLogeado }) => {
       </div>);
   };
 
+  const cambiarImagen = async(files) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'x-token': user.token
+      },
+      body: files
+    };
+    const response = await fetch('http://localhost:4000/api/upload/usuarios/' + user.usuarioDB.uid, requestOptions);
+    const data = await response.json();
+    user.usuarioDB.img = data.nombreArchivo;
+    window.localStorage.setItem('user', JSON.stringify(user));
+    window.location.reload();
+  }
+
+  const handleFileInput = (e) => {
+    var files = new FormData();
+    files.append("imagen", e.target.files[0]);
+    var response = window.confirm("Esta seguro de cambiar su imagen de perfil?");
+    if(response){
+      cambiarImagen(files);
+    }else{
+      alert("su imagen de perfil no ha cambiado");
+    }
+  }
+  
+
   useEffect(() => {
     cargarSkills();
   }, [usuario]);
@@ -159,7 +186,7 @@ const EditarPerfil = ({ setLogeado }) => {
                 <div className='img-perfil'>
                   <img src={imgURL + user.usuarioDB.img} alt='' />
                   <br />
-                  <input type='file' name='imf-perfil' id='img-perfil' />
+                  <input type='file' name='imf-perfil' id='img-perfil' onChange={handleFileInput}/>
                 </div>
               </div>
             </div>
