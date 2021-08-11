@@ -178,7 +178,11 @@ const getOfertasByCategoria = async (req, res) => {
     }
 }
 
+<<<<<<< HEAD
 const getOfertasByCategoriaUser = async (req, res) => {
+=======
+const getOfertasByCategoria = async (req, res) => {
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     try {
         if (req.params.text == "") {
             res.json({
@@ -186,7 +190,11 @@ const getOfertasByCategoriaUser = async (req, res) => {
                 ofertas:{}
             });
         } else {
+<<<<<<< HEAD
             const busqueda = await Oferta.find({ categoria: new RegExp(req.params.text), usuario: { $ne: req.params.id }, disponible: 'sin contrato' }).sort({ fechaCreacion: -1 });
+=======
+            const busqueda = await Oferta.find({ categoria: new RegExp(req.params.text) }).sort({ fechaCreacion: -1 });
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
             res.json({
                 ok: true,
                 ofertas: busqueda
@@ -274,8 +282,12 @@ module.exports = {
     getOfertasDiferentesUser,
     verOfertasContratadasByUser,
     getBuscarOfertas,
+<<<<<<< HEAD
     getOfertasByCategoria,
     getBuscarOfertasUser,
     getOfertasByCategoriaUser,
     verContratosUser
+=======
+    getOfertasByCategoria
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 }

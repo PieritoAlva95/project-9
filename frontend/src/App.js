@@ -20,7 +20,10 @@ import Contratos from './components/contratos';
 import AdminOfertas from './pages/adminOfertas';
 import EditarExperiencia from './components/modales/editarExperiencia';
 import EditarEstudios from './components/modales/editarEstudios';
+<<<<<<< HEAD
 import MisContratos from './pages/misContratos';
+=======
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
 const App = () => {
   const user = JSON.parse(window.localStorage.getItem('user'));
@@ -101,6 +104,7 @@ const App = () => {
         <Route path='/dashboard'
           render={() => {
             return user ?
+<<<<<<< HEAD
               <Dashboard setLogeado={setLogeado} logeado={logeado} cargar={cargar} />
               : <Redirect to="/" />
           }}
@@ -110,6 +114,9 @@ const App = () => {
           render={() => {
             return user ?
               <MisContratos setLogeado={setLogeado} logeado={logeado}/>
+=======
+              <Dashboard setLogeado={setLogeado} logeado={logeado} />
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
               : <Redirect to="/" />
           }}
           exact />
@@ -136,7 +143,11 @@ const App = () => {
           exact /> */}
 
         <Route path="/dashboard/editar-oferta" component={(routeProps) => (
+<<<<<<< HEAD
           <EditarOferta {...routeProps} setLogeado={setLogeado} setCargar={setCargar} />
+=======
+          <EditarOferta {...routeProps} setLogeado={setLogeado} />
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
         )} exact />
 
         {/* <Route

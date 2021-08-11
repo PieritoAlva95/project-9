@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 const TablaEstudios = ({ estudio, user, editarUser }) => {
+<<<<<<< HEAD
   const eliminar = () => {
     var response = window.confirm('Esta seguro de eliminar su estudio?');
     if (response === true) {
@@ -12,6 +13,20 @@ const TablaEstudios = ({ estudio, user, editarUser }) => {
       editarUser(user);
     } else {
       alert('No se ha realizado ningún cambio');
+=======
+
+    const eliminar = () => {
+        var response = window.confirm("Esta seguro de eliminar su estudio?");
+        if (response === true) {
+            const expobj = user.usuarioDB.estudios.findIndex(
+                (post) => post._id === estudio._id
+              );
+              user.usuarioDB.estudios.splice(expobj,1);
+              editarUser(user);
+        }else{
+            alert("No se ha realizado ningún cambio");
+        }
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
   };
   return (

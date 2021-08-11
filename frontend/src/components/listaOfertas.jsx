@@ -10,12 +10,20 @@ const ListaOfertas = ({ oferta, logeado }) => {
         if (user === null) {
             alert("No ha iniciado sesión");
         }
+<<<<<<< HEAD
         const interesado = oferta.interesados.find((post) => post.postulante === user.usuarioDB.uid);
         if (interesado) {
             alert("Sr. usuario ya se ha postulado a esta oferta");
         } else {
             if (user != null) {
             } else {
+=======
+        if (user != null) {
+            const interesado =oferta.interesados.find((post) => post.postulante === user.usuarioDB.uid);
+            if(interesado !== undefined){
+                alert("Sr. usuario ya se ha postulado a esta oferta");
+            }else{
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                 const interesado = {
                     postulante: user.usuarioDB.uid,
                     nombres: user.usuarioDB.nombres + " " + user.usuarioDB.apellidos,

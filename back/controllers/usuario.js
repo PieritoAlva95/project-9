@@ -30,7 +30,11 @@ const getUsuarios = async (req, res) => {
     res.json(users);
   } catch (error) {
     res.json({
+<<<<<<< HEAD
       mensaje: 'Error del server',
+=======
+      mensaje: "Error del server"
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     });
   }
 };
@@ -41,7 +45,11 @@ const getUsuariosAdmin = async (req, res) => {
     res.json(users);
   } catch (error) {
     res.json({
+<<<<<<< HEAD
       mensaje: 'Error del server',
+=======
+      mensaje: "Error del server"
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     });
   }
 };
@@ -52,10 +60,19 @@ const getUsuarioById = async (req, res) => {
     res.json(user);
   } catch (error) {
     res.json({
+<<<<<<< HEAD
       mensaje: 'Error',
     });
   }
 };
+=======
+      mensaje: "Error"
+    });
+  }
+
+}
+
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
 const crearUsuario = async (req, res = response) => {
   const { email, password, numeroDeCelular, documentoDeIdentidad } = req.body;
@@ -175,13 +192,21 @@ const cambiarPassword = async (req, res) => {
   const uid = req.params.id;
   const usuario = await Usuario.findById(uid);
   const passAct = req.body.passwordActual;
+<<<<<<< HEAD
   const validPassword = bcryptjs.compareSync(passAct, usuario.password);
+=======
+  const validPassword = bcryptjs.compareSync( passAct, usuario.password );
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
   try {
     if (validPassword) {
       if (!usuario) {
         return res.status(404).json({
           ok: false,
+<<<<<<< HEAD
           msg: 'El usuario no existe',
+=======
+          msg: 'El usuario no existe'
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
         });
       }
 
@@ -193,6 +218,7 @@ const cambiarPassword = async (req, res) => {
       res.json({
         ok: true,
         usuarioDB,
+<<<<<<< HEAD
         msg: 'Su contraseña se ha actualizado correctamente',
       });
     } else {
@@ -200,6 +226,15 @@ const cambiarPassword = async (req, res) => {
         ok: false,
         msg: 'La contraseña es actual es incorrecta',
       });
+=======
+        msg:"Su contraseña se ha actualizado correctamente"
+      })
+    }else{
+      res.json({
+        ok:false,
+        msg:"La contraseña es actual es incorrecta"
+      })
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
   } catch (error) {
     console.log(error);
@@ -208,7 +243,12 @@ const cambiarPassword = async (req, res) => {
       msg: 'error inesperado, consulta con el administrador',
     });
   }
+<<<<<<< HEAD
 };
+=======
+
+}
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
 module.exports = {
   getUsuario,

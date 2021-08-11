@@ -98,6 +98,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                                         <label>Categoría</label>
                                         <select className="form-select" aria-label="Default select example" name="categoria" onChange={handleInputChange}>
                                             <option selected>Seleccione una categoría</option>
+<<<<<<< HEAD
                                             <option value="Construccion">Albañilería / Construcción</option>
                                             <option value="Trabajos Domesticos">Trabajos Domésticos</option>
                                             <option value="Carpinteria">Carpintería</option>
@@ -106,6 +107,16 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                                             <option value="Atencion al cliente">Atención al cliente</option>
                                             <option value="Vendedor">Vendedor/a</option>
                                             <option value="Servicios Informaticos">Servicios Informáticos</option>
+=======
+                                            <option value="Construcción">Albañilería / Construcción</option>
+                                            <option value="Trabajos Domésticos">Trabajos Domésticos</option>
+                                            <option value="Carpintería">Carpintería</option>
+                                            <option value="Plomería">Plomería</option>
+                                            <option value="Electricidad">Electricidad</option>
+                                            <option value="Atención al cliente">Atención al cliente</option>
+                                            <option value="Vendedor">Vendedor/a</option>
+                                            <option value="Servicios Informáticos">Servicios Informáticos</option>
+>>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                                             <option value="Servicios Profesionales">Servicios Profesionales</option>
                                             <option value="Otros">Otros</option>
                                         </select>
