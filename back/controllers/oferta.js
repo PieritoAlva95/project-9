@@ -65,7 +65,7 @@ const verOfertas = async (req, res) => {
     const desde = Number(req.query.desde) || 0;
     const [ofertas, total] = await Promise.all([
         Oferta
-            .find({ disponible: 'sin contrato' })
+            .find()
             .sort({ fechaCreacion: -1 }),
 
         Oferta.countDocuments()
@@ -86,6 +86,19 @@ const verOfertasByUser = async (req, res) => {
     res.json(listaOfertas);
 }
 
+const verContratosUser = async (req, res) => {
+    const listaOfertas = await Oferta.find({disponible: 'con contrato' }).sort({ fechaCreacion: -1 });
+    let lista=[];
+    listaOfertas.forEach(oferta => {
+        oferta.interesados.forEach(interesado => {
+            if(interesado.postulante == req.params.id){
+                lista.push(oferta);
+            }
+        });
+    });
+    res.json(lista);
+}
+
 const verOfertasContratadasByUser = async (req, res) => {
     const listaOfertas = await Oferta.find({ usuario: req.params.id, disponible: 'con contrato' }).sort({ fechaCreacion: -1 });
     res.json(listaOfertas);
@@ -104,7 +117,7 @@ const getBuscarOfertas = async (req, res) => {
                 ofertas:{}
             });
         } else {
-            const busqueda = await Oferta.find({ titulo: new RegExp(req.params.text) }).sort({ fechaCreacion: -1 });
+            const busqueda = await Oferta.find({ titulo: new RegExp(req.params.text), disponible: 'sin contrato' }).sort({ fechaCreacion: -1 });
             res.json({
                 ok: true,
                 ofertas: busqueda
@@ -119,6 +132,74 @@ const getBuscarOfertas = async (req, res) => {
     }
 }
 
+const getBuscarOfertasUser = async (req, res) => {
+    try {
+        if (req.params.text == "") {
+            res.json({
+                ok:true,
+                ofertas:{}
+            });
+        } else {
+            const busqueda = await Oferta.find({ titulo: new RegExp(req.params.text), usuario: { $ne: req.params.id }, disponible: 'sin contrato' }).sort({ fechaCreacion: -1 });
+            res.json({
+                ok: true,
+                ofertas: busqueda
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Consulte  con el administrador'
+        })
+    }
+}
+
+const getOfertasByCategoria = async (req, res) => {
+    try {
+        if (req.params.text == "") {
+            res.json({
+                ok:true,
+                ofertas:{}
+            });
+        } else {
+            const busqueda = await Oferta.find({ categoria: new RegExp(req.params.text), disponible: 'sin contrato' }).sort({ fechaCreacion: -1 });
+            res.json({
+                ok: true,
+                ofertas: busqueda
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Consulte  con el administrador'
+        })
+    }
+}
+
+const getOfertasByCategoriaUser = async (req, res) => {
+    try {
+        if (req.params.text == "") {
+            res.json({
+                ok:true,
+                ofertas:{}
+            });
+        } else {
+            const busqueda = await Oferta.find({ categoria: new RegExp(req.params.text), usuario: { $ne: req.params.id }, disponible: 'sin contrato' }).sort({ fechaCreacion: -1 });
+            res.json({
+                ok: true,
+                ofertas: busqueda
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Consulte  con el administrador'
+        })
+    }
+}
 
 const actualizarOferta = async (req, res = response) => {
 
@@ -192,5 +273,9 @@ module.exports = {
     verOfertasByUser,
     getOfertasDiferentesUser,
     verOfertasContratadasByUser,
-    getBuscarOfertas
+    getBuscarOfertas,
+    getOfertasByCategoria,
+    getBuscarOfertasUser,
+    getOfertasByCategoriaUser,
+    verContratosUser
 }

@@ -1,89 +1,130 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import AñadirOferta from '../components/añadirOferta';
-import TablaOfertas from '../components/tablaOfertas';
 import Sidebar from '../components/sidebar';
 import { useHistory, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import ToolkitProvider, { Search, CSVExport } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 const { SearchBar, ClearSearchButton } = Search;
 
-
-const Dashboard = ({ setLogeado }) => {
-  const history = useHistory();
+const Dashboard = ({ setLogeado, logeado, cargar }) => {
   const user = JSON.parse(window.localStorage.getItem('user'));
-  console.log(user);
-  if (user == null) {
-    history.push('/');
-  }
 
-  const estiloBtnDelete = {
-    backgroundColor: "#ff6b6b",
-    color: "#fafafa",
-    borderStyle: "none"
+  const verificarToken = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: user.token }),
+    };
+    const response = await fetch(
+      'http://localhost:4000/api/usuarios/validar/token',
+      requestOptions
+    );
+    const resp = await response.json();
+    if (!resp.ok) {
+      alert('Su token ha expirado, se procederá a cerrar sesión.');
+      localStorage.removeItem('user');
+      setLogeado(false);
+      history.push('/');
+    }
   };
+
+  const history = useHistory();
+  if (!user) {
+    history.push('/');
+  } else {
+    verificarToken();
+  }
 
   const columns = [
     {
       dataField: 'titulo',
-      text: 'Titulo'
+      text: 'Titulo',
     },
     {
       dataField: 'cuerpo',
-      text: 'Descripción'
+      text: 'Descripción',
     },
     {
       dataField: 'precio',
-      text: 'Precio'
+      text: 'Precio (USD)',
     },
     {
       dataField: 'tipoPago',
-      text: 'Tipo Pago'
+      text: 'Tipo Pago',
     },
     {
-      dataField: "",
+      dataField: '',
       text: 'Acción',
       formatter: (cellContent, row) => {
         return (
           // <p>{row.precio}</p>
           <Fragment>
-            <Link className="btnLink" to={{ pathname: "/dashboard/visualizar-oferta", state: { oft: row } }}><i className='bx bxs-show'></i></Link>
-            <Link className="btnLink" to={{ pathname: "/dashboard/editar-oferta", state: { oft: row } }}><i className='bx bx-edit'></i></Link>
-            <button type="button" className="btnDelete" onClick={() => eliminar(row)}>
+            <Link
+              className='btnLink'
+              to={{
+                pathname: '/dashboard/visualizar-oferta',
+                state: { oft: row },
+              }}
+            >
+              <i className='bx bxs-show'></i>
+            </Link>
+            <Link
+              className='btnLink'
+              to={{ pathname: '/dashboard/editar-oferta', state: { oft: row } }}
+            >
+              <i className='bx bx-edit'></i>
+            </Link>
+            <button
+              type='button'
+              className='btnDelete'
+              onClick={() => eliminar(row)}
+            >
               <i className='bx bx-trash delete'></i>
             </button>
           </Fragment>
         );
-      }
-    }
+      },
+    },
   ];
 
-  const eliminar = async(oferta) => {
-    var response = window.confirm("Esta seguro de eliminar la oferta de trabajo");
+  const eliminar = async (oferta) => {
+    var response = window.confirm(
+      'Esta seguro de eliminar la oferta de trabajo'
+    );
     if (response) {
       const requestOptions = {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'x-token': user.token
-        }
+          'x-token': user.token,
+        },
       };
-      const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
+      const response = await fetch(
+        'http://localhost:4000/api/oferta/' + oferta._id,
+        requestOptions
+      );
       const data = await response.json();
-      cargarOfertasByUser()
+      if (data.ok) {
+        alert('Se ha eliminado exitosamente');
+      } else {
+        alert('No se logro eliminar');
+      }
+      cargarOfertasByUser();
     }
-  }
+  };
 
   const selectedRow = (row, isSelect, rowIndex) => {
-    this.setState(curr => ({ ...curr, selectedRow: row }));
-    console.log(row);
+    this.setState((curr) => ({ ...curr, selectedRow: row }));
   };
 
   const selectRow = {
     mode: 'radio',
     clickToSelect: true,
     hideSelectColumn: true,
-    onselect: selectedRow
+    onselect: selectedRow,
   };
 
   let lista = [];
@@ -103,7 +144,12 @@ const Dashboard = ({ setLogeado }) => {
       requestOptions
     );
     const dataREs = await response.json();
-    alert("Su Oferta ha sido creada exitosamente");
+    if (dataREs.ok) {
+      alert('Su Oferta ha sido creada exitosamente');
+      window.location.reload();
+    } else {
+      alert('Su oferta no se pudo crear');
+    }
     cargarOfertasByUser();
   };
 
@@ -118,16 +164,20 @@ const Dashboard = ({ setLogeado }) => {
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
       setListaOfertas(data);
 
       lista.push(data);
     }
   };
 
+  if (cargar) {
+    window.location.reload();
+  }
 
   useEffect(() => {
-    cargarOfertasByUser()
+    // eslint-disable-next-line
+    cargarOfertasByUser();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -147,35 +197,32 @@ const Dashboard = ({ setLogeado }) => {
               Añadir
             </button>
             <div className='main-tabla'>
-              <ToolkitProvider keyField='id'
+              <ToolkitProvider
+                keyField='id'
                 data={listaOfertas}
                 columns={columns}
                 search
               >
-                {
-                  props => (
-                    <div>
-                      <SearchBar {...props.searchProps} />
-                      <ClearSearchButton {...props.searchProps} />
-                      <hr />
-                      <BootstrapTable
-                        {...props.baseProps}
-                        // ref={ n => this.node = n }
-                        selectRow={selectRow}
-                        pagination={ paginationFactory() }
-                      />
-
-                    </div>
-                  )
-                }
+                {(props) => (
+                  <div>
+                    <SearchBar {...props.searchProps} />
+                    <ClearSearchButton {...props.searchProps} />
+                    <hr />
+                    <BootstrapTable
+                      {...props.baseProps}
+                      // ref={ n => this.node = n }
+                      selectRow={selectRow}
+                      pagination={paginationFactory()}
+                    />
+                  </div>
+                )}
               </ToolkitProvider>
             </div>
-            {
-              user ?
-                <AñadirOferta metodoCrearOferta={crearOferta}></AñadirOferta>
-                :
-                <span></span>
-            }
+            {user ? (
+              <AñadirOferta metodoCrearOferta={crearOferta}></AñadirOferta>
+            ) : (
+              <span></span>
+            )}
           </div>
         </div>
       </div>

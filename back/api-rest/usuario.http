@@ -10,13 +10,12 @@ POST http://localhost:4000/api/usuarios
 Content-Type: application/json
 
 {
-	"nombres": "Piero",
+	"nombres": "Jose",
     "apellidos":"Alvarado",
-    "documentoDeIdentidad":"0706735445",
+    "documentoDeIdentidad":"1104124431",
     "numeroDeCelular": "0982703085",
-    "email":"piero@gmail.com",
-    "password":"12345",
-    "esAdmin":true
+    "email":"pier@gmail.com",
+    "password":"12345"
 }
 # http://localhost:4000/api/upload/usuarios/60dcc5c2958f7d1a98b357ad
 ###
@@ -24,8 +23,8 @@ POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {
-    "email":"juan@gmail.com",
-    "password":"12345"
+    "email":"ricardo@gmail.com",
+    "password":"123456789"
 }
 
 
@@ -44,13 +43,16 @@ Authorization: x-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRiNzgy
 //lista todas las ofertas
 GET http://localhost:4000/api/oferta
 
+###
+//lista todas las contratos
+GET http://localhost:4000/api/oferta/busqueda/contratos/usuario/6104a2b2501c8243940ff5cd
+
 # listar todas las ofertas creadas por un usuario
 ###
 GET http://localhost:4000/api/oferta/usuario/60dcc5c2958f7d1a98b357ad
 
 ###
-GET http://localhost:4000/api/oferta/busqueda/""
-
+GET http://localhost:4000/api/oferta/usuario/categoria/Fontaneria/6104a2e2501c8243940ff5d0
 
 ###
 GET http://localhost:4000/api/oferta/60dcb8a0df26ce2b7477d26b
@@ -58,4 +60,10 @@ GET http://localhost:4000/api/oferta/60dcb8a0df26ce2b7477d26b
 ###
 GET http://localhost:4000/api/oferta/usuario/get-ofertas/60ec6703907adc272c743092
 
+###
+POST http://localhost:4000/api/usuarios/validar/token
+Content-Type: application/json
 
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTA0YTJlMjUwMWM4MjQzOTQwZmY1ZDAiLCJpYXQiOjE2MjgwODE3NzAsImV4cCI6MTYyODE2ODE3MH0.2NazSmiA6D7gkzpzwp8WJfocgoAK4RoyMDrl_pcRIa0"
+}

@@ -37,10 +37,10 @@ const LoginPage = ({ setLogeado }) => {
       window.localStorage.setItem('user', JSON.stringify(data));
       setLogeado(true);
   
-      if (data.usuarioDB.esAdmin == true) {
-        history.push('/dashboard');
+      if (data.usuarioDB.esAdmin === true) {
+        history.push('/');
       } else {
-        history.push('/dashboard');
+        history.push('/');
       }
     } else {
       alert('Usuario o Contraseña incorrectas.');
@@ -85,7 +85,7 @@ const LoginPage = ({ setLogeado }) => {
                 LO SIENTO EL USUARIO NO HA SIDO ENCONTRADO EN NUESTROS REGISTROS
               </p>
             </div>
-            <div className='form-group'>
+            {/* <div className='form-group'>
               <div className='custom-control custom-checkbox'>
                 <input
                   type='checkbox'
@@ -96,7 +96,7 @@ const LoginPage = ({ setLogeado }) => {
                   Recuerdame
                 </label>
               </div>
-            </div>
+            </div> */}
 
             <button type='submit'>Ingresar</button>
             <Link to='/reseteo-password'>

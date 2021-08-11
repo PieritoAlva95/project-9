@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import ListaPersonas from '../components/listaPersonas';
+import { Link } from 'react-router-dom';
+
 
 const Oferta = ({ location, logeado }) => {
   const oferta = location.state.oferta;
@@ -13,7 +14,6 @@ const Oferta = ({ location, logeado }) => {
       alert('Ya se ha postulado en esta oferta de trabajo');
     } else {
       if (user != null) {
-        console.log(user);
         const interesado = {
           postulante: user.usuarioDB.uid,
           nombres: user.usuarioDB.nombres + ' ' + user.usuarioDB.apellidos,
@@ -42,7 +42,6 @@ const Oferta = ({ location, logeado }) => {
         alert('No ha iniciado sesión');
       }
 
-      console.log(oferta);
     }
   };
   return (
@@ -54,14 +53,15 @@ const Oferta = ({ location, logeado }) => {
               <h1>{oferta.titulo}</h1>
             </div>
             <div className="card-body">
-              <h4 className='usuario'>{oferta.nombreUsuario}</h4>
+              <Link className="linkUser" to={{ pathname: "/perfil", state: { user: oferta.usuario } }}><h3>{oferta.nombreUsuario}</h3></Link>
               <p>{oferta.cuerpo}</p>
               <p>
                 <strong>Categoria:</strong> {oferta.categoria}
               </p>
               <p>
-                <strong>Salario:</strong> {oferta.precio}
+                <strong>Salario (USD): </strong> {oferta.precio}
               </p>
+              <p><strong>Tipo Pago: </strong>{oferta.tipoPago}</p>
             </div>
 
             <div className="card-footer">

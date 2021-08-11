@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search, CSVExport } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import Sidebar from './sidebar';
 const { SearchBar, ClearSearchButton } = Search;
@@ -10,11 +11,17 @@ const Contratos = ({ setLogeado }) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
     const [ofertasContratos, setOfertasContratos] = useState([]);
 
+    const history = useHistory();
+
+    if (user == null) {
+        history.push('/login');
+    }
+
     const estiloBtnDelete = {
         backgroundColor: "#ff6b6b",
-        color:"#fafafa",
-        borderStyle:"none"
-      };
+        color: "#fafafa",
+        borderStyle: "none"
+    };
 
     const columns = [
         {
@@ -31,19 +38,19 @@ const Contratos = ({ setLogeado }) => {
         },
         {
             dataField: 'precio',
-            text: 'Precio'
+            text: 'Precio (USD)'
         },
         {
             dataField: 'tipoPago',
             text: 'Tipo Pago'
         },
         {
-            dataField:"",
+            dataField: "",
             text: 'Acción',
             formatter: (cellContent, row) => {
-                return(
+                return (
                     // <p>{row.precio}</p>
-                    <button style={estiloBtnDelete} onClick={()=>finalizar(row)}>Finalizar Contrato</button>
+                    <button style={estiloBtnDelete} onClick={() => finalizar(row)}>Finalizar Contrato</button>
                 );
             }
         }
@@ -51,15 +58,14 @@ const Contratos = ({ setLogeado }) => {
 
     const selectedRow = (row, isSelect, rowIndex) => {
         this.setState(curr => ({ ...curr, selectedRow: row }));
-        console.log(row);
-      };
+    };
 
     const selectRow = {
         mode: 'radio',
         clickToSelect: true,
         hideSelectColumn: true,
-        onselect:selectedRow
-      };
+        onselect: selectedRow
+    };
 
     const cargarOfertasContratos = async () => {
 
@@ -88,12 +94,17 @@ const Contratos = ({ setLogeado }) => {
         };
         const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
         const data = await response.json();
+        if (data.ok) {
+            alert("Se ha actualizado correctamente");
+        }else {
+            alert("No se logro actualizar el registro");
+        }
         cargarOfertasContratos();
     }
 
     const finalizar = (oferta) => {
         var response = window.confirm("Esta seguro de finalizar el contrato?");
-        if (response == true) {
+        if (response === true) {
             oferta.disponible = "contrato finalizado";
             finalizarContrato(oferta);
         } else {
@@ -103,6 +114,7 @@ const Contratos = ({ setLogeado }) => {
 
     useEffect(() => {
         cargarOfertasContratos();
+        // eslint-disable-next-line
     }, [])
     return (
         <Fragment>
@@ -117,7 +129,7 @@ const Contratos = ({ setLogeado }) => {
                                 data={ofertasContratos}
                                 columns={columns}
                                 search
-                                >
+                            >
                                 {
                                     props => (
                                         <div>
@@ -127,10 +139,10 @@ const Contratos = ({ setLogeado }) => {
                                             <BootstrapTable
                                                 {...props.baseProps}
                                                 // ref={ n => this.node = n }
-                                                selectRow={ selectRow }
-                                                pagination={ paginationFactory() }
+                                                selectRow={selectRow}
+                                                pagination={paginationFactory()}
                                             />
-                                            
+
                                         </div>
                                     )
                                 }

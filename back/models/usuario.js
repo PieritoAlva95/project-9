@@ -8,9 +8,9 @@ const UsuarioSchema = Schema(
     numeroDeCelular: { type: String, require: true },
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
-    img: { type: String, default: 'no-img.png' },
+    img: { type: String, default: 'no-img.jpg' },
     skills: [{ type: String, require: false, default: '' }],
-    bio: { type: String, require:'' },
+    bio: { type: String, require: '' },
     redesSociales: {
       twitter: { type: String, default: '' },
       facebook: { type: String, default: '' },
@@ -37,7 +37,7 @@ const UsuarioSchema = Schema(
     ],
     esAdmin: { type: Boolean, default: false },
     fechaCreacion: { type: Date, default: Date.now() },
-    activo:{type:Boolean, default:true}
+    activo: { type: Boolean, default: true },
   },
   {
     timestamps: false,

@@ -26,50 +26,63 @@ const getUsuario = async (req, res) => {
 
 const getUsuarios = async (req, res) => {
   try {
-    const users = await Usuario.find({esAdmin:false});
+    const users = await Usuario.find({ esAdmin: false });
     res.json(users);
   } catch (error) {
     res.json({
-      mensaje:"Error del server"
+      mensaje: 'Error del server',
     });
   }
-}
+};
 
 const getUsuariosAdmin = async (req, res) => {
   try {
-    const users = await Usuario.find({_id:{$ne:req.params.id}});
+    const users = await Usuario.find({ _id: { $ne: req.params.id } });
     res.json(users);
   } catch (error) {
     res.json({
-      mensaje:"Error del server"
+      mensaje: 'Error del server',
     });
   }
-}
+};
 
 const getUsuarioById = async (req, res) => {
   try {
     const user = await Usuario.findById(req.params.id);
-    res.json(user);  
+    res.json(user);
   } catch (error) {
     res.json({
-      mensaje:"Error"
+      mensaje: 'Error',
     });
   }
-  
-}
-
+};
 
 const crearUsuario = async (req, res = response) => {
-
-  const { email,
-    password } = req.body;
+  const { email, password, numeroDeCelular, documentoDeIdentidad } = req.body;
 
   try {
     const existeEmail = await Usuario.findOne({ email });
+    const existeTelefono = await Usuario.findOne({ numeroDeCelular });
+    const existeCedula = await Usuario.findOne({ documentoDeIdentidad });
+
     if (existeEmail) {
       return res.status(400).json({
-        ok: true,
-        msg: "correo existente"
+        ok: false,
+        msg: 'El correo electrónico ya existe',
+      });
+    }
+
+    if (existeTelefono) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'El número de telefono ya existe',
+      });
+    }
+
+    if (existeCedula) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'El número de cédula ya existe',
       });
     }
 
@@ -85,20 +98,18 @@ const crearUsuario = async (req, res = response) => {
     res.json({
       ok: true,
       usuario,
-      token
+      token,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'error inesperado, consulta con el administrador'
+      msg: 'error inesperado, consulta con el administrador',
     });
   }
-}
+};
 
 const actualizarUsuario = async (req, res) => {
-
   const uid = req.params.id;
   try {
     const usuario = await Usuario.findById(uid);
@@ -106,22 +117,24 @@ const actualizarUsuario = async (req, res) => {
     if (!usuario) {
       return res.status(404).json({
         ok: false,
-        msg: 'El usuario no existe'
+        msg: 'El usuario no existe',
       });
     }
 
     const cambio = {
       ...req.body,
-      usuario: uid
-    }
+      usuario: uid,
+    };
     const token = await generarJWT(usuario.id);
-    const usuarioDB = await Usuario.findByIdAndUpdate(uid, cambio, { new: true });
+    const usuarioDB = await Usuario.findByIdAndUpdate(uid, cambio, {
+      new: true,
+    });
 
     res.json({
       ok: true,
       token,
       usuarioDB,
-    })
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -158,27 +171,36 @@ const borrarUsuario = async (req, res) => {
   }
 };
 
-const cambiarPassword = async(req, res) => {
+const cambiarPassword = async (req, res) => {
   const uid = req.params.id;
+  const usuario = await Usuario.findById(uid);
+  const passAct = req.body.passwordActual;
+  const validPassword = bcryptjs.compareSync(passAct, usuario.password);
   try {
-    const usuario = await Usuario.findById(uid);
+    if (validPassword) {
+      if (!usuario) {
+        return res.status(404).json({
+          ok: false,
+          msg: 'El usuario no existe',
+        });
+      }
 
-    if (!usuario) {
-      return res.status(404).json({
+      const salt = bcryptjs.genSaltSync();
+      const pass = bcryptjs.hashSync(req.body.password, salt);
+      usuario.password = pass;
+      const usuarioDB = await Usuario.findByIdAndUpdate(uid, usuario);
+
+      res.json({
+        ok: true,
+        usuarioDB,
+        msg: 'Su contraseña se ha actualizado correctamente',
+      });
+    } else {
+      res.json({
         ok: false,
-        msg: 'El usuario no existe'
+        msg: 'La contraseña es actual es incorrecta',
       });
     }
-
-    const salt = bcryptjs.genSaltSync();
-    const pass = bcryptjs.hashSync(req.body.password, salt);
-    usuario.password = pass;
-    const usuarioDB = await Usuario.findByIdAndUpdate(uid, usuario);
-
-    res.json({
-      ok: true,
-      usuarioDB,
-    })
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -186,8 +208,7 @@ const cambiarPassword = async(req, res) => {
       msg: 'error inesperado, consulta con el administrador',
     });
   }
-  
-}
+};
 
 module.exports = {
   getUsuario,
@@ -197,5 +218,5 @@ module.exports = {
   getUsuarioById,
   getUsuarios,
   getUsuariosAdmin,
-  cambiarPassword
+  cambiarPassword,
 };

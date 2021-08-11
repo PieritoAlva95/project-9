@@ -24,6 +24,7 @@ const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
     if (user) {
       setLogeado(true);
     }
+    // eslint-disable-next-line
   }, [logeado]);
 
   return (
@@ -50,7 +51,7 @@ const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
             {logeado ? (
               <li className='nav-item'>
                 <Link className='nav-link usuario-nombre' to='/dashboard'>
-                  {user.usuarioDB.nombres}
+                  {user.usuarioDB.nombres} {user.usuarioDB.apellidos}
                 </Link>
               </li>
             ) : (
@@ -68,9 +69,9 @@ const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
 
             {/* <li><button onClick={props.test()}>Ola</button></li> */}
           </ul>
-          <div class="d-flex">
-            <input class="form-control me-2 txtBusqueda" type="search" name="text" placeholder="Search" aria-label="Search" onChange={handleBusqueda} />
-            <button class="btn btn-outline-success" onClick={buscar}>Search</button>
+          <div className="d-flex">
+            <input className="form-control me-2 txtBusqueda" type="search" name="text" placeholder="Buscar Oferta" aria-label="Buscar Oferta" onChange={handleBusqueda} />
+            <button className="btn btnSearch" onClick={buscar}><i className='bx bx-search-alt-2'></i></button>
           </div>
         </div>
       </div>

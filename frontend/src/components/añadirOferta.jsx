@@ -1,7 +1,16 @@
 import React, { Fragment, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 const AñadirOferta = ({ metodoCrearOferta }) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
+
+    const history = useHistory();
+
+    if (user == null) {
+        history.push('/login');
+    }
+
 
     const [oferta, setOferta] = useState({
         titulo: '',
@@ -9,7 +18,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
         precio: '',
         tipoPago: '',
         categoria: '',
-        nombreUsuario: user.usuarioDB.nombres,
+        nombreUsuario: user.usuarioDB.nombres + " " + user.usuarioDB.apellidos,
         uid: user.usuarioDB.uid
     })
     const handleInputChange = e => {
@@ -43,7 +52,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Enter title"
+                                            placeholder="Ingrese un titulo"
                                             name="titulo"
                                             onChange={handleInputChange}
                                             required
@@ -55,7 +64,7 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
                                         <textarea
                                             type="text"
                                             className="form-control"
-                                            placeholder="Enter description"
+                                            placeholder="Ingrese una descripción"
                                             name="cuerpo"
                                             onChange={handleInputChange}
                                             required
@@ -75,28 +84,32 @@ const AñadirOferta = ({ metodoCrearOferta }) => {
 
                                     <div className="form-group">
                                         <label>Tipo Pago</label>
-                                        <select class="form-select" aria-label="Default select example" name="tipoPago" onChange={handleInputChange}>
+                                        <select className="form-select" aria-label="Default select example" name="tipoPago" onChange={handleInputChange}>
                                             <option selected>Seleccione una opción de pago</option>
-                                            <option value="mensual">Mensual</option>
-                                            <option value="quincenal">Quincenal</option>
-                                            <option value="semanal">Semanal</option>
-                                            <option value="hora">Por Hora</option>
-                                            <option value="contrato">Contrato</option>
+                                            <option value="Mensual">Mensual</option>
+                                            <option value="Quincenal">Quincenal</option>
+                                            <option value="Semanal">Semanal</option>
+                                            <option value="Hora">Por Hora</option>
+                                            <option value="Contrato">Contrato</option>
                                         </select>
                                     </div>
 
                                     <div className="form-group">
-                                        <label>Categoria</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Enter Category"
-                                            name="categoria"
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                        <label>Categoría</label>
+                                        <select className="form-select" aria-label="Default select example" name="categoria" onChange={handleInputChange}>
+                                            <option selected>Seleccione una categoría</option>
+                                            <option value="Construccion">Albañilería / Construcción</option>
+                                            <option value="Trabajos Domesticos">Trabajos Domésticos</option>
+                                            <option value="Carpinteria">Carpintería</option>
+                                            <option value="Plomeria">Plomería</option>
+                                            <option value="Electricidad">Electricidad</option>
+                                            <option value="Atencion al cliente">Atención al cliente</option>
+                                            <option value="Vendedor">Vendedor/a</option>
+                                            <option value="Servicios Informaticos">Servicios Informáticos</option>
+                                            <option value="Servicios Profesionales">Servicios Profesionales</option>
+                                            <option value="Otros">Otros</option>
+                                        </select>
                                     </div>
-
                                 </form>
                             </div>
                         </div>

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import EditarOferta from './editOferta';
 import { Link } from 'react-router-dom';
 
 const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
@@ -15,7 +14,6 @@ const TablaOfertas = ({ oferta, metodoCargarDatos }) => {
         };
         const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
         const data = await response.json();
-        console.log(data);
         metodoCargarDatos()
         // alert(oferta._id)
     }

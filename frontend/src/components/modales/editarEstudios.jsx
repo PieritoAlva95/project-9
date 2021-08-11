@@ -1,15 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Sidebar from '../sidebar';
 import { useHistory } from 'react-router-dom';
 
-const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
+const EditarEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
   const history = useHistory();
   const user = JSON.parse(window.localStorage.getItem('user'));
+  const [estudios, setEstudios] = useState(location.state.estudio);
   const [seleccionado, setSeleccionado] = useState(false);
-  const [estudios, setEstudios] = useState({});
 
   if (user === null) {
-    history.push('/');
+    history.push('/login');
   }
 
   const handleInputChange = (e) => {
@@ -31,6 +31,7 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
     } else {
       user.usuarioDB.estudios.push(estudios);
     }
+    console.log(user);
     editarUser(user);
     setCargar(true);
     setTimeout(function () {
@@ -43,12 +44,10 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
     checkbox.addEventListener('change', function () {
       if (this.checked) {
         setSeleccionado(true);
-        // eslint-disable-next-line
         setFechaFin('Estudio Actual');
       } else {
         setSeleccionado(false);
-        // eslint-disable-next-line
-        setFechaFin(e.target.value);
+        setFechaFin(e.target.v);
       }
     });
   };
@@ -56,6 +55,8 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
   const setFechaFin = (valor) => {
     setEstudios({ ...estudios, fechaFin: valor });
   };
+
+  useEffect(() => {}, []);
 
   return (
     <Fragment>
@@ -77,6 +78,7 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
                       className='form-control'
                       placeholder='Añada el nombre de su institución'
                       name='nombreInstitucion'
+                      defaultValue={estudios.nombreInstitucion}
                       onChange={handleInputChange}
                       required
                     />
@@ -89,6 +91,7 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
                       className='form-control'
                       placeholder='Añada el nombre de su titulo'
                       name='titulo'
+                      defaultValue={estudios.titulo}
                       onChange={handleInputChange}
                       required
                     />
@@ -101,6 +104,7 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
                       className='form-control'
                       placeholder='Añada la fecha de inicio de sus estudios'
                       name='fechaInicio'
+                      defaultValue={estudios.fechaInicio}
                       onChange={handleInputChange}
                       required
                     />
@@ -130,6 +134,7 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
                         className='form-control'
                         placeholder='Añada la fecha de finalización de sus estudios'
                         name='fechaFin'
+                        defaultValue={estudios.fechaFin}
                         onChange={handleInputChange}
                         required
                       />
@@ -141,6 +146,7 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
                       className='form-control'
                       placeholder='Añada una breve descripción de sus estudios'
                       name='descripcion'
+                      defaultValue={estudios.descripcion}
                       onChange={handleInputChange}
                       required
                     ></textarea>
@@ -158,4 +164,4 @@ const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
   );
 };
 
-export default AddEstudios;
+export default EditarEstudios;

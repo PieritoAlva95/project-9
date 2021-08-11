@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search, CSVExport } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import Sidebar from '../components/sidebar';
 const { SearchBar, ClearSearchButton } = Search;
@@ -9,6 +10,11 @@ const AdminUsers = ({ setLogeado }) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
     const [usuarios, setUsuarios] = useState([])
     const imgURL = "http://localhost:4000/uploads/";
+
+    const history = useHistory();
+    if (user == null) {
+        history.push('/login');
+    }
 
     const estiloBtnDelete = {
         backgroundColor: "#ff6b6b",
@@ -25,15 +31,15 @@ const AdminUsers = ({ setLogeado }) => {
         color: "#1d3557",
         borderStyle: "none"
     };
-    
+
 
     const columns = [
         {
             dataField: '',
             text: 'Imagen',
             formatter: (cellContent, row) => {
-                return(
-                    <img className="img-table" src={imgURL+row.img} />
+                return (
+                    <img className="img-table" alt="imagen de perfil" src={imgURL + row.img} />
                 );
             }
         },
@@ -59,22 +65,22 @@ const AdminUsers = ({ setLogeado }) => {
                     );
                 } else {
                     return (
-                        <button style={estiloBtnDelete} onClick={() => activar(row)}>Activar</button>
+                        <button style={estiloAdmin} onClick={() => activar(row)}>Activar</button>
                     );
                 }
             }
         },
         {
-            dataField:"",
-            text:"Tipo Usuario",
+            dataField: "",
+            text: "Tipo Usuario",
             formatter: (cellContent, row) => {
-                if(row.esAdmin){
-                    return(
-                        <button style={estiloAdmin} onClick={() => noHacerAdmin(row)}>Admin</button>
+                if (row.esAdmin) {
+                    return (
+                        <button style={estiloAdmin} onClick={() => noHacerAdmin(row)}>Administrador</button>
                     );
-                }else{
-                    return(
-                        <button style={estiloUser} onClick={() => hacerAdmin(row)}>User</button>
+                } else {
+                    return (
+                        <button style={estiloUser} onClick={() => hacerAdmin(row)}>Usuario</button>
                     );
                 }
             }
@@ -83,7 +89,6 @@ const AdminUsers = ({ setLogeado }) => {
 
     const selectedRow = (row, isSelect, rowIndex) => {
         this.setState(curr => ({ ...curr, selectedRow: row }));
-        console.log(row);
     };
 
     const selectRow = {
@@ -99,7 +104,7 @@ const AdminUsers = ({ setLogeado }) => {
             headers: { 'Content-Type': 'application/json' },
         };
         const response = await fetch(
-            'http://localhost:4000/api/usuarios/obtener/usuarios/'+user.usuarioDB.uid,
+            'http://localhost:4000/api/usuarios/obtener/usuarios/' + user.usuarioDB.uid,
             requestOptions
         );
         const data = await response.json();
@@ -120,33 +125,53 @@ const AdminUsers = ({ setLogeado }) => {
             requestOptions
         );
         const data = await response.json();
-        alert("Sus cambios se han guardado satisfactoriamente");
+        if (data.ok) {
+            alert("Sus cambios se han guardado satisfactoriamente");
+        } else {
+            alert("No se realizarón los cambios");
+        }
         getUsuarios();
     };
 
     const desactivar = (user) => {
-        user.activo = false;
-        editarUser(user);
+        var response = window.confirm("Esta seguro de desactivar este usuario?");
+        if (response) {
+            user.activo = false;
+            editarUser(user);
+            window.location.reload();
+        } else {
+            alert("No se ha realizado ningún cambio");
+        }
     }
 
     const activar = (user) => {
         user.activo = true;
         editarUser(user);
+        window.location.reload();
     }
 
-    const hacerAdmin = (usuario) =>{
-        usuario.esAdmin = true;
-        editarUser(usuario);
+    const hacerAdmin = (usuario) => {
+        var response = window.confirm("Esta seguro de convertir en ADMINISTRADOR a este usuario?");
+        if (response) {
+            usuario.esAdmin = true;
+            editarUser(usuario);
+            window.location.reload();
+        } else {
+            alert("No se ha realizado ningún cambio");
+        }
     }
 
-    const noHacerAdmin = (usuario) =>{
+    const noHacerAdmin = (usuario) => {
         usuario.esAdmin = false;
         editarUser(usuario);
+        window.location.reload();
     }
 
     useEffect(() => {
         getUsuarios();
+        // eslint-disable-next-line
     }, [])
+    // eslint-disable-next-line
     return (
         <Fragment>
             <Sidebar setLogeado={setLogeado} />

@@ -8,8 +8,11 @@ const VisualizarOferta = ({ setLogeado, location }) => {
   const user = JSON.parse(window.localStorage.getItem('user'));
   const history = useHistory();
 
+  if (user == null) {
+    history.push('/login');
+  }
+
   const realizarContrato = async (personaID) => {
-    console.log(personaID);
     const interesadoContratado = oferta.interesados.find(post => post.postulante === personaID);
     interesadoContratado.aceptado = true;
     oferta.interesados= interesadoContratado;
@@ -24,7 +27,11 @@ const VisualizarOferta = ({ setLogeado, location }) => {
     };
     const response = await fetch('http://localhost:4000/api/oferta/' + oferta._id, requestOptions);
     const data = await response.json();
+    if(data.ok){
     alert("Se ha contratado a la persona exitorsamente");
+    }else{
+      alert("No se logro contratar a la persona");
+    }
     history.push('/dashboard/contratos')
   }
 
@@ -37,23 +44,30 @@ const VisualizarOferta = ({ setLogeado, location }) => {
           <div className="col-lg-10">
             <div className="container">
               <div className="row">
-                <div className='col-lg-6 body-oferta'>
-                  <h1>{oferta.titulo}</h1>
+                <div className='col-lg-12 body-oferta card'>
+                  <div className="card-body">
+                  <h1 className="card-title">{oferta.titulo}</h1>
                   <h4 className='usuario'>{oferta.nombreUsuario}</h4>
                   <p>{oferta.cuerpo}</p>
                   <p>
                     <strong>Categoria:</strong> {oferta.categoria}
                   </p>
                   <p>
-                    <strong>Salario:</strong> {oferta.precio}
+                    <strong>Salario (USD):</strong> {oferta.precio}
                   </p>
+                  <p><strong>Tipo Pago: </strong>{oferta.tipoPago}</p>
+                  </div>
                 </div>
-                <div className='col-lg-6 personas'>
-                  <h2>Personas que estan ofertando</h2>
+                <br />
+                <br />
+                <div className='col-lg-12 personas card'>
+                  <div className="card-body">
+                  <h2 className="card-title">Personas que estan postulando</h2>
                   <div className='container lista-personas'>
                     {oferta.interesados.map((persona) => (
                       <ListaPersonas key={persona._id} persona={persona} metodoContratar={realizarContrato} />
                     ))}
+                  </div>
                   </div>
                 </div>
               </div>

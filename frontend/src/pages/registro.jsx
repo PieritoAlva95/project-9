@@ -18,7 +18,7 @@ const Registro = () => {
 
   const verificarCedula = (cedula) => {
     //Preguntamos si la cedula consta de 10 digitos
-    if (cedula.length == 10) {
+    if (cedula.length === 10) {
 
       //Obtenemos el digito de la region que sonlos dos primeros digitos
       var digito_region = cedula.substring(0, 2);
@@ -34,24 +34,24 @@ const Registro = () => {
 
         //Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
         var numero1 = cedula.substring(0, 1);
-        var numero1 = (numero1 * 2);
-        if (numero1 > 9) { var numero1 = (numero1 - 9); }
+        numero1 = (numero1 * 2);
+        if (numero1 > 9) { numero1 = (numero1 - 9); }
 
         var numero3 = cedula.substring(2, 3);
-        var numero3 = (numero3 * 2);
-        if (numero3 > 9) { var numero3 = (numero3 - 9); }
+        numero3 = (numero3 * 2);
+        if (numero3 > 9) { numero3 = (numero3 - 9); }
 
         var numero5 = cedula.substring(4, 5);
-        var numero5 = (numero5 * 2);
-        if (numero5 > 9) { var numero5 = (numero5 - 9); }
+        numero5 = (numero5 * 2);
+        if (numero5 > 9) { numero5 = (numero5 - 9); }
 
         var numero7 = cedula.substring(6, 7);
-        var numero7 = (numero7 * 2);
-        if (numero7 > 9) { var numero7 = (numero7 - 9); }
+        numero7 = (numero7 * 2);
+        if (numero7 > 9) { numero7 = (numero7 - 9); }
 
         var numero9 = cedula.substring(8, 9);
-        var numero9 = (numero9 * 2);
-        if (numero9 > 9) { var numero9 = (numero9 - 9); }
+        numero9 = (numero9 * 2);
+        if (numero9 > 9) { numero9 = (numero9 - 9); }
 
         var impares = numero1 + numero3 + numero5 + numero7 + numero9;
 
@@ -68,8 +68,9 @@ const Registro = () => {
         var digito_validador = decena - suma_total;
 
         //Si el digito validador es = a 10 toma el valor de 0
-        if (digito_validador == 10)
-          var digito_validador = 0;
+        if (digito_validador === 10) {
+          digito_validador = 0;
+        }
         //Validamos que el digito validador sea igual al de la cedula
         if (digito_validador === ultimo_digito) {
           return true
@@ -79,7 +80,7 @@ const Registro = () => {
 
       } else {
         // imprimimos en consola si la region no pertenece
-       return 'Esta cedula no pertenece a ninguna region'
+        return 'Esta cedula no pertenece a ninguna region'
       }
     } else {
       //imprimimos en consola si la cedula tiene mas o menos de 10 digitos
@@ -88,23 +89,23 @@ const Registro = () => {
   }
 
   const handleSubmit = (e) => {
-    
+
     e.preventDefault();
     var resp = verificarCedula(usuario.documentoDeIdentidad)
-    if (resp === true){
+    if (resp === true) {
       if (usuario.password !== usuario.confirmPassword) {
         alert('Las contraseñas no son iguales.');
-      }else  if (usuario.password.length < 6) {
+      } else if (usuario.password.length < 6) {
         alert('La contraseña debe tener como minimo 6 caracteres.');
-      }else  if (usuario.numeroDeCelular.length !== 10) {
+      } else if (usuario.numeroDeCelular.length !== 10) {
         alert('Por favor ingrese un numero de teléfono valido.');
       } else {
         registrar(usuario);
       }
-    }else{
+    } else {
       alert(resp);
     }
-    
+
   };
 
   const registrar = async (usuario) => {
@@ -118,11 +119,9 @@ const Registro = () => {
       requestOptions
     );
     const data = await response.json();
-    if (data.msg === 'correo existente') {
-      alert('El correo ya esta vinculado a una cuenta');
-    } else if (data.ok === false) {
-      alert('Ha ocurrido un error al registrar el usuario');
-    } else if (data.ok === true) {
+    if (!data.ok) {
+      alert(data.msg);
+    } else if (data.ok) {
       alert('El usuario ha sido regitrado con exito.');
       history.push('/login');
     }
@@ -188,7 +187,7 @@ const Registro = () => {
               </div>
 
               <div className='form-group'>
-                <label>correo Electrónico</label>
+                <label>Correo Electrónico</label>
                 <input
                   type='email'
                   className='form-control'

@@ -12,7 +12,11 @@ const { crearOferta,
     verOfertasByUser,
     getOfertasDiferentesUser,
     verOfertasContratadasByUser,
-    getBuscarOfertas
+    getBuscarOfertas,
+    getOfertasByCategoria,
+    getOfertasByCategoriaUser,
+    getBuscarOfertasUser,
+    verContratosUser
 } = require('../controllers/oferta');
 
 const router = Router();
@@ -23,8 +27,14 @@ router.get('/:id', verOfertaUnica);
 
 router.get('/usuario/:id', verOfertasByUser);
 
+router.get('/usuario/categoria/:text/:id', getOfertasByCategoriaUser);
+router.get('/usuario/busqueda/:text/:id', getBuscarOfertasUser);
+
 router.get('/usuario/contratos/:id', verOfertasContratadasByUser);
 router.get('/busqueda/:text', getBuscarOfertas);
+router.get('/busqueda/categoria/:text', getOfertasByCategoria);
+
+router.get('/busqueda/contratos/usuario/:id', verContratosUser);
 
 router.post('/',
     [
