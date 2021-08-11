@@ -1,15 +1,18 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
-import ConfirmarEliminar from './modales/confirmarEliminar';
 
 
-const TabalaExperiencia = ({ experiencia, user }) => {
+const TabalaExperiencia = ({ experiencia, user, editarUser }) => {
     const eliminar = () => {
         var response = window.confirm("Esta seguro de eliminar su experiencia?");
-        if (response == true) {
-            alert(experiencia.titulo);
+        if (response === true) {
+            const expobj = user.usuarioDB.experiencia.findIndex(
+                (post) => post._id === experiencia._id
+              );
+              user.usuarioDB.experiencia.splice(expobj,1);
+              editarUser(user);
         }else{
-            alert("bad");
+            alert("No se ha realizado ningún cambio");
         }
     }
     return (
@@ -20,17 +23,13 @@ const TabalaExperiencia = ({ experiencia, user }) => {
                 <td>{experiencia.fechaInicio}</td>
                 <td>{experiencia.fechaFin}</td>
                 <td><Link className="btnLink" to={{
-                    pathname: "/dashboard/perfil/experiencia", state: { experiencia: experiencia }
+                    pathname: "/dashboard/perfil/editar-experiencia", state: { experienciaa: experiencia }
                 }}><i className='bx bx-edit'></i></Link>
-                    {/* <button type="button" className="btnDelete" data-bs-toggle="modal" data-bs-target="#eliminar">
-                        <i className='bx bx-trash'></i>
-                    </button></td> */}
                     <button type="button" className="btnDelete" onClick={eliminar}>
                         <i className='bx bx-trash'></i>
                     </button></td>
             </tr>
 
-            <ConfirmarEliminar data={experiencia} />
         </Fragment>
     );
 }

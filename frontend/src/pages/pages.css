@@ -116,6 +116,12 @@
     border: solid 1px var(--primary);
     padding: 20px;
 }
+.marco{
+    text-align: center;
+}
+.marco h2{
+    color: var(--primary) !important;
+}
 .estudios-perfil .marco{
     border: solid 1px var(--primary);
     padding: 20px;
@@ -142,6 +148,9 @@
 .main-dashboard h2{
     color: var(--primary);
 }
+.listaOfertasMain{
+    margin-bottom: 10%;
+}
 
 /* FIN MAIN DASHBOARD *******************************************************************************/
 
@@ -154,9 +163,6 @@
 }
 .main-oferta p{
     color: var(--primary);
-}
-.body-oferta .usuario{
-    text-transform: uppercase;
 }
 .body-oferta p{
     color: var(--primary);
@@ -206,9 +212,6 @@
 }
 .img-perfil img{
     width: 100px;
-}
-.perfil h1{
-    text-transform: uppercase;
 }
 .redes-sociales i{
     font-size: 30px;
@@ -303,12 +306,20 @@
 .visualizar-oferta{
     padding-top: 7%;
 }
+.linkUser{
+    text-decoration: none;
+    font-size: 2em;
+}
 /* FIN VISUALIZAR OFERTA ******************************************************************************/
 .biografia{
     margin-top: 20px;
 }
 .notfound{
-    padding-top: 7%;
+    padding-top: 1%;
+    text-align: center;
+}
+.notfound img{
+    width: 60%;
 }
 
 /* DASHBOARD ADMIN *************************************************************************************/
@@ -356,4 +367,17 @@
     .container{
         padding-top: 10%;
     }
+}
+
+.spanPass{
+    cursor: pointer;
+    font-weight: bold;
+}
+.spanPass i {
+    color: var(--primary) !important;
+    font-size: 1.2em;
+}
+
+.listaCategoria{
+    position: fixed;
 }

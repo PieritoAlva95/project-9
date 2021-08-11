@@ -1,14 +1,19 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search, CSVExport } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { useHistory } from 'react-router-dom';
 import Sidebar from '../components/sidebar';
 const { SearchBar, ClearSearchButton } = Search;
 
 const AdminOfertas = ({ setLogeado }) => {
     const user = JSON.parse(window.localStorage.getItem('user'));
     const [ofertas, setOfertas] = useState([])
-    const imgURL = "http://localhost:4000/uploads/";
+
+    const history = useHistory();
+    if (user === null) {
+        history.push('/login');
+    }
 
     const estiloBtnDelete = {
         backgroundColor: "#ff6b6b",
@@ -22,12 +27,12 @@ const AdminOfertas = ({ setLogeado }) => {
             text: 'Titulo'
         },
         {
-            dataField:'cuerpo',
-            text:'Descripción'
+            dataField: 'cuerpo',
+            text: 'Descripción'
         },
         {
             dataField: 'precio',
-            text: 'Precio'
+            text: 'Precio (USD)'
         },
         {
             dataField: 'tipoPago',
@@ -52,7 +57,6 @@ const AdminOfertas = ({ setLogeado }) => {
 
     const selectedRow = (row, isSelect, rowIndex) => {
         this.setState(curr => ({ ...curr, selectedRow: row }));
-        console.log(row);
     };
 
     const selectRow = {
@@ -89,19 +93,31 @@ const AdminOfertas = ({ setLogeado }) => {
             requestOptions
         );
         const data = await response.json();
-        alert("Sus cambios se han guardado satisfactoriamente");
+        if (data.ok) {
+            alert("Sus cambios se han guardado satisfactoriamente");
+        } else {
+            alert("No se realizarón los cambios");
+        }
         getOfertas();
     };
 
     const desactivar = (oferta) => {
-        oferta.status = false;
-        editarOferta(oferta);
+        var response = window.confirm("Esta seguro de desactivar esta oferta?");
+        if (response) {
+            oferta.status = false;
+            editarOferta(oferta);
+            window.location.reload();
+        } else {
+            alert("No se ha realizado ningún cambio");
+        }
     }
 
     const activar = (oferta) => {
         oferta.status = true;
         editarOferta(oferta);
+        window.location.reload();
     }
+    
 
     useEffect(() => {
         getOfertas();

@@ -3,19 +3,19 @@ import Sidebar from '../sidebar';
 import { useHistory } from 'react-router-dom';
 
 
-const AddEstudios = ({ location, editarUser, setLogeado }) => {
+const AddEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
     const history = useHistory();
-    const estudio = location.state.estudio;
+    var estudio;
     const user = JSON.parse(window.localStorage.getItem('user'));
-
-    const [estudios, setEstudios] = useState({
-        _id: estudio._id,
-        nombreInstitucion: estudio.nombreInstitucion,
-        titulo: estudio.titulo,
-        fechaInicio: estudio.fechaInicio,
-        fechaFin: estudio.fechaFin,
-        descripcion: estudio.descripcion
-    })
+    const [seleccionado, setSeleccionado] = useState(false);
+    const [estudios, setEstudios] = useState({});
+    
+    if(user === null){
+        history.push('/');
+    }else{
+        estudio = location.state.estudio;
+        setEstudios(estudio);
+    }
 
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -32,8 +32,27 @@ const AddEstudios = ({ location, editarUser, setLogeado }) => {
             user.usuarioDB.estudios.push(estudios);
         }
         editarUser(user);
-        history.goBack();
+        setCargar(true);
+        setTimeout(function(){
+            history.push("/dashboard/editar-perfil");
+        },500);
     }
+
+    const check = () => {
+        var checkbox = document.getElementById('flexCheckDefault');
+        checkbox.addEventListener('change', function () {
+            if (this.checked) {
+                setSeleccionado(true);
+                // eslint-disable-next-line
+                setEstudios({ ...estudios, ["fechaFin"]: "Estudio Actual" })
+            } else {
+                setSeleccionado(false);
+                // eslint-disable-next-line
+                setEstudios({ ...estudios, ["fechaFin"]: estudio.fechaFin })
+            }
+        });
+    }
+
     return (
         <Fragment>
             <Sidebar setLogeado={setLogeado}></Sidebar>
@@ -83,20 +102,29 @@ const AddEstudios = ({ location, editarUser, setLogeado }) => {
                                             required
                                         />
                                     </div>
-
-                                    <div className="form-group">
-                                        <label>Fecha Fin</label>
-                                        <input
-                                            type="date"
-                                            className="form-control"
-                                            placeholder="Añada la fecha de finalización de sus estudios"
-                                            name="fechaFin"
-                                            defaultValue={estudio.fechaFin}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={check} />
+                                        <label className="form-check-label" htmlFor="flexCheckDefault">
+                                            Estudio Actual
+                                        </label>
                                     </div>
-
+                                    {
+                                        seleccionado ?
+                                            ""
+                                            :
+                                            <div className="form-group">
+                                                <label>Fecha Fin</label>
+                                                <input
+                                                    type="date"
+                                                    className="form-control"
+                                                    placeholder="Añada la fecha de finalización de sus estudios"
+                                                    name="fechaFin"
+                                                    defaultValue={estudio.fechaFin}
+                                                    onChange={handleInputChange}
+                                                    required
+                                                />
+                                            </div>
+                                    }
                                     <div className="form-group">
                                         <label>Descripción</label>
                                         <textarea

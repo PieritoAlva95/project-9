@@ -3,30 +3,39 @@ import Sidebar from '../sidebar';
 import { useHistory } from 'react-router-dom';
 
 
-const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
+const EditarEstudios = ({ location, editarUser, setLogeado, setCargar }) => {
     const history = useHistory();
+    const estudio = location.state.estudio;
     const user = JSON.parse(window.localStorage.getItem('user'));
-    var exp;
     const [seleccionado, setSeleccionado] = useState(false);
-    const [experiencia, setExperiencia] = useState({})
 
+    const [estudios, setEstudios] = useState({
+        _id: estudio._id,
+        nombreInstitucion: estudio.nombreInstitucion,
+        titulo: estudio.titulo,
+        fechaInicio: estudio.fechaInicio,
+        fechaFin: estudio.fechaFin,
+        descripcion: estudio.descripcion
+    })
+
+    
     if(user === null){
         history.push('/login');
     }
 
     const handleInputChange = e => {
         const { name, value } = e.target
-        setExperiencia({ ...experiencia, [name]: value })
+        setEstudios({ ...estudios, [name]: value })
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        const expp = user.usuarioDB.experiencia.find((post) => post._id === experiencia._id);
-        if (expp !== undefined) {
-            const expp = user.usuarioDB.experiencia.findIndex((post) => post._id === experiencia._id);
-            user.usuarioDB.experiencia[expp] = experiencia;
+        const est = user.usuarioDB.estudios.find((post) => post._id === estudios._id);
+        if (est !== undefined) {
+            const est = user.usuarioDB.estudios.findIndex((post) => post._id === estudios._id);
+            user.usuarioDB.estudios[est] = estudios;
         } else {
-            user.usuarioDB.experiencia.push(experiencia);
+            user.usuarioDB.estudios.push(estudios);
         }
         editarUser(user);
         setCargar(true);
@@ -41,11 +50,11 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
             if (this.checked) {
                 setSeleccionado(true);
                 // eslint-disable-next-line
-                setExperiencia({ ...experiencia, ["fechaFin"]: "Trabajo Actual" })
+                setEstudios({ ...estudios, ["fechaFin"]: "Estudio Actual" })
             } else {
                 setSeleccionado(false);
                 // eslint-disable-next-line
-                setExperiencia({ ...experiencia, ["fechaFin"]: exp.fechaFin })
+                setEstudios({ ...estudios, ["fechaFin"]: estudio.fechaFin })
             }
         });
     }
@@ -62,24 +71,26 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                             <div className="row">
                                 <form className="añadir-oferta-form needs-validation" onSubmit={handleSubmit}>
                                     <div className="form-group">
-                                        <label>Titulo</label>
+                                        <label>Institución</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Añada el titulo de su trabajo"
-                                            name="titulo"
+                                            placeholder="Añada el nombre de su institución"
+                                            name="nombreInstitucion"
+                                            defaultValue={estudio.nombreInstitucion}
                                             onChange={handleInputChange}
                                             required
                                         />
                                     </div>
 
                                     <div className="form-group">
-                                        <label>Empresa</label>
+                                        <label>Titulo</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Añada el nombre de la empresa"
-                                            name="empresa"
+                                            placeholder="Añada el nombre de su titulo"
+                                            name="titulo"
+                                            defaultValue={estudio.titulo}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -90,8 +101,9 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                         <input
                                             type="date"
                                             className="form-control"
-                                            placeholder="Añada la fecha de inicio en su trabajo"
+                                            placeholder="Añada la fecha de inicio de sus estudios"
                                             name="fechaInicio"
+                                            defaultValue={estudio.fechaInicio}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -99,7 +111,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                     <div className="form-check">
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={check} />
                                         <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            Trabajo Actual
+                                            Estudio Actual
                                         </label>
                                     </div>
                                     {
@@ -107,24 +119,25 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                             ""
                                             :
                                             <div className="form-group">
-                                                <label>Fecha final</label>
+                                                <label>Fecha Fin</label>
                                                 <input
                                                     type="date"
                                                     className="form-control"
-                                                    placeholder="Añada la fecha de finalización de su trabajo"
+                                                    placeholder="Añada la fecha de finalización de sus estudios"
                                                     name="fechaFin"
+                                                    defaultValue={estudio.fechaFin}
                                                     onChange={handleInputChange}
                                                     required
                                                 />
                                             </div>
                                     }
-
                                     <div className="form-group">
                                         <label>Descripción</label>
                                         <textarea
                                             className="form-control"
-                                            placeholder="Añada una breve descripción de su puesto laboral"
+                                            placeholder="Añada una breve descripción de sus estudios"
                                             name="descripcion"
+                                            defaultValue={estudio.descripcion}
                                             onChange={handleInputChange}
                                             required
                                         ></textarea>
@@ -141,4 +154,4 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
     );
 }
 
-export default AddExperiencia
+export default EditarEstudios;

@@ -26,22 +26,22 @@ const getUsuario = async (req, res) => {
 
 const getUsuarios = async (req, res) => {
   try {
-    const users = await Usuario.find({esAdmin:false});
+    const users = await Usuario.find({ esAdmin: false });
     res.json(users);
   } catch (error) {
     res.json({
-      mensaje:"Error del server"
+      mensaje: "Error del server"
     });
   }
 }
 
 const getUsuariosAdmin = async (req, res) => {
   try {
-    const users = await Usuario.find({_id:{$ne:req.params.id}});
+    const users = await Usuario.find({ _id: { $ne: req.params.id } });
     res.json(users);
   } catch (error) {
     res.json({
-      mensaje:"Error del server"
+      mensaje: "Error del server"
     });
   }
 }
@@ -49,13 +49,13 @@ const getUsuariosAdmin = async (req, res) => {
 const getUsuarioById = async (req, res) => {
   try {
     const user = await Usuario.findById(req.params.id);
-    res.json(user);  
+    res.json(user);
   } catch (error) {
     res.json({
-      mensaje:"Error"
+      mensaje: "Error"
     });
   }
-  
+
 }
 
 
@@ -158,27 +158,36 @@ const borrarUsuario = async (req, res) => {
   }
 };
 
-const cambiarPassword = async(req, res) => {
+const cambiarPassword = async (req, res) => {
   const uid = req.params.id;
+  const usuario = await Usuario.findById(uid);
+  const passAct = req.body.passwordActual;
+  const validPassword = bcryptjs.compareSync( passAct, usuario.password );
   try {
-    const usuario = await Usuario.findById(uid);
+    if (validPassword) {
+      if (!usuario) {
+        return res.status(404).json({
+          ok: false,
+          msg: 'El usuario no existe'
+        });
+      }
 
-    if (!usuario) {
-      return res.status(404).json({
-        ok: false,
-        msg: 'El usuario no existe'
-      });
+      const salt = bcryptjs.genSaltSync();
+      const pass = bcryptjs.hashSync(req.body.password, salt);
+      usuario.password = pass;
+      const usuarioDB = await Usuario.findByIdAndUpdate(uid, usuario);
+
+      res.json({
+        ok: true,
+        usuarioDB,
+        msg:"Su contraseña se ha actualizado correctamente"
+      })
+    }else{
+      res.json({
+        ok:false,
+        msg:"La contraseña es actual es incorrecta"
+      })
     }
-
-    const salt = bcryptjs.genSaltSync();
-    const pass = bcryptjs.hashSync(req.body.password, salt);
-    usuario.password = pass;
-    const usuarioDB = await Usuario.findByIdAndUpdate(uid, usuario);
-
-    res.json({
-      ok: true,
-      usuarioDB,
-    })
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -186,7 +195,7 @@ const cambiarPassword = async(req, res) => {
       msg: 'error inesperado, consulta con el administrador',
     });
   }
-  
+
 }
 
 module.exports = {

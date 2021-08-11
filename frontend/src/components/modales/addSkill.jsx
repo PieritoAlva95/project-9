@@ -40,7 +40,7 @@ const AddSkill = ({ editarUser, user }) => {
                             </form>
                         </div>
                     </div>
-                    <div class="card-footer">
+                    <div className="card-footer">
                     </div>
                 </div>
             </div>

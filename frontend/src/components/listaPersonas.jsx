@@ -15,7 +15,7 @@ const ListaPersonas = ({ persona, metodoContratar }) => {
                         <img src={imgURL + persona.foto} alt="" />
                     </div>
                     <div className="col-7 nombres-apellidos">
-                        <Link className="link" to={{ pathname: "/perfil", state: { user: persona.postulante } }} >{persona.nombres}</Link>
+                        <Link className="link" to={{ pathname: "/perfil", state: { user: persona.postulante } }} >{persona.nombres} {persona.apellidos}</Link>
                     </div>
                     <div className="col-3">
                         <button className="btn-submit" data-bs-toggle="modal" data-bs-target="#confirmContratar"> Contratar</button>

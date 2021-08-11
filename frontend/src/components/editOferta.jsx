@@ -4,19 +4,24 @@ import Sidebar from './sidebar';
 
 const EditarOferta = ({ location, setLogeado }) => {
     const history = useHistory();
-
-    const oft = location.state.oft;
     const user = JSON.parse(window.localStorage.getItem('user'));
+    const oft = location.state.oft;
+    const [oferta, setOferta] = useState(oft)
+    if (user === null) {
+        history.push('/login');
+    }
+    
 
-    const [oferta, setOferta] = useState({
-        _id: oft._id,
-        titulo: "",
-        cuerpo: "",
-        precio: "",
-        categoria: "",
-        nombreUsuario: user.usuarioDB.nombres,
-        uid: user.usuarioDB.uid
-    })
+    // const [oferta, setOferta] = useState({
+    //     _id: oft._id,
+    //     titulo: oft.titulo,
+    //     cuerpo: oft.cuerpo,
+    //     precio: oft.precio,
+    //     tipoPago: oft.tipoPago,
+    //     categoria: oft.categoria,
+    //     nombreUsuario: user.usuarioDB.nombres,
+    //     uid: user.usuarioDB.uid
+    // })
     const handleInputChange = e => {
         const { name, value } = e.target
         setOferta({ ...oferta, [name]: value })
@@ -33,7 +38,11 @@ const EditarOferta = ({ location, setLogeado }) => {
         };
         const response = await fetch('http://localhost:4000/api/oferta/' + oft._id, requestOptions);
         const data = await response.json();
-        console.log(data);
+        if(data.ok){
+            alert("Sus datos han sido actualizados");
+        }else{
+            alert("Error al actualizar los datos");
+        }
         // console.log(oft.titulo);
     }
     const handleSubmit = e => {
@@ -57,7 +66,7 @@ const EditarOferta = ({ location, setLogeado }) => {
                                         type="text"
                                         className="form-control"
                                         placeholder="Enter title"
-                                        defaultValue={oft.titulo}
+                                        defaultValue={oferta.titulo}
                                         name="titulo"
                                         onChange={handleInputChange}
                                         required
@@ -71,7 +80,7 @@ const EditarOferta = ({ location, setLogeado }) => {
                                         className="form-control"
                                         placeholder="Enter description"
                                         name="cuerpo"
-                                        defaultValue={oft.cuerpo}
+                                        defaultValue={oferta.cuerpo}
                                         onChange={handleInputChange}
                                         required
                                     ></textarea>
@@ -83,24 +92,40 @@ const EditarOferta = ({ location, setLogeado }) => {
                                         type="number"
                                         className="form-control"
                                         name="precio"
-                                        defaultValue={oft.precio}
+                                        defaultValue={oferta.precio}
                                         onChange={handleInputChange}
                                         required
                                     />
                                 </div>
 
                                 <div className="form-group">
-                                    <label>Categoria</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Enter Category"
-                                        defaultValue={oft.categoria}
-                                        name="categoria"
-                                        onChange={handleInputChange}
-                                        required
-                                    />
+                                    <label>Tipo Pago</label>
+                                    <select className="form-select" aria-label="Default select example" name="tipoPago" onChange={handleInputChange} required>
+                                        <option selected>Seleccione una opción de pago</option>
+                                        <option value="mensual">Mensual</option>
+                                        <option value="quincenal">Quincenal</option>
+                                        <option value="semanal">Semanal</option>
+                                        <option value="hora">Por Hora</option>
+                                        <option value="contrato">Contrato</option>
+                                    </select>
                                 </div>
+
+                                <div className="form-group">
+                                        <label>Categoría</label>
+                                        <select className="form-select" aria-label="Default select example" name="categoria" onChange={handleInputChange} required>
+                                            <option selected>Seleccione una categoría</option>
+                                            <option value="Construcción">Albañilería / Construcción</option>
+                                            <option value="Trabajos Domésticos">Trabajos Domésticos</option>
+                                            <option value="Carpintería">Carpintería</option>
+                                            <option value="Plomería">Plomería</option>
+                                            <option value="Electricidad">Electricidad</option>
+                                            <option value="Atención al cliente">Atención al cliente</option>
+                                            <option value="Vendedor">Vendedor/a</option>
+                                            <option value="Servicios Informáticos">Servicios Informáticos</option>
+                                            <option value="Servicios Profesionales">Servicios Profesionales</option>
+                                            <option value="Otros">Otros</option>
+                                        </select>
+                                    </div>
                                 <button className="btn-submit">Guardar Cambios</button>
                             </form>
                         </div>

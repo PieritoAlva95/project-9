@@ -1,14 +1,18 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 
-const TablaEstudios = ({ estudio, user }) => {
+const TablaEstudios = ({ estudio, user, editarUser }) => {
 
     const eliminar = () => {
-        var response = window.confirm("Esta seguro de eliminar este índice de estudio");
-        if (response == true) {
-            alert(estudio.titulo);
+        var response = window.confirm("Esta seguro de eliminar su estudio?");
+        if (response === true) {
+            const expobj = user.usuarioDB.estudios.findIndex(
+                (post) => post._id === estudio._id
+              );
+              user.usuarioDB.estudios.splice(expobj,1);
+              editarUser(user);
         }else{
-            alert("La información no ha sido eliminada");
+            alert("No se ha realizado ningún cambio");
         }
     }
     return (

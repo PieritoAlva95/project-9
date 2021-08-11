@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
-const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarJWT, validarToken } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
@@ -22,6 +22,8 @@ router.get('/:id', getUsuarioById);
 
 router.get('/obtener/usuarios', getUsuarios);
 router.get('/obtener/usuarios/:id', getUsuariosAdmin);
+
+router.post('/validar/token', validarToken);
 
 router.post(
   '/',

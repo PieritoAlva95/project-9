@@ -1,5 +1,5 @@
 import Navbar from './components/nabvar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './pages/login';
 import Main from './pages/main';
 import Perfil from './pages/perfil';
@@ -18,10 +18,15 @@ import VerPerfil from './components/verPerfil';
 import AdminUsers from './pages/adminUsers';
 import Contratos from './components/contratos';
 import AdminOfertas from './pages/adminOfertas';
+import EditarExperiencia from './components/modales/editarExperiencia';
+import EditarEstudios from './components/modales/editarEstudios';
 
 const App = () => {
+  const user = JSON.parse(window.localStorage.getItem('user'));
+
   const [logeado, setLogeado] = useState(false);
   const [busqueda, setBusqueda] = useState({});
+  const [cargar, setCargar] = useState(false)
 
   const editarUser = async (useredit) => {
     const requestOptions = {
@@ -34,9 +39,12 @@ const App = () => {
     };
     const response = await fetch('http://localhost:4000/api/usuarios/' + useredit.usuarioDB.uid, requestOptions);
     const data = await response.json();
-    console.log(data);
-    var user = window.localStorage.setItem('user', JSON.stringify(data));
-    console.log(user);
+    if (data.ok) {
+      window.localStorage.setItem('user', JSON.stringify(data));
+      alert("Se actualizarón los datos");
+    } else {
+      alert("No se pudo actualizar la información");
+    }
   }
 
   const buscarOfertas = async (texto) => {
@@ -64,75 +72,141 @@ const App = () => {
           <Main {...routeProps} logeado={logeado} busqueda={busqueda} />
         )} exact></Route>
         <Route
-          path='/login'
-          component={(routeProps) => (
-            <Login {...routeProps} setLogeado={setLogeado} />
-          )}
+          path='/login' render={() => {
+            return user ? <Redirect to="/dashboard" /> : <Login setLogeado={setLogeado} />
+          }}
           exact
         />
         <Route path='/perfil' component={Perfil} exact />
-        <Route
+
+        {/* <Route
           path='/dashboard'
           component={(routeProps) => (
-            <Dashboard {...routeProps} setLogeado={setLogeado} />
+            <Dashboard {...routeProps} setLogeado={setLogeado} logeado={logeado} />
           )}
           exact
-        />
+        /> */}
+        <Route path='/dashboard'
+          render={() => {
+            return user ?
+              <Dashboard setLogeado={setLogeado} logeado={logeado} />
+              : <Redirect to="/" />
+          }}
+          exact />
+
+
         <Route path='/oferta' component={(routeProps) => (
           <Oferta {...routeProps} logeado={logeado} />
         )} exact />
-        <Route path='/registro' component={Registro} exact />
-        <Route path='/reseteo-password' component={ReseteoPassword} exact />
-        <Route path='/dashboard/editar-oferta' component={(routeProps) => (
+
+        <Route path='/registro' render={() => {
+          return user ? <Redirect to="/dashboard" /> : <Registro />
+        }} exact />
+
+        <Route path='/reseteo-password' render={() => {
+          return user ? <Redirect to="/dashboard" /> : <ReseteoPassword />
+        }} exact />
+
+        {/* <Route path='/dashboard/editar-oferta'
+          render={() => {
+            return user ?
+              <EditarOferta setLogeado={setLogeado} />
+              : <Redirect to="/" />
+          }}
+          exact /> */}
+
+        <Route path="/dashboard/editar-oferta" component={(routeProps) => (
           <EditarOferta {...routeProps} setLogeado={setLogeado} />
         )} exact />
-        <Route
+
+        {/* <Route
           path='/dashboard/visualizar-oferta'
-          component={(routeProps) => (
-            <VisualizarOferta {...routeProps} setLogeado={setLogeado} />
-          )}
+          render={() => {
+            return user ?
+              <VisualizarOferta setLogeado={setLogeado} />
+              : <Redirect to="/" />
+          }}
           exact
-        />
+        /> */}
+
+        <Route path="/dashboard/visualizar-oferta" component={(routeProps) => (
+          <VisualizarOferta {...routeProps} setLogeado={setLogeado} />
+        )} exact />
+
+
         <Route
           path='/dashboard/editar-perfil'
-          component={(routeProps) => (
-            <EditarPerfil {...routeProps} setLogeado={setLogeado} />
-          )}
+          render={() => {
+            return user ?
+              <EditarPerfil setLogeado={setLogeado} cargar={cargar} />
+              : <Redirect to="/" />
+          }}
           exact
         />
+
+        {/* <Route path="/dashboard/perfil/experiencia"
+          render={() => {
+            return user ?
+              <AddExperiencia editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
+              : <Redirect to="/" />
+          }}
+          exact /> */}
+
         <Route path="/dashboard/perfil/experiencia" component={(routeProps) => (
-          <AddExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
-        )} />
+          <AddExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
+        )} exact />
+
+        <Route path="/dashboard/perfil/editar-experiencia" component={(routeProps) => (
+          <EditarExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
+        )} exact />
+
+        <Route path="/dashboard/perfil/editar-estudios" component={(routeProps) => (
+          <EditarEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
+        )} exact />
+
         <Route path="/dashboard/perfil/estudios" component={(routeProps) => (
-          <AddEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} />
-        )} />
+          <AddEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
+        )} exact />
+
+        {/* <Route path="/dashboard/perfil/estudios"
+          render={() => {
+            return user ?
+              <AddEstudios editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
+              : <Redirect to="/" />
+          }}
+          exact /> */}
+
         <Route
           path='/dashboard/ver-perfil'
-          component={(routeProps) => (
-            <VerPerfil {...routeProps} logeado={logeado} setLogeado={setLogeado} />
-          )}
+          render={() => {
+            return user ?
+              <VerPerfil logeado={logeado} setLogeado={setLogeado} />
+              : <Redirect to="/" />
+          }}
           exact
         />
 
         <Route
           path='/dashboard/admin/usuarios'
-          component={(routeProps) => (
-            <AdminUsers {...routeProps} setLogeado={setLogeado} />
-          )}
+          render={() => {
+            return user ?
+              <AdminUsers setLogeado={setLogeado} />
+              : <Redirect to="/" />
+          }}
           exact
         />
         <Route
           path='/dashboard/admin/ofertas'
-          component={(routeProps) => (
-            <AdminOfertas {...routeProps} setLogeado={setLogeado} />
-          )}
+          render={() => {
+            return user ? <AdminOfertas setLogeado={setLogeado} /> : <Redirect to="/" />
+          }}
           exact
         />
         <Route
           path='/dashboard/contratos'
-          component={(routeProps) => (
-            <Contratos {...routeProps} setLogeado={setLogeado} />
-          )}
+          render={() => {
+            return user ? <Contratos setLogeado={setLogeado} /> : <Redirect to="/" />
+          }}
           exact
         />
 

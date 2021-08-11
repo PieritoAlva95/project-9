@@ -1,0 +1,20 @@
+diff a/frontend/src/pages/pages.css b/frontend/src/pages/pages.css	(rejected hunks)
+@@ -356,4 +367,17 @@
+     .container{
+         padding-top: 10%;
+     }
++}
++
++.spanPass{
++    cursor: pointer;
++    font-weight: bold;
++}
++.spanPass i {
++    color: var(--primary) !important;
++    font-size: 1.2em;
++}
++
++.listaCategoria{
++    position: fixed;
+ }
+\ No newline at end of file

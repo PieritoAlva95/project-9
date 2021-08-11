@@ -3,13 +3,21 @@ import Sidebar from '../sidebar';
 import { useHistory } from 'react-router-dom';
 
 
-const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
+const EditarExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
     const history = useHistory();
     const user = JSON.parse(window.localStorage.getItem('user'));
-    var exp;
+    const exp = location.state.experienciaa;
     const [seleccionado, setSeleccionado] = useState(false);
-    const [experiencia, setExperiencia] = useState({})
+    const [experiencia, setExperiencia] = useState({
+        _id: exp._id,
+        titulo: exp.titulo,
+        empresa: exp.empresa,
+        fechaInicio: exp.fechaInicio,
+        fechaFin: exp.fechaFin,
+        descripcion: exp.descripcion
+    })
 
+    
     if(user === null){
         history.push('/login');
     }
@@ -68,6 +76,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                             className="form-control"
                                             placeholder="Añada el titulo de su trabajo"
                                             name="titulo"
+                                            defaultValue={exp.titulo}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -80,6 +89,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                             className="form-control"
                                             placeholder="Añada el nombre de la empresa"
                                             name="empresa"
+                                            defaultValue={exp.empresa}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -92,6 +102,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                             className="form-control"
                                             placeholder="Añada la fecha de inicio en su trabajo"
                                             name="fechaInicio"
+                                            defaultValue={exp.fechaInicio}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -113,6 +124,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                                     className="form-control"
                                                     placeholder="Añada la fecha de finalización de su trabajo"
                                                     name="fechaFin"
+                                                    defaultValue={exp.fechaFin}
                                                     onChange={handleInputChange}
                                                     required
                                                 />
@@ -125,6 +137,7 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
                                             className="form-control"
                                             placeholder="Añada una breve descripción de su puesto laboral"
                                             name="descripcion"
+                                            defaultValue={exp.descripcion}
                                             onChange={handleInputChange}
                                             required
                                         ></textarea>
@@ -141,4 +154,4 @@ const AddExperiencia = ({ location, editarUser, setLogeado, setCargar}) => {
     );
 }
 
-export default AddExperiencia
+export default EditarExperiencia;

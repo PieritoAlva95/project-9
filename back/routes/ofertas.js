@@ -12,7 +12,8 @@ const { crearOferta,
     verOfertasByUser,
     getOfertasDiferentesUser,
     verOfertasContratadasByUser,
-    getBuscarOfertas
+    getBuscarOfertas,
+    getOfertasByCategoria
 } = require('../controllers/oferta');
 
 const router = Router();
@@ -25,6 +26,7 @@ router.get('/usuario/:id', verOfertasByUser);
 
 router.get('/usuario/contratos/:id', verOfertasContratadasByUser);
 router.get('/busqueda/:text', getBuscarOfertas);
+router.get('/busqueda/categoria/:text', getOfertasByCategoria);
 
 router.post('/',
     [

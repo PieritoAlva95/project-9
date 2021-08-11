@@ -119,6 +119,28 @@ const getBuscarOfertas = async (req, res) => {
     }
 }
 
+const getOfertasByCategoria = async (req, res) => {
+    try {
+        if (req.params.text == "") {
+            res.json({
+                ok:true,
+                ofertas:{}
+            });
+        } else {
+            const busqueda = await Oferta.find({ categoria: new RegExp(req.params.text) }).sort({ fechaCreacion: -1 });
+            res.json({
+                ok: true,
+                ofertas: busqueda
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Consulte  con el administrador'
+        })
+    }
+}
 
 const actualizarOferta = async (req, res = response) => {
 
@@ -192,5 +214,6 @@ module.exports = {
     verOfertasByUser,
     getOfertasDiferentesUser,
     verOfertasContratadasByUser,
-    getBuscarOfertas
+    getBuscarOfertas,
+    getOfertasByCategoria
 }
