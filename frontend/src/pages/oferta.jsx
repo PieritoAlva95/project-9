@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const Oferta = ({ location, logeado }) => {
   const oferta = location.state.oferta;
 
@@ -41,7 +40,6 @@ const Oferta = ({ location, logeado }) => {
       } else {
         alert('No ha iniciado sesión');
       }
-
     }
   };
   return (
@@ -49,11 +47,16 @@ const Oferta = ({ location, logeado }) => {
       <div className='container main-oferta'>
         <div className='row'>
           <div className='col-lg-12 body-oferta card'>
-            <div className="card-header">
+            <div className='card-header'>
               <h1>{oferta.titulo}</h1>
             </div>
-            <div className="card-body">
-              <Link className="linkUser" to={{ pathname: "/perfil", state: { user: oferta.usuario } }}><h3>{oferta.nombreUsuario}</h3></Link>
+            <div className='card-body'>
+              <Link
+                className='linkUser'
+                to={{ pathname: '/perfil', state: { user: oferta.usuario } }}
+              >
+                <h3>{oferta.nombreUsuario}</h3>
+              </Link>
               <p>{oferta.cuerpo}</p>
               <p>
                 <strong>Categoria:</strong> {oferta.categoria}
@@ -61,19 +64,21 @@ const Oferta = ({ location, logeado }) => {
               <p>
                 <strong>Salario (USD): </strong> {oferta.precio}
               </p>
-              <p><strong>Tipo Pago: </strong>{oferta.tipoPago}</p>
+              <p>
+                <strong>Tipo Pago: </strong>
+                {oferta.tipoPago}
+              </p>
             </div>
 
-            <div className="card-footer">
-              {
-                logeado ? <button onClick={postularseOferta}>
-                <i className='bx bxs-send'></i> Postular
+            <div className='card-footer'>
+              {logeado ? (
+                <button onClick={postularseOferta}>
+                  <i className='bx bxs-send'></i> Postular
                 </button>
-                : <p>RECUERDE! Para postularse debe iniciar sesión</p>
-              }
-
+              ) : (
+                <p>RECUERDE! Para postularse debe iniciar sesión</p>
+              )}
             </div>
-
           </div>
         </div>
       </div>

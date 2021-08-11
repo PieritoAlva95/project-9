@@ -1,5 +1,10 @@
 import Navbar from './components/nabvar';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Login from './pages/login';
 import Main from './pages/main';
 import Perfil from './pages/perfil';
@@ -20,36 +25,36 @@ import Contratos from './components/contratos';
 import AdminOfertas from './pages/adminOfertas';
 import EditarExperiencia from './components/modales/editarExperiencia';
 import EditarEstudios from './components/modales/editarEstudios';
-<<<<<<< HEAD
 import MisContratos from './pages/misContratos';
-=======
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
 const App = () => {
   const user = JSON.parse(window.localStorage.getItem('user'));
 
   const [logeado, setLogeado] = useState(false);
   const [busqueda, setBusqueda] = useState({});
-  const [cargar, setCargar] = useState(false)
+  const [cargar, setCargar] = useState(false);
 
   const editarUser = async (useredit) => {
     const requestOptions = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'x-token': useredit.token
+        'x-token': useredit.token,
       },
-      body: JSON.stringify(useredit.usuarioDB)
+      body: JSON.stringify(useredit.usuarioDB),
     };
-    const response = await fetch('http://localhost:4000/api/usuarios/' + useredit.usuarioDB.uid, requestOptions);
+    const response = await fetch(
+      'http://localhost:4000/api/usuarios/' + useredit.usuarioDB.uid,
+      requestOptions
+    );
     const data = await response.json();
     if (data.ok) {
       window.localStorage.setItem('user', JSON.stringify(data));
-      alert("Se actualizarón los datos");
+      alert('Se actualizarón los datos');
     } else {
-      alert("No se pudo actualizar la información");
+      alert('No se pudo actualizar la información');
     }
-  }
+  };
 
   const buscarOfertas = async (texto) => {
     if (texto.length > 0) {
@@ -59,7 +64,10 @@ const App = () => {
       };
       if (logeado) {
         const response = await fetch(
-          'http://localhost:4000/api/oferta//usuario/busqueda/' + texto + '/' + user.usuarioDB.uid,
+          'http://localhost:4000/api/oferta//usuario/busqueda/' +
+            texto +
+            '/' +
+            user.usuarioDB.uid,
           requestOptions
         );
         const data = await response.json();
@@ -75,20 +83,33 @@ const App = () => {
         setBusqueda(data.ofertas);
       }
     }
-  }
+  };
 
   return (
     <Router>
       <div className='container-fluid'>
-        <Navbar logeado={logeado} metodoBusqueda={buscarOfertas} setLogeado={setLogeado}></Navbar>
+        <Navbar
+          logeado={logeado}
+          metodoBusqueda={buscarOfertas}
+          setLogeado={setLogeado}
+        ></Navbar>
       </div>
       <Switch>
-        <Route path='/' component={(routeProps) => (
-          <Main {...routeProps} logeado={logeado} busqueda={busqueda} />
-        )} exact></Route>
         <Route
-          path='/login' render={() => {
-            return user ? <Redirect to="/dashboard" /> : <Login setLogeado={setLogeado} />
+          path='/'
+          component={(routeProps) => (
+            <Main {...routeProps} logeado={logeado} busqueda={busqueda} />
+          )}
+          exact
+        ></Route>
+        <Route
+          path='/login'
+          render={() => {
+            return user ? (
+              <Redirect to='/dashboard' />
+            ) : (
+              <Login setLogeado={setLogeado} />
+            );
           }}
           exact
         />
@@ -101,38 +122,57 @@ const App = () => {
           )}
           exact
         /> */}
-        <Route path='/dashboard'
+        <Route
+          path='/dashboard'
           render={() => {
-            return user ?
-<<<<<<< HEAD
-              <Dashboard setLogeado={setLogeado} logeado={logeado} cargar={cargar} />
-              : <Redirect to="/" />
+            return user ? (
+              <Dashboard
+                setLogeado={setLogeado}
+                logeado={logeado}
+                cargar={cargar}
+              />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
-          exact />
+          exact
+        />
 
-        <Route path='/dashboard/mis-contratos'
+        <Route
+          path='/dashboard/mis-contratos'
           render={() => {
-            return user ?
-              <MisContratos setLogeado={setLogeado} logeado={logeado}/>
-=======
-              <Dashboard setLogeado={setLogeado} logeado={logeado} />
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
-              : <Redirect to="/" />
+            return user ? (
+              <MisContratos setLogeado={setLogeado} logeado={logeado} />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
-          exact />
+          exact
+        />
 
+        <Route
+          path='/oferta'
+          component={(routeProps) => (
+            <Oferta {...routeProps} logeado={logeado} />
+          )}
+          exact
+        />
 
-        <Route path='/oferta' component={(routeProps) => (
-          <Oferta {...routeProps} logeado={logeado} />
-        )} exact />
+        <Route
+          path='/registro'
+          render={() => {
+            return user ? <Redirect to='/dashboard' /> : <Registro />;
+          }}
+          exact
+        />
 
-        <Route path='/registro' render={() => {
-          return user ? <Redirect to="/dashboard" /> : <Registro />
-        }} exact />
-
-        <Route path='/reseteo-password' render={() => {
-          return user ? <Redirect to="/dashboard" /> : <ReseteoPassword />
-        }} exact />
+        <Route
+          path='/reseteo-password'
+          render={() => {
+            return user ? <Redirect to='/dashboard' /> : <ReseteoPassword />;
+          }}
+          exact
+        />
 
         {/* <Route path='/dashboard/editar-oferta'
           render={() => {
@@ -142,13 +182,17 @@ const App = () => {
           }}
           exact /> */}
 
-        <Route path="/dashboard/editar-oferta" component={(routeProps) => (
-<<<<<<< HEAD
-          <EditarOferta {...routeProps} setLogeado={setLogeado} setCargar={setCargar} />
-=======
-          <EditarOferta {...routeProps} setLogeado={setLogeado} />
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
-        )} exact />
+        <Route
+          path='/dashboard/editar-oferta'
+          component={(routeProps) => (
+            <EditarOferta
+              {...routeProps}
+              setLogeado={setLogeado}
+              setCargar={setCargar}
+            />
+          )}
+          exact
+        />
 
         {/* <Route
           path='/dashboard/visualizar-oferta'
@@ -160,17 +204,22 @@ const App = () => {
           exact
         /> */}
 
-        <Route path="/dashboard/visualizar-oferta" component={(routeProps) => (
-          <VisualizarOferta {...routeProps} setLogeado={setLogeado} />
-        )} exact />
-
+        <Route
+          path='/dashboard/visualizar-oferta'
+          component={(routeProps) => (
+            <VisualizarOferta {...routeProps} setLogeado={setLogeado} />
+          )}
+          exact
+        />
 
         <Route
           path='/dashboard/editar-perfil'
           render={() => {
-            return user ?
+            return user ? (
               <EditarPerfil setLogeado={setLogeado} cargar={cargar} />
-              : <Redirect to="/" />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
           exact
         />
@@ -183,21 +232,57 @@ const App = () => {
           }}
           exact /> */}
 
-        <Route path="/dashboard/perfil/experiencia" component={(routeProps) => (
-          <AddExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
-        )} exact />
+        <Route
+          path='/dashboard/perfil/experiencia'
+          component={(routeProps) => (
+            <AddExperiencia
+              {...routeProps}
+              editarUser={editarUser}
+              setLogeado={setLogeado}
+              setCargar={setCargar}
+            />
+          )}
+          exact
+        />
 
-        <Route path="/dashboard/perfil/editar-experiencia" component={(routeProps) => (
-          <EditarExperiencia {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
-        )} exact />
+        <Route
+          path='/dashboard/perfil/editar-experiencia'
+          component={(routeProps) => (
+            <EditarExperiencia
+              {...routeProps}
+              editarUser={editarUser}
+              setLogeado={setLogeado}
+              setCargar={setCargar}
+            />
+          )}
+          exact
+        />
 
-        <Route path="/dashboard/perfil/editar-estudios" component={(routeProps) => (
-          <EditarEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
-        )} exact />
+        <Route
+          path='/dashboard/perfil/editar-estudios'
+          component={(routeProps) => (
+            <EditarEstudios
+              {...routeProps}
+              editarUser={editarUser}
+              setLogeado={setLogeado}
+              setCargar={setCargar}
+            />
+          )}
+          exact
+        />
 
-        <Route path="/dashboard/perfil/estudios" component={(routeProps) => (
-          <AddEstudios {...routeProps} editarUser={editarUser} setLogeado={setLogeado} setCargar={setCargar} />
-        )} exact />
+        <Route
+          path='/dashboard/perfil/estudios'
+          component={(routeProps) => (
+            <AddEstudios
+              {...routeProps}
+              editarUser={editarUser}
+              setLogeado={setLogeado}
+              setCargar={setCargar}
+            />
+          )}
+          exact
+        />
 
         {/* <Route path="/dashboard/perfil/estudios"
           render={() => {
@@ -210,9 +295,11 @@ const App = () => {
         <Route
           path='/dashboard/ver-perfil'
           render={() => {
-            return user ?
+            return user ? (
               <VerPerfil logeado={logeado} setLogeado={setLogeado} />
-              : <Redirect to="/" />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
           exact
         />
@@ -220,23 +307,33 @@ const App = () => {
         <Route
           path='/dashboard/admin/usuarios'
           render={() => {
-            return user ?
+            return user ? (
               <AdminUsers setLogeado={setLogeado} />
-              : <Redirect to="/" />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
           exact
         />
         <Route
           path='/dashboard/admin/ofertas'
           render={() => {
-            return user ? <AdminOfertas setLogeado={setLogeado} /> : <Redirect to="/" />
+            return user ? (
+              <AdminOfertas setLogeado={setLogeado} />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
           exact
         />
         <Route
           path='/dashboard/contratos'
           render={() => {
-            return user ? <Contratos setLogeado={setLogeado} /> : <Redirect to="/" />
+            return user ? (
+              <Contratos setLogeado={setLogeado} />
+            ) : (
+              <Redirect to='/' />
+            );
           }}
           exact
         />

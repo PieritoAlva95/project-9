@@ -9,9 +9,9 @@ function ReseteoPassword() {
   const history = useHistory();
   const [usuario, setusuario] = useState({});
 
-    if (user !== null) {
-        history.push('/dashboard');
-      }
+  if (user !== null) {
+    history.push('/dashboard');
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

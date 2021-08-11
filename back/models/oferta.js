@@ -5,7 +5,7 @@ const OfertaSchema = Schema(
     titulo: { type: String, require: true },
     cuerpo: { type: String, require: true },
     precio: { type: Number, require: true },
-    tipoPago:{ type: String, require: true },
+    tipoPago: { type: String, require: true },
     categoria: { type: String, require: true },
     usuario: { require: true, type: Schema.Types.ObjectId, ref: 'Usuario' },
     nombreUsuario: { require: true, type: String },
@@ -20,7 +20,7 @@ const OfertaSchema = Schema(
       },
     ],
     disponible: { type: String, default: 'sin contrato' },
-    status:{ type:Boolean, default:true },
+    status: { type: Boolean, default: true },
   },
   {
     timestamps: false,

@@ -31,23 +31,12 @@ const Dashboard = ({ setLogeado, logeado, cargar }) => {
     }
   };
 
-<<<<<<< HEAD
   const history = useHistory();
   if (!user) {
-=======
-const Dashboard = ({ setLogeado, logeado }) => {
-  
-  const history = useHistory();
-  if (!logeado) {
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     history.push('/');
   } else {
     verificarToken();
   }
-<<<<<<< HEAD
-=======
-  const user = JSON.parse(window.localStorage.getItem('user'));
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
   const columns = [
     {
@@ -60,11 +49,7 @@ const Dashboard = ({ setLogeado, logeado }) => {
     },
     {
       dataField: 'precio',
-<<<<<<< HEAD
       text: 'Precio (USD)',
-=======
-      text: 'Precio (USD)'
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     },
     {
       dataField: 'tipoPago',
@@ -105,35 +90,10 @@ const Dashboard = ({ setLogeado, logeado }) => {
     },
   ];
 
-<<<<<<< HEAD
   const eliminar = async (oferta) => {
     var response = window.confirm(
       'Esta seguro de eliminar la oferta de trabajo'
     );
-=======
-  const verificarToken = async() =>{
-    const requestOptions = {
-      method: 'POST',
-      body: JSON.stringify(user.token),
-    };
-    const response = await fetch(
-      'http://localhost:4000/api/usuarios/validar/token',
-      requestOptions
-    );
-    const resp = await response.json();
-    if (!resp) {
-      alert("Su token ha expirado, se cerrara sesión");
-      localStorage.removeItem('user');
-        setLogeado(false);
-        history.push("/");
-    }
-  }
-
-  verificarToken();
-
-  const eliminar = async(oferta) => {
-    var response = window.confirm("Esta seguro de eliminar la oferta de trabajo");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     if (response) {
       const requestOptions = {
         method: 'DELETE',
@@ -147,30 +107,17 @@ const Dashboard = ({ setLogeado, logeado }) => {
         requestOptions
       );
       const data = await response.json();
-<<<<<<< HEAD
       if (data.ok) {
         alert('Se ha eliminado exitosamente');
       } else {
         alert('No se logro eliminar');
       }
       cargarOfertasByUser();
-=======
-      if(data.ok){
-        alert("Se ha eliminado exitosamente");
-      }else{
-        alert("No se logro eliminar")
-      }
-      cargarOfertasByUser()
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
   };
 
   const selectedRow = (row, isSelect, rowIndex) => {
-<<<<<<< HEAD
     this.setState((curr) => ({ ...curr, selectedRow: row }));
-=======
-    this.setState(curr => ({ ...curr, selectedRow: row }));
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
   };
 
   const selectRow = {
@@ -197,18 +144,11 @@ const Dashboard = ({ setLogeado, logeado }) => {
       requestOptions
     );
     const dataREs = await response.json();
-<<<<<<< HEAD
     if (dataREs.ok) {
       alert('Su Oferta ha sido creada exitosamente');
       window.location.reload();
     } else {
       alert('Su oferta no se pudo crear');
-=======
-    if(dataREs.ok){
-      alert("Su Oferta ha sido creada exitosamente");
-    }else{
-      alert("Su oferta no se pudo crear");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
     cargarOfertasByUser();
   };
@@ -236,11 +176,7 @@ const Dashboard = ({ setLogeado, logeado }) => {
 
   useEffect(() => {
     // eslint-disable-next-line
-<<<<<<< HEAD
     cargarOfertasByUser();
-=======
-    cargarOfertasByUser()
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     // eslint-disable-next-line
   }, []);
 

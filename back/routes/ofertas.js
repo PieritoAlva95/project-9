@@ -4,23 +4,20 @@ const { validarCampos } = require('../middlewares/validar-campos');
 
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-const { crearOferta,
-    verOfertaUnica,
-    verOfertas,
-    actualizarOferta,
-    borrarOferta,
-    verOfertasByUser,
-    getOfertasDiferentesUser,
-    verOfertasContratadasByUser,
-    getBuscarOfertas,
-<<<<<<< HEAD
-    getOfertasByCategoria,
-    getOfertasByCategoriaUser,
-    getBuscarOfertasUser,
-    verContratosUser
-=======
-    getOfertasByCategoria
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
+const {
+  crearOferta,
+  verOfertaUnica,
+  verOfertas,
+  actualizarOferta,
+  borrarOferta,
+  verOfertasByUser,
+  getOfertasDiferentesUser,
+  verOfertasContratadasByUser,
+  getBuscarOfertas,
+  getOfertasByCategoria,
+  getOfertasByCategoriaUser,
+  getBuscarOfertasUser,
+  verContratosUser,
 } = require('../controllers/oferta');
 
 const router = Router();
@@ -37,37 +34,37 @@ router.get('/usuario/busqueda/:text/:id', getBuscarOfertasUser);
 router.get('/usuario/contratos/:id', verOfertasContratadasByUser);
 router.get('/busqueda/:text', getBuscarOfertas);
 router.get('/busqueda/categoria/:text', getOfertasByCategoria);
-<<<<<<< HEAD
 
 router.get('/busqueda/contratos/usuario/:id', verContratosUser);
-=======
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
-router.post('/',
-    [
-        validarJWT,
-        check('titulo', 'El titulo de la oferta es necesario').not().isEmpty(),
-        check('cuerpo', 'El cuerpo de la oferta es necesario').not().isEmpty(),
+router.post(
+  '/',
+  [
+    validarJWT,
+    check('titulo', 'El titulo de la oferta es necesario').not().isEmpty(),
+    check('cuerpo', 'El cuerpo de la oferta es necesario').not().isEmpty(),
 
-        validarCampos
-    ], crearOferta);
-
-
+    validarCampos,
+  ],
+  crearOferta
+);
 
 //router.get('/' ,getOfertaUsuario);
 
-router.put('/:id',
-    [
-        validarJWT,
-        check('titulo', 'El titulo de la oferta es necesario').not().isEmpty(),
-        check('cuerpo', 'El cuerpo de la oferta es necesario').not().isEmpty(),
+router.put(
+  '/:id',
+  [
+    validarJWT,
+    check('titulo', 'El titulo de la oferta es necesario').not().isEmpty(),
+    check('cuerpo', 'El cuerpo de la oferta es necesario').not().isEmpty(),
 
-        validarCampos
-    ], actualizarOferta);
-
+    validarCampos,
+  ],
+  actualizarOferta
+);
 
 router.delete('/:id', validarJWT, borrarOferta);
 
-router.get('/usuario/get-ofertas/:id', getOfertasDiferentesUser)
+router.get('/usuario/get-ofertas/:id', getOfertasDiferentesUser);
 
 module.exports = router;

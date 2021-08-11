@@ -12,7 +12,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
   const history = useHistory();
   const [usuario, setUsuario] = useState({});
   const [password, setPassword] = useState({
-<<<<<<< HEAD
     password: '',
     password2: '',
     passwordActual: '',
@@ -26,21 +25,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
     fechaFin: '',
     descripcion: '',
   };
-=======
-    password: "",
-    password2: "",
-    passwordActual: ""
-  });
-
-  const experiencia = {
-    _id: "asdasd",
-    titulo: "",
-    empresa: "",
-    fechaInicio: "",
-    fechaFin: "",
-    descripcion: ""
-  }
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
   // if (!user) {
   //   history.push('/');
@@ -69,13 +53,9 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
   const handleSubmitData = (e) => {
     e.preventDefault();
     if (user.usuarioDB.email !== datos.email) {
-<<<<<<< HEAD
       alert(
         'Si modifica su correo electrónico, se cerrara su sesión automáticamente y deberá ingresar nuevamente con su nuevo correo'
       );
-=======
-      alert("Si modifica su correo electrónico, se cerrara su sesión automáticamente y deberá ingresar nuevamente con su nuevo correo")
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
     user.usuarioDB.nombres = datos.nombres;
     user.usuarioDB.apellidos = datos.apellidos;
@@ -103,22 +83,16 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
   };
 
   const cambiarPassword = () => {
-<<<<<<< HEAD
     if (
       password.password === '' ||
       password.password2 === '' ||
       password.passwordActual === ''
     ) {
       alert('Se deben llenar los campos');
-=======
-    if (password.password === "" || password.password2 === "" || password.passwordActual === "") {
-      alert("Se deben llenar los campos");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     } else {
       if (password.password === password.password2) {
         if (password.password.length >= 6 && password.password2.length >= 6) {
           user.usuarioDB.password = password.password;
-<<<<<<< HEAD
           passwordChange(user);
         } else {
           alert('Las contraseñas no pueden tener menos de 6 caracteres');
@@ -126,15 +100,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
         }
       } else {
         alert('Las contraseñas no son iguales');
-=======
-          passwordChange(user)
-        } else {
-          alert("Las contraseñas no pueden tener menos de 6 caracteres");
-          window.location.reload();
-        }
-      } else {
-        alert("Las contraseñas no son iguales");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
         window.location.reload();
       }
     }
@@ -159,19 +124,11 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
       const user = JSON.parse(window.localStorage.getItem('user', data));
       setUsuario(user);
       cargarSkills();
-<<<<<<< HEAD
       alert('Sus cambios se han guardado satisfactoriamente');
       presentarExperiencia();
       presentarEstudios();
     } else {
       alert('No se realizarón los cambios');
-=======
-      alert("Sus cambios se han guardado satisfactoriamente");
-      presentarExperiencia();
-      presentarEstudios();
-    } else {
-      alert("No se realizarón los cambios");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
     // console.log(oft.titulo);
   };
@@ -192,28 +149,17 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
     const data = await response.json();
     alert(data.msg);
     if (data.ok) {
-<<<<<<< HEAD
       alert('Su sesión se cerrará');
       localStorage.removeItem('user');
       setLogeado(false);
       history.push('/login');
     } else {
-=======
-      alert("Su sesión se cerrará");
-      localStorage.removeItem('user');
-      history.push("/login");
-    }else{
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
       window.location.reload();
     }
   };
 
   const eliminarSkill = (skill) => {
-<<<<<<< HEAD
     var response = window.confirm('Esta seguro de eliminar la habilidad');
-=======
-    var response = window.confirm("Esta seguro de eliminar la habilidad");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     if (response === true) {
       const habilidad = user.usuarioDB.skills.indexOf(skill);
       user.usuarioDB.skills.splice(habilidad, 1);
@@ -258,7 +204,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
 
   const handleFileInput = (e) => {
     var files = new FormData();
-<<<<<<< HEAD
     files.append('imagen', e.target.files[0]);
     var response = window.confirm(
       'Esta seguro de cambiar su imagen de perfil?'
@@ -267,14 +212,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
       cambiarImagen(files);
     } else {
       alert('su imagen de perfil no ha cambiado');
-=======
-    files.append("imagen", e.target.files[0]);
-    var response = window.confirm("Esta seguro de cambiar su imagen de perfil?");
-    if (response) {
-      cambiarImagen(files);
-    } else {
-      alert("su imagen de perfil no ha cambiado");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
     }
   };
 
@@ -298,29 +235,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
   if (cargar) {
     window.location.reload();
   }
-<<<<<<< HEAD
-=======
-
-  const presentarExperiencia = () => {
-    return (
-      user.usuarioDB.experiencia.map((exp) => (
-        <TabalaExperiencia experiencia={exp} user={user} editarUser={editarUser} cargar={presentarExperiencia} />
-      ))
-    );
-  }
-
-  const presentarEstudios = () => {
-    return (
-      user.usuarioDB.estudios.map((estudio) => (
-        <TablaEstudios estudio={estudio} user={user} editarUser={editarUser} />
-      ))
-    );
-  }
-
-  if (cargar) {
-    window.location.reload();
-  }
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
   useEffect(() => {
     cargarSkills();
@@ -340,16 +254,12 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                 <div className='img-perfil'>
                   <img src={imgURL + user.usuarioDB.img} alt='' />
                   <br />
-<<<<<<< HEAD
                   <input
                     type='file'
                     name='imf-perfil'
                     id='img-perfil'
                     onChange={handleFileInput}
                   />
-=======
-                  <input type='file' name='imf-perfil' id='img-perfil' onChange={handleFileInput} />
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                 </div>
               </div>
             </div>
@@ -357,7 +267,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
             <div className='col-12 datosGenerales'>
               <h1>Datos Generales</h1>
               <form className='datos-generales' onSubmit={handleSubmitData}>
-<<<<<<< HEAD
                 <div className='row'>
                   <div className='col-6'>
                     <div className='form-group mb-3'>
@@ -368,16 +277,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         type='text'
                         className='txtSocial form-control'
                         id='txtNombres'
-=======
-                <div className="row">
-                  <div className="col-6">
-                    <div className='form-group mb-3'>
-                      <label htmlFor="txtNombres" className="form-label">Nombres</label>
-                      <input
-                        type='text'
-                        className='txtSocial form-control'
-                        id="txtNombres"
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         name='nombres'
                         defaultValue={datos.nombres}
                         // eslint-disable-next-line
@@ -387,23 +286,15 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                       />
                     </div>
                     <div className='form-group mb-3'>
-<<<<<<< HEAD
                       <label htmlFor='txtApellidos' className='form-label'>
                         Apellidos
                       </label>
-=======
-                      <label htmlFor="txtApellidos" className="form-label">Apellidos</label>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       <input
                         type='text'
                         className='txtSocial form-control'
                         name='apellidos'
                         // eslint-disable-next-line
-<<<<<<< HEAD
                         id='txtApellidos'
-=======
-                        id="txtApellidos"
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         defaultValue={datos.apellidos}
                         // eslint-disable-next-line
                         id='apellidos'
@@ -411,7 +302,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                       />
                     </div>
                   </div>
-<<<<<<< HEAD
                   <div className='col-6'>
                     <div className='form-group mb-3'>
                       <label htmlFor='txtTelefono' className='form-label'>
@@ -421,15 +311,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         type='text'
                         className='txtSocial form-control'
                         id='txtTelefono'
-=======
-                  <div className="col-6">
-                    <div className='form-group mb-3'>
-                      <label htmlFor="txtTelefono" className="form-label">Telefono</label>
-                      <input
-                        type='text'
-                        className='txtSocial form-control'
-                        id="txtTelefono"
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         name='numeroDeCelular'
                         defaultValue={datos.numeroDeCelular}
                         // eslint-disable-next-line
@@ -438,7 +319,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                       />
                     </div>
                     <div className='form-group mb-3'>
-<<<<<<< HEAD
                       <label htmlFor='txtCorreo' className='form-label'>
                         Correo
                       </label>
@@ -446,13 +326,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         type='text'
                         className='txtSocial form-control'
                         id='txtCorreo'
-=======
-                      <label htmlFor="txtCorreo" className="form-label">Correo</label>
-                      <input
-                        type='text'
-                        className='txtSocial form-control'
-                        id="txtCorreo"
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         name='email'
                         defaultValue={datos.email}
                         // eslint-disable-next-line
@@ -462,7 +335,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                     </div>
                   </div>
                 </div>
-<<<<<<< HEAD
                 <div className='row'>
                   <div className='col-6'>
                     <div className='form-group mb-3'>
@@ -473,16 +345,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         type='text'
                         className='txtSocial form-control'
                         id='txtBio'
-=======
-                <div className="row">
-                  <div className="col-6">
-                    <div className='form-group mb-3'>
-                      <label htmlFor="txtBio" className="form-label">Biografia</label>
-                      <textarea
-                        type='text'
-                        className='txtSocial form-control'
-                        id="txtBio"
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         name='bio'
                         defaultValue={datos.bio}
                         // eslint-disable-next-line
@@ -494,7 +356,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                       <i className='bx bxs-save'></i> Guardar Datos Generales
                     </button>
                   </div>
-<<<<<<< HEAD
                   <div className='col-6'>
                     <br />
                     <span
@@ -581,38 +442,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                       >
                         Guardar
                       </button>
-=======
-                  <div className="col-6">
-                    <br />
-                    <span className="spanPass" data-bs-toggle="modal" data-bs-target="#cambiarPassword"><i className='bx bxs-key'></i> Cambiar Contraseña</span>
-                  </div>
-                </div>
-              </form>
-              <div className="modal fade" id="cambiarPassword" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                      <div className="mb-3">
-                        <label htmlFor="passwordActual" className="form-label">Contraseña Actual</label>
-                        <input type="password" className="form-control" name="passwordActual" id="passwordActual" onChange={handleInputChangePassword} />
-                      </div>
-                      <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Contraseña</label>
-                        <input type="password" className="form-control" name="password" id="password" onChange={handleInputChangePassword} />
-                      </div>
-                      <div className="mb-3">
-                        <label htmlFor="password2" className="form-label">Repita la Contraseña</label>
-                        <input type="password" name="password2" className="form-control" id="password2" onChange={handleInputChangePassword} />
-                      </div>
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={cambiarPassword}>Guardar</button>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                     </div>
                   </div>
                 </div>
@@ -652,13 +481,7 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                     <th scope='col'>Acciones</th>
                   </tr>
                 </thead>
-<<<<<<< HEAD
                 <tbody>{presentarExperiencia()}</tbody>
-=======
-                <tbody>
-                  {presentarExperiencia()}
-                </tbody>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
               </table>
             </div>
             <hr />
@@ -683,13 +506,7 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                     <th scope='col'>Acciones</th>
                   </tr>
                 </thead>
-<<<<<<< HEAD
                 <tbody>{presentarEstudios()}</tbody>
-=======
-                <tbody>
-                  {presentarEstudios()}
-                </tbody>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
               </table>
             </div>
             <hr />
@@ -697,7 +514,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
               <h1>REDES SOCIALES</h1>
               <small>Recuerde ingresar el link de su perfil!</small>
               <form className='redes-sociales' onSubmit={handleSubmit}>
-<<<<<<< HEAD
                 <div className='container'>
                   <div className='row'>
                     <div className='col-6'>
@@ -705,14 +521,6 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         <label htmlFor='txtSocial' className='form-label'>
                           <i className='bx bxl-facebook-square'></i> Facebook
                         </label>
-=======
-                <div className="container">
-                  <div className="row">
-                    <div className="col-6">
-                      <div className='form-group mb-3'>
-                        <label htmlFor="txtSocial" className="form-label">
-                          <i className='bx bxl-facebook-square'></i> Facebook</label>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         <input
                           type='text'
                           className='txtSocial form-control'
@@ -723,14 +531,9 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         />
                       </div>
                       <div className='form-group mb-3'>
-<<<<<<< HEAD
                         <label htmlFor='txtTwitter' className='form-label'>
                           <i className='bx bxl-twitter'></i> Twitter
                         </label>
-=======
-                        <label htmlFor="txtTwitter" className="form-label">
-                          <i className='bx bxl-twitter'></i> Twitter</label>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         <input
                           type='text'
                           className='txtSocial form-control'
@@ -741,18 +544,11 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         />
                       </div>
                     </div>
-<<<<<<< HEAD
                     <div className='col-6'>
                       <div className='form-group mb-3'>
                         <label htmlFor='txtTwitter' className='form-label'>
                           <i className='bx bxl-instagram'></i> Instagram
                         </label>
-=======
-                    <div className="col-6">
-                      <div className='form-group mb-3'>
-                        <label htmlFor="txtTwitter" className="form-label">
-                          <i className='bx bxl-instagram'></i> Instagram</label>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         <input
                           type='text'
                           className='txtSocial form-control'
@@ -763,14 +559,9 @@ const EditarPerfil = ({ setLogeado, cargar }) => {
                         />
                       </div>
                       <div className='form-group'>
-<<<<<<< HEAD
                         <label htmlFor='txtTwitter' className='form-label'>
                           <i className='bx bxl-linkedin'></i> Linkedin
                         </label>
-=======
-                        <label htmlFor="txtTwitter" className="form-label">
-                          <i className='bx bxl-linkedin'></i> Linkedin</label>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                         <input
                           type='text'
                           className='txtSocial form-control'

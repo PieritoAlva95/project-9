@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
   const user = JSON.parse(window.localStorage.getItem('user'));
   const [text, setText] = useState({
-    text: ""
+    text: '',
   });
 
   const handleBusqueda = (e) => {
     const { name, value } = e.target;
     setText({ ...text, [name]: value });
-  }
+  };
 
   const buscar = () => {
     if (text.text.length > 0) {
@@ -18,7 +18,7 @@ const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
     } else {
       window.location.reload();
     }
-  }
+  };
 
   useEffect(() => {
     if (user) {
@@ -61,17 +61,28 @@ const Navbar = ({ logeado, metodoBusqueda, setLogeado }) => {
                     Iniciar Sesión
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/registro">Registrarse</Link>
+                <li className='nav-item'>
+                  <Link className='nav-link' to='/registro'>
+                    Registrarse
+                  </Link>
                 </li>
               </>
             )}
 
             {/* <li><button onClick={props.test()}>Ola</button></li> */}
           </ul>
-          <div className="d-flex">
-            <input className="form-control me-2 txtBusqueda" type="search" name="text" placeholder="Buscar Oferta" aria-label="Buscar Oferta" onChange={handleBusqueda} />
-            <button className="btn btnSearch" onClick={buscar}><i className='bx bx-search-alt-2'></i></button>
+          <div className='d-flex'>
+            <input
+              className='form-control me-2 txtBusqueda'
+              type='search'
+              name='text'
+              placeholder='Buscar Oferta'
+              aria-label='Buscar Oferta'
+              onChange={handleBusqueda}
+            />
+            <button className='btn btnSearch' onClick={buscar}>
+              <i className='bx bx-search-alt-2'></i>
+            </button>
           </div>
         </div>
       </div>

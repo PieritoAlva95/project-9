@@ -53,7 +53,8 @@ small {
 .oferta p {
   text-align: justify;
 }
-.oferta small, span{
+.oferta small,
+span {
   color: var(--primary) !important;
 }
 .oferta button {
@@ -101,10 +102,10 @@ small {
 .lista-personas .nombres-apellidos {
   padding: 0%;
 }
-.lista-personas button{
+.lista-personas button {
   padding: 5px;
 }
-.lista-personas .link{
+.lista-personas .link {
   text-decoration: none;
   color: var(--primary);
   font-size: 1.4em;
@@ -193,26 +194,26 @@ small {
   }
 }
 
-.modal-body p{
+.modal-body p {
   color: var(--primary);
 }
 @media (min-width: 1300px) {
-  .txtBusqueda{
+  .txtBusqueda {
     width: 500px;
   }
 }
-.btnSideBar{
+.btnSideBar {
   border: none;
   background-color: transparent;
   color: var(--txtClaro);
 }
 
-.btnSearch{
+.btnSearch {
   background-color: var(--secondary) !important;
   border-color: var(--secondary) !important;
 }
 
-.btnSearch:hover{
+.btnSearch:hover {
   border-color: var(--alert);
   background-color: var(--alert);
 }

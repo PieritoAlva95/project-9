@@ -7,11 +7,7 @@ const Main = ({ logeado, busqueda }) => {
   const user = JSON.parse(window.localStorage.getItem('user'));
 
   const [ofertas, setOfertas] = useState([]);
-<<<<<<< HEAD
   const [radio, setRadio] = useState('');
-=======
-  const [radio, setRadio] = useState("");
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
   const cargarOfertas = async () => {
     const requestOptions = {
@@ -130,7 +126,6 @@ const Main = ({ logeado, busqueda }) => {
         </div>
       ));
     } else {
-<<<<<<< HEAD
       return <h1>No se ha encontrado información</h1>;
     }
   };
@@ -165,38 +160,12 @@ const Main = ({ logeado, busqueda }) => {
       setOfertas(data.ofertas);
     }
   };
-=======
-      return (<h1>No se ha encontrado información</h1>)
-    }
-  }
-
-  const handleRadioSelect = (opcion) => {
-    setRadio(opcion)
-  }
-
-  const buscarCategoria = async () => {
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    const response = await fetch(
-      'http://localhost:4000/api/oferta/busqueda/categoria/' + radio,
-      requestOptions
-    );
-    const data = await response.json();
-    setOfertas(data.ofertas);
-  }
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
   useEffect(() => {
     // eslint-disable-next-line
     cargarOfertas();
     // eslint-disable-next-line
   }, [logeado]);
-<<<<<<< HEAD
-=======
-
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
 
   return (
     <div className='container main-section'>
@@ -204,7 +173,6 @@ const Main = ({ logeado, busqueda }) => {
         <div className='container'>
           <div className='row'>
             <div className='col-3'>
-<<<<<<< HEAD
               <div className='listaCategoria'>
                 <h3>Categorías</h3>
                 <br />
@@ -218,25 +186,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Construcción')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-              <div className="listaCategoria">
-                <h3>Categorías</h3>
-                <br />
-                <div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Construcción")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Albañilería / Construcción
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -246,21 +199,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Trabajos Domesticos')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Trabajos Domésticos")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Trabajos Domésticos
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -270,21 +212,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Carpinteria')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Carpintería")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Carpintería
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -294,21 +225,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Plomeria')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Plomería")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Plomería
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -318,21 +238,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Electricidad')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Electricidad")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Electricidad
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -342,21 +251,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Atencion al cliente')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Atención al cliente")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Atención al cliente
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -366,21 +264,10 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Vendedor')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Vendedor")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Vendedor/a
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -392,21 +279,10 @@ const Main = ({ logeado, busqueda }) => {
                       }
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Servicios Informáticos")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Servicios Informáticos
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -418,21 +294,10 @@ const Main = ({ logeado, busqueda }) => {
                       }
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Servicios Profesionales")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Servicios Profesionales
                     </label>
                   </div>
 
-<<<<<<< HEAD
                   <div class='form-check'>
                     <input
                       class='form-check-input'
@@ -442,22 +307,11 @@ const Main = ({ logeado, busqueda }) => {
                       onChange={() => handleRadioSelect('Otros')}
                     />
                     <label class='form-check-label' for='flexRadioDefault1'>
-=======
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      onChange={() => handleRadioSelect("Otros")} />
-                    <label class="form-check-label" for="flexRadioDefault1">
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                       Otros
                     </label>
                   </div>
 
                   <div>
-<<<<<<< HEAD
                     <button
                       className='btn btn-submit'
                       onClick={buscarCategoria}
@@ -472,16 +326,11 @@ const Main = ({ logeado, busqueda }) => {
                     >
                       Limpiar Filtro
                     </button>
-=======
-                    <button className="btn btn-submit" onClick={buscarCategoria}>Filtrar</button>
-                    <button className="btn" onClick={() => { window.location.reload() }}>Limpiar Filtro</button>
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
                   </div>
                 </div>
               </div>
             </div>
             <div className='col-9 listaOfertasMain'>
-<<<<<<< HEAD
               {logeado ? (
                 ''
               ) : (
@@ -491,14 +340,6 @@ const Main = ({ logeado, busqueda }) => {
                 </p>
               )}
               {presentarListaOfertas()}
-=======
-              {
-                logeado ? "" : <p>Recuerde que para poder postularse a un trabajo debe tener una cuenta e iniciar sesión</p>
-              }
-              {
-                presentarListaOfertas()
-              }
->>>>>>> 68cf343c8151aad16293484c8501397cd569f635
             </div>
           </div>
         </div>

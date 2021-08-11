@@ -13,7 +13,7 @@ const {
   getUsuarioById,
   getUsuarios,
   getUsuariosAdmin,
-  cambiarPassword
+  cambiarPassword,
 } = require('../controllers/usuario');
 
 router.get('/', getUsuario);
@@ -38,7 +38,7 @@ router.post(
 
 router.put('/:id', [validarJWT, validarCampos], actualizarUsuario);
 
-router.put('/cambio/:id',[validarJWT], cambiarPassword);
+router.put('/cambio/:id', [validarJWT], cambiarPassword);
 
 router.delete('/:id', validarJWT, borrarUsuario);
 

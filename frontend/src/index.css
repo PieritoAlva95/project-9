@@ -1,12 +1,12 @@
-:root{
+:root {
   --backgorundColor: #f7fff7;
   --primary: #1d3557;
   --secondary: #355070;
   --alert: #ffe66d;
   --danger: #ff6b6b;
-  --txtClaro:#fafafa;
-  --oferta:#FDFEFE;
-  --ofertaHover:#F2F3F4;
+  --txtClaro: #fafafa;
+  --oferta: #fdfefe;
+  --ofertaHover: #f2f3f4;
 }
 body {
   margin: 0;
@@ -18,7 +18,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--backgorundColor);
 }
-.container-fluid{
+.container-fluid {
   padding: 0%;
 }
 code {
@@ -26,21 +26,20 @@ code {
     monospace;
 }
 
-
-.btn-submit{
+.btn-submit {
   border-style: none;
   background-color: var(--secondary);
-  padding: 1% 2% ;
+  padding: 1% 2%;
   margin: 10px 10px 10px 1px;
   border-radius: 5px;
   color: var(--txtClaro);
   box-shadow: 0 7px #999;
 }
-.btn-submit:active{
+.btn-submit:active {
   box-shadow: 0 4px #666;
-  transform: translateY(4px)
+  transform: translateY(4px);
 }
 
-textarea{
+textarea {
   resize: none;
 }

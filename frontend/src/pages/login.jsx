@@ -36,7 +36,7 @@ const LoginPage = ({ setLogeado }) => {
     if (data.ok === true) {
       window.localStorage.setItem('user', JSON.stringify(data));
       setLogeado(true);
-  
+
       if (data.usuarioDB.esAdmin === true) {
         history.push('/');
       } else {
